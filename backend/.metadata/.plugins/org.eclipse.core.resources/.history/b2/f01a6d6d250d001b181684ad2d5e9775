@@ -1,0 +1,47 @@
+package org.mdoubleh.www.dao;
+
+import static org.mdoubleh.www.common.JdbcUtil.close;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class HessDao {
+	private Connection con;
+	
+	private HessDao() {
+		
+	}
+	
+	public static HessDao getInstance() {
+        return LazyHolder.INSTANCE;
+    }
+
+    private static class LazyHolder {
+        private static final HessDao INSTANCE = new HessDao();
+    }
+    
+    public void setConnection(Connection con) {
+    	this.con = con;
+    }
+    
+    public int getMemberSequence(String id) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int mber_sq = 0;
+        try {
+            pstmt = con.prepareStatement("SELECT mber_sq FROM inf_mber_tb WHERE id = ?");
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+            	mber_sq = rs.getInt("mber_sq");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close(rs);
+            close(pstmt);
+        }
+        return sq;
+    }
+}

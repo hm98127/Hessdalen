@@ -1,0 +1,9 @@
+package org.mdoubleh.www.vo;
+
+public class ArticleVo {
+	private int articl_sq;
+	private int hit;
+	private String dttm;
+	private String sj;
+	private String dn;
+}

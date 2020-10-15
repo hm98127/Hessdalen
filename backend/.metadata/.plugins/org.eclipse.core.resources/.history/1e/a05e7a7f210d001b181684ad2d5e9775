@@ -1,0 +1,9 @@
+package org.mdoubleh.www.vo;
+
+public class ItemVo {
+	private int item_sq;
+	private int img_sq;
+	private int pc;
+	private String nm;
+	private String cn;
+}

@@ -1,0 +1,365 @@
+/* Detail Product */
+
+#detail__products {
+  padding-top: 120px;
+  height: 900px;
+  display: flex;
+  justify-content: center;
+  background-color: #E5E5E5;
+}
+
+.left__detail {
+  flex-basis: 50%;
+  height: 87.8%;
+  text-align: left;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.detail__title {
+  padding: 20px 0px;
+}
+
+.detail__description {
+  padding: 40px 100px;
+}
+
+.detail__price {
+  padding: 10px 0px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid #D0D0D0;
+  font-size: 14px;
+}
+
+.rb__btn {
+  padding: 40px 0px;
+  display: flex;
+}
+
+.rent__btn,
+.basket__btn {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.basket__btn {
+  margin: 0px 24px;
+}
+
+.right__detail {
+  flex-basis: 30%;
+}
+
+.right__detail img {
+  border-radius: 20px;
+}
+
+.naver__buy {
+  display: flex;
+  border-bottom: 1px solid #EAECEE;
+  padding-bottom: 40px;
+}
+
+.buy__description {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.naver__logo {
+  color: #1EC300;
+  font-size: 15px;
+  padding-bottom: 2px;
+}
+
+.navar__pay {
+  color: #474747;
+}
+
+.buy__btn {
+  color: #00AB33;
+  background-color: #FCFCFC;
+  padding: 15px 110px;
+  border: 2px solid #BFC4C7;
+  margin: 0px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.buy__btn img {
+  position: relative;
+  top: 4px;
+}
+
+.review {
+  text-align: center;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+.review__title {
+  border-bottom: 2px solid #414141;
+  padding: 20px;
+
+}
+
+.review__board {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.review__list {
+  margin: 0px 37px;
+  font-size: 14px;
+}
+
+/* Detail more Products */
+
+#more__carousel {
+  position: relative;
+  height:300px;
+  padding: 100px 0px;
+}
+
+.slide_wrap {
+  width: 1320px;
+  overflow-x: hidden;
+  text-align: center;
+  margin: auto;
+}
+
+.slide_box {
+  overflow-x: hidden;
+  margin: auto;
+}
+
+.slide_list {
+  height: 300px;
+}
+
+.current__slide {
+  float: left;
+  width: 400px;
+  height: 300px;
+  margin: 0px 12px;
+
+}
+
+.current__slide img {
+  width: 360px;
+  height: 300px;
+}
+
+.left__btn {
+  position: absolute;
+  left: 3%;
+  top: 55%;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.right__btn {
+  position: absolute;
+  right: 3%;
+  top: 55%;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+
+/* Footer */
+
+#footer{
+  height:220px;
+  text-align: center;
+  font-size:16px;
+  border-top:1px solid #EEEEEE;
+  line-height: 34px;
+  margin-top:120px;
+  background-color: #3f4246;
+  color:#D9E3E9;
+  font-weight: bold;
+
+}
+.team__name{
+  font-size:14px;
+  padding-top:25px;
+  color:#868E96;
+
+}
+.footer__description h1{
+  font-size:15px;
+}
+.footer__description p{
+  font-size:14px;
+  color:#868E96;
+}
+
+
+
+
+@media screen and (max-width:768px) {
+
+
+  /* Login */
+
+  #login {
+    position: static;
+    width: 100%;
+    text-align: right;
+    padding: 15px 0px;
+    color: #f8f8f8;
+  }
+
+  .login__btn a {
+    font-size: 12px;
+  }
+
+  /* Navbar */
+
+  #navbar {
+    padding: 0px;
+    justify-content: center;
+    padding-bottom: 50px;
+  }
+
+  .logo {
+    flex-direction: column;
+    color: #001928;
+  }
+
+  .logo__title a {
+    font-size: 22px;
+  }
+
+  .square__point {
+    top: 0px;
+    left: -15px;
+  }
+
+  .menu__list {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px;
+    padding-top: 30px;
+    text-align: center;
+    padding-top: 50px;
+
+  }
+
+  .menu__items a {
+    line-height: 50px;
+    font-size: 14px;
+    color: #f8f8f8;
+    font-weight: var(--weight-bold);
+
+  }
+
+  #input__form {
+    display: none;
+  }
+
+  .category {
+    position: absolute;
+    top: 53px;
+    right: 8px;
+    font-size: 18px;
+    display: block;
+  }
+
+  /* Detail Products */
+
+  #detail__products {
+    flex-wrap: wrap;
+  }
+
+  .detail__title h1 {
+    font-size: 16px;
+  }
+
+  .detail__price {
+    font-size: 14px;
+  }
+
+  .buy__description {
+    display: none;
+  }
+
+  .buy__btn {
+    padding: 14px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .review {
+    padding-top: 80px;
+  }
+
+  .review__list {
+    font-size: 14px;
+    margin: 9px;
+  }
+
+  .left__detail {
+    width: 500px;
+  }
+
+  .right__detail {
+    position: absolute;
+    bottom: -123px;
+    right: 90px;
+  }
+
+  .right__detail img {
+    width: 100px;
+    height: 200px;
+    border-radius: 0px;
+  }
+
+  /*  Detail More Products */
+
+  .left__btn {
+    z-index: 10;
+  }
+
+  #more__carousel {
+    padding: 0px;
+    padding-top: 50px;
+  }
+
+  #more__carousel,
+  .slide_list {
+    overflow-x: hidden;
+  }
+  .current__slide{
+    margin:0 12px;
+  }
+
+  .current__slide img {
+    width: 340px;
+    height: 230px;
+  }
+
+  /* Footer */
+
+#footer{
+  line-height: 28px;
+}
+.team__name{
+  font-size:13px;
+}
+.footer__description h1{
+  font-size:14px;
+}
+.footer__description p{
+  font-size:13px;
+  color:#868E96;
+  padding-top:10px;
+}
+
+}

@@ -1,0 +1,9 @@
+package org.mdoubleh.www.common;
+
+import java.util.Hashtable;
+
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class LoginManager implements HttpSessionBindingListener {
+	private static Hashtable loginUsers = new Hashtable();
+}

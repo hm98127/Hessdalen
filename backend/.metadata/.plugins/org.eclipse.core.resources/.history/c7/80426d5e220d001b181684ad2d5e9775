@@ -1,0 +1,7 @@
+package org.mdoubleh.www.common;
+
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class LoginManager implements HttpSessionBindingListener {
+	
+}

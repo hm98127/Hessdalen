@@ -1,0 +1,5 @@
+package org.mdoubleh.www.common;
+
+public class RegExp {
+
+}

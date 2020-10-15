@@ -1,0 +1,35 @@
+package org.mdoubleh.www.common;
+
+import java.util.Hashtable;
+
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class LoginManager implements HttpSessionBindingListener {
+	private static Hashtable loginUsers = new Hashtable();
+	
+	private LoginManager() {
+		super();
+	}
+	
+	public static LoginManager getInstance() {
+		return LoginManager.LazyHolder.INSTANCE;
+	}
+	
+	private static class LazyHolder {
+		private static final LoginManager INSTANCE = new LoginManager();
+	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		loginUsers.put(event.getSession(), event.getName());
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

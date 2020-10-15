@@ -1,0 +1,76 @@
+*{
+    margin:0px;
+}
+
+#write__container{
+    width:1000px;
+    height:570px;
+    margin:auto;
+    text-align: center;
+
+}
+.write__title{
+    text-align: center;
+}
+.write__title h2{
+    padding-top:20px;
+    font-size:22px;
+}
+
+.form__box{
+    padding:27px 60px;
+    
+}
+.input__name{
+    text-align: left;
+    margin:0px 125px;
+}
+
+#title__input{
+    width: 622px;
+    height:20px;
+    margin:10px 0px;
+
+}
+#write__input{
+    width:700px;
+    height:320px;
+    margin:10px 0px;
+}
+
+#insert,
+#amend,
+#delete{
+    outline: none;
+    border:none;
+    color: black;
+    margin:18px 12px;
+    padding:6px 10px;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width:768px){
+   #write__container,
+#title__input,
+#text__area,
+#write__input{
+    width:350px;
+}
+
+.form__box{
+    padding:35px 0px;
+}
+
+.input__name
+{
+    padding:0px;
+    margin:0px;
+}
+#insert,
+#amend,
+#delete{
+    margin:20px 14px;
+}
+

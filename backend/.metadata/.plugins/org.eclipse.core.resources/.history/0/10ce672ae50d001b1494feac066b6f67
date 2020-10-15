@@ -1,0 +1,45 @@
+package org.mdoubleh.www.action;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.mdoubleh.www.common.Action;
+import org.mdoubleh.www.common.ActionForward;
+import org.mdoubleh.www.common.RegExp;
+import org.mdoubleh.www.service.HessService;
+import org.mdoubleh.www.vo.ArticleVo;
+
+import static org.mdoubleh.www.common.RegExp.PAGE_NUM;
+
+public class DetailAction implements Action {
+	@Override
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String num = request.getParameter("num");
+		if (num == null || num.equals("") || !RegExp.checkString(PAGE_NUM, num)) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('잘못된 접근입니다.'); location.href='/index.jsp';</script>");
+			out.close();
+			return null;
+		}
+		
+		int buff = Integer.parseInt(num);
+		if (buff <= 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('잘못된 접근입니다.'); location.href='/index.jsp';</script>");
+			out.close();
+			return null;
+		}
+		
+		HessService service = new HessService();
+		ArticleVo vo = service.getArticle(buff);
+		ActionForward forward = new ActionForward();
+		request.setAttribute("list", list);
+		forward.setPath("/views/service.jsp");
+		return forward;
+	}
+}

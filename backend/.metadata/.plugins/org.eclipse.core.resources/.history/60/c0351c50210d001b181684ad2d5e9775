@@ -1,0 +1,7 @@
+package org.mdoubleh.www.vo;
+
+public class ItemImgVo {
+	private int img_sq;
+	private String file_path_01;
+	private String thumb_path_01;
+}

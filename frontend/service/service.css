@@ -1,0 +1,210 @@
+
+  /* Service Title */
+
+  #service{
+    height:800px;
+    padding-top:30px;
+    text-align: center;
+    position: relative;
+  }
+  .service__title h1{
+    font-size:14px;
+  }
+
+  .select__service{
+    padding:50px;
+  }
+  
+  .service__menu{
+    display:flex;
+    justify-content: center;
+
+  }
+
+  .service__event,
+  .service__notice{
+    padding:18px 295px;
+    margin:50px 0px;
+    font-size:16px;
+    cursor: pointer;
+    color:white;
+  }
+
+  .service__event{
+  background-color: #283541;
+  transition: all 300ms linear;
+  }  
+  .service__notice{
+    background-color: #E2CDCD;
+  transition: all 300ms linear;
+
+  }
+
+
+  /* Notice board */
+
+.notice__board{
+  width:82.5%;
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  border-top:1px solid black;
+  border-bottom:1px solid #E5E5E5;
+}
+
+.board__list{
+  padding:12px 120px;
+  color:rgb(39, 38, 38);
+}
+.write__form{
+  position: absolute;
+  right:9%;
+  bottom:0px;
+  border:1px solid#E2CDCD;
+  padding:10px;
+  cursor: pointer;
+
+}
+.write__form:hover{
+  background-color: #E2CDCD;
+}
+.write__form p,
+.write__form a
+{
+  font-size:13px;
+  color:black;
+
+}
+
+
+/* Footer */
+
+#footer{
+  height:220px;
+  text-align: center;
+  font-size:16px;
+  border-top:1px solid #EEEEEE;
+  line-height: 34px;
+  margin-top:120px;
+  background-color: #3f4246;
+  color:#D9E3E9;
+  font-weight: bold;
+
+}
+.team__name{
+  font-size:14px;
+  padding-top:25px;
+  color:#868E96;
+
+}
+.footer__description h1{
+  font-size:15px;
+}
+.footer__description p{
+  font-size:14px;
+  color:#868E96;
+}
+
+
+
+/* Media Screen */
+
+@media screen and (max-width:768px){
+
+  
+  /* Login */
+  
+  #login {
+    position: static;
+    width: 100%;
+    text-align: right;
+    padding:15px 0px;
+    color:#f8f8f8;
+  }
+  .login__btn a{
+    font-size:12px;
+  }
+  /* Navbar */
+  
+  #navbar{
+    padding:0px;
+    justify-content: center;
+    padding-bottom:50px;
+    }
+  .logo{
+    flex-direction: column;
+    color:#001928;
+  }
+  .logo__title a{
+    font-size: 22px;
+  }
+  
+  .square__point {
+    top:0px;
+    left: -15px;
+  }
+  
+  .menu__list {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin:0px;
+    padding-top:30px;
+    text-align: center;
+    padding-top:50px;
+  
+  }
+  
+  .menu__items a{
+    line-height: 50px;
+    font-size:14px;
+    color:#f8f8f8;
+    font-weight: var(--weight-bold);
+  
+  }
+  
+  #input__form{
+    display:none;
+  }
+  
+  .category{
+    position: absolute;
+    top: 53px;
+    right:8px;
+    font-size:18px;
+    display: block;
+  
+  }
+  /* Service Title  */
+
+  .service__event,
+  .service__notice{
+    padding: 10px 90px;
+  }
+
+  /*  Notice board */
+
+.board__list{
+  padding:12px 21px;
+  font-size:14px;
+}
+
+/* Footer */
+
+#footer{
+  line-height: 28px;
+}
+.team__name{
+  font-size:13px;
+}
+.footer__description h1{
+  font-size:14px;
+}
+.footer__description p{
+  font-size:13px;
+  color:#868E96;
+  padding-top:10px;
+}
+
+
+}

@@ -1,0 +1,28 @@
+package org.mdoubleh.www.service;
+
+import static org.mdoubleh.www.common.JdbcUtil.*;
+
+import java.sql.Connection;
+
+import org.mdoubleh.www.dao.HessDao;
+import org.mdoubleh.www.vo.MemberVo;
+
+public class HessService {
+	public boolean logoutMember(MemberVo memberVo) {
+        HessDao dao = HessDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        boolean isSucess = false;
+        memberVo.setSq(dao.getMemberSequence(memberVo.getId()));
+        int count = dao.updateLoginState(memberVo);
+        if (count > 0) {
+            commit(con);
+            isSucess = true;
+        } else {
+            rollback(con);
+        }
+        close(con);
+        return isSucess;
+    }
+
+}
