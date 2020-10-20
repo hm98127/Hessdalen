@@ -1,0 +1,70 @@
+String header = "Bearer " + access_token; // Bearer 다음에 공백 추가
+        try {
+            apiURL = "https://openapi.naver.com/v1/nid/me";
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Authorization", header);
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+            if (responseCode == 200) { // 정상 호출
+                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+            } else {  // 에러 발생
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+            String inputLine;
+            StringBuffer response2 = new StringBuffer();
+            while ((inputLine = br.readLine()) != null) {
+                response2.append(inputLine);
+            }
+
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(response2.toString());
+            JSONObject dataObject = (JSONObject) jsonObject.get("response");
+
+            String id = (String) dataObject.get("id");
+            id += "@naver";
+
+            String name = (String) dataObject.get("name");
+            String birthday = (String) dataObject.get("birthday");
+            String gender = (String) dataObject.get("gender");
+            String email = (String) dataObject.get("email");
+            br.close();
+
+            JoinBean joinBean = new JoinBean();
+            joinBean.setMB_ID(id);
+            joinBean.setMB_NM(name);
+            joinBean.setMB_BIRTH_NO(birthday);
+            joinBean.setMB_EMAIL(email);
+            joinBean.setMB_GENDER(gender);
+
+            joinBean.setB_MB_BIRTH_MONTH(joinBean.getMB_BIRTH_NO().split("-")[0]);
+            joinBean.setB_MB_BIRTH_DAY(joinBean.getMB_BIRTH_NO().split("-")[1]);
+
+            // 아이디 존재 유무 검사
+            MemberProService memberProService = new MemberProService();
+            int count_01 = memberProService.getMemberCountForSMS(id, "Y");
+            int count_02 = memberProService.getMemberCount(id);
+            int count_03 = memberProService.getMemberCountForSMS(id, "N");
+
+            if (count_02 == 0) {
+                session.setAttribute("joinBean", joinBean);
+                forward.setPath("/jsp/joinNaver.jsp");
+                return forward;
+            } else {
+                if (count_01 > 0) {
+                    if (count_03 > 0) {
+
+                    } else {
+                        session.setAttribute("joinBean", joinBean);
+                        forward.setPath("/jsp/joinNaver.jsp");
+                        return forward;
+                    }
+                }
+            }
+            br.close();
+
+            loginManager.setSession(session, id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }

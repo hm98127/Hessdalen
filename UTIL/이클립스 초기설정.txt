@@ -1,0 +1,25 @@
+1. 이클립스 실행 시 가용할 최소메모리와 최대메모리 설정
+가. 이클립스 설치 폴더에서 eclipse.ini 파일 편집
+나. -Xms 항목을 1024m, -Xmx 항목을 2048m로 수정
+다. 이클립스 실행 후 Windows -> preferences -> General -> Show heap status 선택 후 저장
+라. 이클립스 우측 하단에서 힙메모리와 사용량 확인 가능
+마. 휴지통 버튼 클릭 시 힙 메모리 비워짐
+
+2. Encoding UTF-8 설정
+가. Window -> Preferences -> General -> Content Types - Java Class File -> Default encoding 에 UTF-8 입력
+나. Window -> Preferences -> General -> Editors -> Text Editors -> Spelling -> Encoding 에서 UTF-8 선택
+다. Window -> Preferences -> General -> Workspace -> Text file encoding 에서 UTF-8 선택 
+라. Window -> Preferences -> Web -> CSS Files에서 Encoding : ISO 10646/Unicode(UTF-8) 선택
+마. Window -> Preferences -> Web -> HTML Files에서 Encoding : ISO 10646/Unicode(UTF-8) 선택
+바. Window -> Preferences -> Web -> JSP Filse에서 Encoding : ISO 10646/Unicode(UTF-8) 선택
+사. Project - Properties - Resource - Text file encoding 에서 UTF-8 선택
+
+3. JDK 설정
+가. Window -> Preferences -> Java -> Installed JREs -> Add -> Next
+나. JRE home 작성, JRE name 작성
+다. Add Extenal JARs 선택 -> Tomcat의 lib 폴더에서 Servlet-api.jar 선택 후 열기
+라. Finish
+
+4. Tomcat 추가 및 JDK 선택
+가. Window -> Preferences -> Server -> Runtime Environment -> Add -> Tomcat 버전 선택 후 Next -> Browse 버튼 눌러 Tomcat 경로 선택 및 JRE 선택 -> Finish
+나. 하단의 Server 탭 선택 -> “No server are available. Click this link to create a new server...” 클릭 -> 서버 선택 후 Finish

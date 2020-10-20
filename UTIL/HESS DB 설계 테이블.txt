@@ -1,0 +1,50 @@
+DB 설계
+
+// 게시판 DB
+CREATE TABLE inf_articl_tb (
+	articl_sq INT NOT NULL AUTO_INCREMENT,
+	hit INT NOT NULL DEFAULT '0',
+	dttm DATETIME NOT NULL DEFAULT now(),
+	sj VARCHAR(400) NOT NULL,
+	cn TEXT,
+	PRIMARY KEY(articl_sq)
+	);
+
+// 상품 게시판 이미지 DB
+CREATE TABLE inf_item_img_tb (
+	img_sq INT NOT NULL AUTO_INCREMENT,
+	file_path_01 VARCHAR(500) NOT NULL,
+	thumb_path_01 VARCHAR(500) NOT NULL,
+	file_path_02 VARCHAR(500),
+	thumb_path_02 VARCHAR(500),
+	file_path_03 VARCHAR(500),
+	thumb_path_03 VARCHAR(500),
+	file_path_04 VARCHAR(500),
+	thumb_path_04 VARCHAR(500),
+	file_path_05 VARCHAR(500),
+	thumb_path_05 VARCHAR(500),
+	PRIMARY KEY(img_sq)
+	);
+	
+// 상품 게시판 DB
+CREATE TABLE inf_item_tb (
+	item_sq INT NOT NULL AUTO_INCREMENT,
+	img_sq INT,
+	pc INT NOT NULL,
+	nm VARCHAR(100),
+	cn TEXT,
+	PRIMARY KEY(item_sq),
+	FOREIGN KEY(img_sq)
+	REFERENCES inf_item_img_tb(img_sq) ON UPDATE CASCADE
+	);
+	
+// 회원 DB
+CREATE TABLE inf_mber_tb (
+	mber_sq INT NOT NULL AUTO_INCREMENT,
+	del_fl BOOLEAN NOT NULL DEFAULT FALSE,
+	id VARCHAR(100) NOT NULL,
+	tel VARCHAR(100) NOT NULL,
+	addr VARCHAR(200) NOT NULL,
+	detail_addr VARCHAR(200) NOT NULL,
+	PRIMARY KEY(mber_sq)
+	);

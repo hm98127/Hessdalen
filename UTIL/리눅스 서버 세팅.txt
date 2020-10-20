@@ -1,0 +1,332 @@
+● centos 셋업 작업
+
+1. centos 최소 설치
+
+2. 네트워크 도구 설치
+ yum install -y net-tools
+3. 호스트 이름 설정
+ hostnamectl set-hostname [호스트이름]
+4. ssh 설치(설치되어 있을 수도 있음)
+ yum install -y openssh-server
+5. ssh 부팅 시 자동 서비스 시작
+ systemctl enable sshd.service
+6. ssh 설정
+ vi /etc/ssh/sshd_config
+
++------------------------------------------------------------+
+| Port 22                                                    |
+| AddressFamily inet                                         |
+| LoginGraceTime 2m                                          |
+| X11Forwarding no                                           |
+| Subsystem sftp /usr/libexec/openssh/sftp-server (주석처리)    |
++------------------------------------------------------------+
+
+7. yum install -y open-vm-tools
+8. SELinux off
+ vi /etc/sysconfig/selinux
+
++-----------------------+
+| SELINUX=disabled로 변경 |
++-----------------------+
+
+9. firewalld 비활성화 및 중지
+
++-----------------------------+
+| systemctl stop firewalld    |
+| systemctl mask firewalld    |
+| systemctl disable firewalld |
++-----------------------------+
+
+10. iptables 관련 패키지 설치
+ yum install -y iptables-services
+
+11. 부팅 시 시작하도록 iptables 생성 및 설정
+
++---------------------------+
+| systemctl enable iptables |
+| systemctl start iptables  |
++---------------------------+
+
+14. 타임존 확인 및 설정
+ timedatectl
+
+15. epel 설치
+ yum install -y epel-release
+
+16. reboot
+
+● FTP 설치
+1. ftp 서버 설치
+ yum -y install vsftpd
+2. 부팅 시 자동 시작
+ systemctl enable vsftpd.service
+3. vi /etc/vsftpd/vsftpd.conf
+
++---------------------------------------------------+
+| anonymous_enable=NO (익명의 사용자 접속 허용 여부)          |
+| chroot_local_user=YES (홈 폴더에서 벗어날 수 없도록 할지 여부) |
+| - 아래 내용 마지막에 추가 -                                |
+| allow_writeable_chroot=YES                         |
+| pasv_enable=YES                                    |
+| pasv_min_port=9000                                 |
+| pasv_max_port=9100                                 |
++----------------------------------------------------+
+
+4. 방화벽 설치
+ yum -y install system-config-firewall-tui
+5. 방화벽 설치 후 사용하려는 포트 허용 스크립트 작성
+ vi /etc/sysconfig/iptables
+
++-------------------------------------------------------------------------+
+| # FOR FTP                                                               |
+| -A INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT        |
+| # FOR FTP(패시브)                                                         |
+| -A INPUT -p tcp -m state --state NEW -m tcp --dport 9000:9100 -j ACCEPT |
+| # FOR APACHE                                                            |
+| -A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT        |
+| # FOR MariaDB                                                           |
+| -A INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -j ACCEPT      |
+| # FOR SVN                                                               |
+| -A INPUT -p tcp -m state --state NEW -m tcp --dport 3690 -j ACCEPT      |
+| # FOR MSSQL                                                             |
+| -A INPUT -p tcp -m state --state NEW -m tcp --dport 1433 -j ACCEPT      |
++-------------------------------------------------------------------------+
+
+6. systemctl restart iptables
+7. systemctl restart sshd
+8. systemctl start vsftpd
+
+● 사용자 추가
+11. 사용자 계정 추가 - useradd [아이디]
+12. 사용자 비밀번호 변경 - passwd [아이디]
+
+● 아파치 설치
+1. httpd 설치 : yum install -y httpd
+2. httpd 확인 : rpm -qa httpd
+3. 부팅 시 자동 시작 : systemctl enable httpd.service
+4. 서비스 시작 : systemctl start httpd.service
+5. 브라우저로 접속하여 화면 뜨는지 확인
+6. os 업데이트 : yum -y update
+
+● wget 설치 : yum install -y wget
+● 톰캣 설정
+1. 유저 아이디로 로그인 후  톰캣과 jdk 압축 해제(tar -zxvf ) 후 폴더명 바꾸기(mv 원래이름 바꿀이름)
+2. tomcat/bin로 이동 후 vi catalina.sh 후 Get standard environment variables 위에 아래 내용 복사
+
++-----------------------------------------------+
+| export CATALINA_HOME=/home/test/tomcat        |
+| export TOMCAT_HOME=/home/test/tomcat          |
+| export CATALINA_BASE=/home/test/tomcat        |
+| CATALINA_PID=/home/test/tomcat/bin/tomcat.pid |
+| export JAVA_HOME=/home/test/jdk               |
++-----------------------------------------------+
+
+3. 톰캣 서비스 시작하여 테스트
+아래는 root 로긴
+● mod_jk로 아파치 톰캣 연동하기
+1. mod_jk를 설치 하려면 gcc, gcc-c++, httpd-devel 세가지 패키지 설치 : yum install -y gcc gcc-c++ httpd-devel
+2. 다운받을 디렉터리 이동 후 wget -c http://apache.tt.co.kr/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.48-src.tar.gz
+3. 압축 해제 : tar -zxvf tomcat-connectors-1.2.48-src.tar.gz
+4. cd tomcat-connectors-1.2.48-src/native
+5. Makefile을 생성하기 위해 ‘./configure --with-apxs=/usr/bin/apxs’ bin 말고 sbin에 있을수도
+6. make
+7. 파일 확인 : file apache-2.0/mod_jk.so
+8. make install -> /etc/httpd/modules/ 경로의 파일 안에 mod_jk.so파일 확인
+9. vi /etc/httpd/conf/httpd.conf – 아래내용 추가
+
++----------------------------------------+
+| ->LoadModule 검색한 뒤 아래 내용 추가          |
+| LoadModule jk_module modules/mod_jk.so |
+| ->제일 밑에 아래 내용 추가:::                  |
+| <VirtualHost *:80>                     |
+| ServerName [도메인주소]                    |
+| JkMount /* worker1                     |
+| </VirtualHost>                         |
++----------------------------------------+
+
+
+10. vi /etc/httpd/conf.modules.d/mod_jk.conf
+
++----------------------------------------+
+| <IfModule jk_module>                   |
+|  JkWorkersFile conf/workers.properties |
+|  JkLogFile logs/mod_jk.log             |
+|  JkLogLevel info                       |
+|  JkShmFile run/mod_jk.shm              |
+| </IfModule>                            |
++----------------------------------------+
+
+12. vi /etc/httpd/conf/workers.properties
+
++-------------------------------+
+| worker.list=worker1           |
+|                               |
+| worker.worker1.type=ajp13     |
+| worker.worker1.host=localhost |
+| worker.worker1.port=8009      |
+| worker.worker1.lbfactor=1     |
++-------------------------------+
+
+13. vi /etc/httpd/conf/httpd.conf에서 ServerName 주석 풀고 localhost로 수정
+14. apachectl configtest 로 테스트 - Syntax OK 라고 나오면 성공
+15. 아파치 재시작 systemctl restart httpd
+
+● mariadb 10.1.x 설치
+1. vi /etc/yum.repos.d/MariaDB.repo 아래 내용 입력
+
++-----------------------------------------------------+
+| [mariadb]                                           |
+| name = MariaDB                                      |
+| baseurl = http://yum.mariadb.org/10.3/centos7-amd64 |
+| gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB  |
+| gpgcheck=1                                          |
++-----------------------------------------------------+
+
+2. yum install –y MariaDB-client MariaDB-server
+3. vi /etc/my.cnf 아래 내용 수정
+
++------------------------------------------------------------------------------------------------------------------------------+
+| [mysql]                                                                                                                      |
+| default-character-set = utf8                                                                                                 |
+|                                                                                                                              |
+| [mysqld]                                                                                                                     |
+| skip-host-cache                                                                                                              |
+| skip-name-resolve                                                                                                            |
+| lower_case_table_names=1                                                                                                     |
+| character-set-client-handshake=FALSE                                                                                         |
+| init_connect="SET collation_connection = utf8_general_ci"                                                                    |
+| init_connect="SET NAMES utf8"                                                                                                |
+| character-set-server = utf8                                                                                                  |
+| collation-server = utf8_general_ci                                                                                           |
+| max_connections = 500                                                                                                        |
+| [mysql]                                                                                                                      |
+| default-character-set = utf8                                                                                                 |
+|                                                                                                                              |
+| [mysqld]                                                                                                                     |
+| skip-host-cache                                                                                                              |
+| skip-name-resolve                                                                                                            |
+| lower_case_table_names=1                                                                                                     |
+| character-set-client-handshake=FALSE                                                                                         |
+| init_connect="SET collation_connection = utf8_general_ci"                                                                    |
+| init_connect="SET NAMES utf8"                                                                                                |
+| character-set-server = utf8                                                                                                  |
+| collation-server = utf8_general_ci                                                                                           |
+| max_connections = 500                                                                                                        |
+| thread_pool_max_threads = 300                                                                                                |
+| innodb_file_per_table                      # innodb 테이블스페이스를 테이블별로 각각의 파일로 나누어 생성한다.             |
+| innodb_buffer_pool_size = 2G               # 버퍼풀의 메모리 사이즈. 권장은 메인메모리의 50~70% (전용서버일때) 디폴트는 8M   |
+| innodb_flush_log_at_trx_commit = 1                                                                                           |
+| innodb_adaptive_flushing = ON                                                                                                |
+| innodb_adaptive_hash_index = ON                                                                                              |
+| innodb_autoextend_increment  = 8  # 테이블스페이스를 자동으로 늘려주는 단위, MB 단위이다.                               |
+| datadir=/var/lib/mysql                                                                                                       |
+| socket=/var/lib/mysql/mysql.sock                                                                                             |
+| symbolic-links=0                                                                                                             |
+|                                                                                                                              |
+| [mysqld_safe]                                                                                                                |
+| log-error=/var/log/mariadb/mariadb.log                                                                                       |
+| pid-file=/var/run/mariadb/mariadb.pid                                                                                        |
+| !includedir /etc/my.cnf.d                                                                                                    |
++------------------------------------------------------------------------------------------------------------------------------+
+
+3. systemctl enable mariadb.service
+4. systemctl start mariadb
+5. mysql_secure_installation
+
+● 톰캣 서버 추가
+root 계정으로 해야할 일
+1. 계정 생성 useradd, passwd 후 소유권 설정 chown –R [계정명] /home/[계정명]
+2. vi /etc/httpd/conf/httpd.conf – 아래 내용 추가
+
++---------------------------+
+| <VirtualHost [아이피주소]:80> |
+| ServerName [url]          |
+| JkMount /* [계정명]          |
+| </VirtualHost>            |
++---------------------------+
+
+3. vi /etc/httpd/conf/workers.properties – 아래 내용 추가
+
++----------------------------------------------+
+| # 2개 이상의 톰캣일 경우 아래 형태로 됨      |
+| worker.list=worker1,worker2                  |
+| worker.worker1.type=ajp13                    |
+| worker.worker1.host=server1                  |
+| worker.worker1.port=8009 # 포트번호          |
+| worker.worker1.lbfactor=2 # 서버 밸런스 비율 |
+| worker.worker2.type=ajp13                    |
+| worker.worker2.host=server2                  |
+| worker.worker2.port=8010 # 포트번호          |
+| worker.worker2.lbfactor=1 # 서버 밸런스 비율 |
++----------------------------------------------+
+
+4. systemctl restart httpd
+
+user 계정으로 로그인 후 해야할 일
+1. 톰캣, 및 jdk 업로드 및 설치 후 mv를 이용하여 폴더명 tomcat, jdk로 변경
+2. vi tomcat/bin/catalina.sh 후 Get standard environment variables 위에 아래 내용 복사
+
++-----------------------------------------------------+
+| export CATALINA_HOME=/home/계정/tomcat               |
+| export TOMCAT_HOME=/home/계정/tomcat                 |
+| export CATALINA_BASE=/home/계정/tomcat               |
+| export JAVA_HOME=/home/계정/jdk                      |
+| export CATALINA_PID=/home/계정/tomcat/bin/tomcat.pid |
++-----------------------------------------------------+
+
+3. vi tomcat/conf/server.xml – 내용 수정
+
++---------------------------------------------------------------------------------------------------------------------+
+| 중략........                                                                                                        |
+| <Server port=[8005 이상의 중복되지 않는 값] shutdown="SHUTDOWN">                                                    |
+| 중략........                                                                                                        |
+| <Connector port=[20101~20200 중복되지 않는 값] protocol="HTTP/1.1"                                                  |
+|                connectionTimeout="20000" redirectPort="8443" />                                                     |
+| <Connector port=[workers.properties에 설정한 포트번호] protocol="AJP/1.3" redirectPort="8443" URIEncoding="UTF-8"/> |
++---------------------------------------------------------------------------------------------------------------------+
+
+
+● svn 설치
+1. yum install –y subversion
+2. svn 최상위 폴더 생성 루트에서 mkdir svn
+3. vi /etc/sysconfig/svnserve 의 OPTIONS 수정
+
++-------------------+
+| OPTIONS="-r /svn" |
++-------------------+
+
+4. systemctl enable svnserve.service
+5. systemctl start svnserve.service
+6. 서비스 실행 확인 ps -ef | grep svn
+7. 포트확인 netstat -anp | grep svnserve
+
+● svn 저장소(프로젝트) 생성
+1. 폴더 생성 : cd /svn 후 svnadmin create --fs-type fsfs [프로젝트명]
+2. 권한 수정 : chmod -R g+ws [프로젝트명]
+3. 저장소 설정 : vi /svn/[프로젝트명]/conf/svnserve.conf 아래내용 수정
+
++----------------------+
+| anon-access = read   |
+| auth-access = write  |
+| password-db = passwd |
+| authz-db = authz     |
++----------------------+
+
+4. 계정 정보 추가 vi /svn/[프로젝트명]/conf/passwd
+
++-------------------+
+| [users]           |
+| 아이디 = 비밀번호 |
++-------------------+
+
+5. 접근 계정정보 추가 vi /svn/[프로젝트명]/conf/authz 아래 내용 하단에 추가
+
++------------+
+| [/]        |
+| * = r      |
+| root = rw  |
+| samin = rw |
++------------+
+
+6. 저장소 확인2 svn info svn://saminsys.site/저장소명
+

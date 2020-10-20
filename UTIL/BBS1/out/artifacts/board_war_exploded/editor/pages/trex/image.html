@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="google" content="notranslate">
+    <title>이미지 첨부</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.form.js"></script>
+    <script src="../../js/popup.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#saveBtn").click(function () {
+                var file = $("#image_file").val();
+                var fileExt = file.substring(file.lastIndexOf('.') + 1).toUpperCase(); //파일의 확장자를 구합니다.
+                var bSubmitCheck = true;
+
+                if (!file) {
+                    alert("파일을 선택해 주세요.");
+                    return;
+                }
+
+                if (!(fileExt == "JPG" || fileExt == "PNG" || fileExt == "GIF" || fileExt == "JPEG" || fileExt == "BMP")) {
+                    alert("이미지 파일이 아닙니다.");
+                    return;
+                }
+                $("#frm").submit();
+            })
+
+            //ajax form submit
+            $('#frm').ajaxForm({
+                beforeSubmit: function (data, form, option) {
+                    //validation체크
+                    //막기위해서는 return false를 잡아주면됨
+                    return true;
+                },
+                success: function (response, status) {
+                    //성공후 서버에서 받은 데이터 처리
+                    done(response);
+                },
+                error: function (request,status,error) {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    alert("error!!");
+                }
+            });
+        })
+
+        function done(response) {
+            if (typeof(execAttach) == 'undefined') { //Virtual Function
+                return;
+            }
+            var response_object = $.parseJSON(response);
+            execAttach(response_object);
+            closeWindow();
+        }
+
+        function initUploader() {
+            var _opener = PopupUtil.getOpener();
+            if (!_opener) {
+                alert('잘못된 경로로 접근하였습니다.');
+                return;
+            }
+
+            var _attacher = getAttacher('image', _opener);
+            registerAction(_attacher);
+        }
+    </script>
+    <link rel="stylesheet" href="../../css/popup.css" type="text/css" charset="utf-8"/>
+</head>
+<body onload="initUploader();">
+<div class="wrapper">
+    <div class="header">
+        <h1>사진 첨부</h1>
+    </div>
+    <div class="body">
+        <dl class="alert">
+            <dt>사진 첨부 확인</dt>
+            <dd>
+                <form id="frm" action="/editor/fileUpload.jsp" method="post">
+                    <input type="file" id="image_file" name="image_file" accept="image/jpg,image/png,image/gif,image/jpeg,image/bmp">
+                </form>
+            </dd>
+        </dl>
+    </div>
+    <div class="footer">
+        <ul>
+            <li class="submit"><a href="#" id="saveBtn" title="등록" class="btnlink">등록</a></li>
+            <li class="cancel"><a href="#" onclick="closeWindow();" title="취소" class="btnlink">취소</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

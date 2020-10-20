@@ -1,0 +1,42 @@
++----------------+
+| Tables_in_kb   |
++----------------+
+| board          |
+| member         |
+| member_history |
++----------------+
+
+mysql> desc board;
++---------+--------------+------+-----+-------------------+-------------------+
+| Field   | Type         | Null | Key | Default           | Extra             |
++---------+--------------+------+-----+-------------------+-------------------+
+| num     | int          | NO   | PRI | NULL              | auto_increment    |
+| mb_sq   | int          | YES  | MUL | NULL              |                   |
+| subject | varchar(100) | NO   |     | NULL              |                   |
+| content | text         | YES  |     | NULL              |                   |
+| hit     | int          | YES  |     | 0                 |                   |
+| wdate   | datetime     | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| udate   | datetime     | YES  |     | NULL              |                   |
+| ddate   | datetime     | YES  |     | NULL              |                   |
++---------+--------------+------+-----+-------------------+-------------------+
+
+mysql> desc member;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| sq       | int          | NO   | PRI | NULL    | auto_increment |
+| id       | varchar(50)  | YES  |     | NULL    |                |
+| pwd      | varchar(200) | YES  |     | NULL    |                |
+| lgn_fl   | tinyint(1)   | NO   |     | 0       |                |
+| leave_fl | tinyint(1)   | NO   |     | 0       |                |
++----------+--------------+------+-----+---------+----------------+
+
+mysql> desc member_history;
++----------+----------+------+-----+-------------------+-------------------+
+| Field    | Type     | Null | Key | Default           | Extra             |
++----------+----------+------+-----+-------------------+-------------------+
+| sq       | int      | NO   | PRI | NULL              | auto_increment    |
+| mb_sq    | int      | YES  | MUL | NULL              |                   |
+| evt_type | tinyint  | NO   |     | NULL              |                   |
+| dttm     | datetime | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++----------+----------+------+-----+-------------------+-------------------+
