@@ -6,7 +6,6 @@ const body = document.querySelector('body');
 function clickHandle() {
   navbarMenu.classList.add('categoryShow');
   categoryClick.style.display = 'none';
-  body.style.backgroundColor = 'black';
 }
 
 function init() {

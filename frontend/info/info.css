@@ -1,0 +1,46 @@
+
+.info__title {
+    text-align: center;
+    font-size: 18px;
+    padding-top:40px;
+}
+
+.info__description {
+    padding-top:60px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.info__individual{
+    text-align:center;
+}
+
+.info__individual img {
+    width: 310px;
+    height: 350px;
+}
+
+
+.info__component h2 {
+    font-size: 17px;
+    padding-top: 12px;
+    color: #041B29;
+}
+
+.info__component h3 {
+    padding-top: 4px;
+    font-size: 15px;
+    color: rgb(94, 31, 31);
+}
+
+.info__component p {
+    color: rgb(77, 76, 76);
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.info__component i{
+    font-size:24px;
+    color:black;
+    padding:0px 6px;
+}
