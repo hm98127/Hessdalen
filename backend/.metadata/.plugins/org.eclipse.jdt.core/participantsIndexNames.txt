@@ -1,5 +1,0 @@
-INDEX VERSION 1.131
-C:\HESS1\projects\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1420778192.index
-\HESS\src
-C:\HESS1\projects\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3176122984.index
-\HESS\src

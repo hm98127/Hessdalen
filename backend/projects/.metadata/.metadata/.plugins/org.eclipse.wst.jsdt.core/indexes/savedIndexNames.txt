@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\HESS1\projects\.metadata\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1891951863.index
+1862459589.index
+1420778192.index
+1959042273.index
+1416051903.index
+169486628.index
+4263189790.index
