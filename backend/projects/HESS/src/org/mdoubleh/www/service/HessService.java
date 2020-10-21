@@ -5,6 +5,7 @@ import static org.mdoubleh.www.common.JdbcUtil.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import org.mdoubleh.www.common.Pagenation;
 import org.mdoubleh.www.dao.HessDao;
 import org.mdoubleh.www.vo.ArticleVo;
 import org.mdoubleh.www.vo.MemberVo;
@@ -70,11 +71,20 @@ public class HessService {
 		return count;
 	}
 	
-	public ArrayList<ArticleVo> getArticleList() {
+	public int getArticleCount(String query) {
 		HessDao dao = HessDao.getInstance();
 		Connection con = getConnection();
 		dao.setConnection(con);
-		ArrayList<ArticleVo> list = dao.getArticleList();
+		int count = dao.getArticleCount(query);
+		close(con);
+		return count;
+	}
+	
+	public ArrayList<ArticleVo> getArticleList(Pagenation pagenation, String query) {
+		HessDao dao = HessDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		ArrayList<ArticleVo> list = dao.getArticleList(pagenation, query);
 		close(con);
 		return list;
 	}

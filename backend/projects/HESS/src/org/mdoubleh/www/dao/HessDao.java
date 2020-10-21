@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.mdoubleh.www.common.Pagenation;
 import org.mdoubleh.www.vo.ArticleVo;
 import org.mdoubleh.www.vo.MemberVo;
 
@@ -105,12 +106,44 @@ public class HessDao {
         return count;
     }
     
-    public ArrayList<ArticleVo> getArticleList() {
+    public int getArticleCount(String query) {
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	int count = 0;
+    	try {
+    		pstmt = con.prepareStatement("SELECT COUNT(*) FROM inf_articl_tb WHERE 1 = 1" + query);
+    		rs = pstmt.executeQuery();
+    		while (rs.next()) {
+    			count = rs.getInt(1);
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally {
+    		close(rs);
+    		close(pstmt);
+    	}
+    	return count;
+    }
+    
+    public ArrayList<ArticleVo> getArticleList(Pagenation pagenation, String query) {
     	PreparedStatement pstmt = null;
     	ResultSet rs = null;
     	ArrayList<ArticleVo> list = new ArrayList<>();
     	try {
-    		pstmt = con.prepareStatement("SELECT * FROM inf_articl_tb");
+    		pstmt = con.prepareStatement
+    				("SELECT b.articl_sq" +
+    						", m.id" +
+    						", b.sj" +
+    						", b.cn" +
+    						", b.hit" +
+    						", b.dttm" +
+    						" FROM inf_articl_tb b" +
+    						" INNER JOIN inf_mber_tb m ON b.mb_sq = m.mber_sq" +
+    						" WHERE 1 = 1" + query +
+    						" ORDER BY articl_sq DESC" +
+    						" limit ?, ?");
+    		pstmt.setInt(1, pagenation.getStartArticleNumber());
+    		pstmt.setInt(2, pagenation.getSHOW_ARTICLE_COUNT());
     		rs = pstmt.executeQuery();
     		while (rs.next()) {
     			ArticleVo vo = new ArticleVo();
@@ -159,9 +192,10 @@ public class HessDao {
     	PreparedStatement pstmt = null;
     	int count = 0;
     	try {
-    		pstmt = con.prepareStatement("INSERT INTO inf_articl_tb(sj, cn) VALUES(?, ?)");
-    		pstmt.setString(1, vo.getSj());
-    		pstmt.setString(2, vo.getCn());
+    		pstmt = con.prepareStatement("INSERT INTO inf_articl_tb(mb_sq, sj, cn) VALUES(?, ?, ?)");
+    		pstmt.setInt(1, vo.getMb_sq());
+    		pstmt.setString(2, vo.getSj());
+    		pstmt.setString(3, vo.getCn());
     		count = pstmt.executeUpdate();
     	} catch (Exception e) {
     		e.printStackTrace();

@@ -55,7 +55,7 @@
 			<ul class="menu__list">
 				<li class="menu__items"><a href="info/info.html">INFO</a></li>
 				<li class="menu__items"><a href="products/products.html">PRODUCTS</a></li>
-				<li class="menu__items"><a href="/list.do">SERVICE</a></li>
+				<li class="menu__items"><a href="/list.do?pn=1">SERVICE</a></li>
 				<form id="input__form" action=''>
 					<input type="text" placeholder="Search" id="search__input">
 					<i class="fas fa-search"></i>

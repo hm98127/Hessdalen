@@ -1,3 +1,4 @@
+<%@page import="org.mdoubleh.www.common.Pagenation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
@@ -7,6 +8,8 @@
 	ArrayList<ArticleVo> list = (ArrayList<ArticleVo>) request.getAttribute("list");
 	LoginManager lm = LoginManager.getInstance();
 	String id = lm.getMemberId(session);
+	Pagenation pagenation = (Pagenation) request.getAttribute("pagenation");
+	String nowPage = request.getParameter("pn");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +17,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+<script 
+	src="https://code.jquery.com/jquery-3.5.1.slim.js"
+	integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
+	crossorigin="anonymous">
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="/images/Logo.png">
@@ -110,7 +118,23 @@
 				}
 			%>
 		</div>
-		
+		<span>
+			<a href="/list.do?pn=<%= pagenation.getStartPage() - 1 %>">◁</a>
+		</span>
+		<% 
+			for (int i = pagenation.getStartPage(); i <= pagenation.getEndPage(); i++) { 
+		%>
+		<span>
+			<a href="/list.do?pn=<%= i %>">
+				<%= i %>
+			</a>
+		</span>
+		<%
+			}
+		%>
+		<span>
+			<a href="/list.do?pn=<%= pagenation.getEndPage() + 1 %>">▷</a>
+		</span>
 		<!-- 글쓰기 버튼 -->
 		<button onclick="location.href='/write.do'">글쓰기</button> 
 
