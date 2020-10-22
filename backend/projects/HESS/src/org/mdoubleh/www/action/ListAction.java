@@ -21,18 +21,18 @@ public class ListAction implements Action {
 		String pageNum = request.getParameter("pn");
 		if (pageNum == null
 				|| !RegExp.checkString(IS_NUMBER, pageNum)) {
-			response.setContentType("text/html; charset=UTF-8");
+			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('잘못된 접근입니다.'); location.href='/index.jsp';</script>");
+			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
 			out.close();
 			return null;
 		}
 		
 		int page = Integer.parseInt(pageNum);
 		if (page < 1) {
-			response.setContentType("text/html; charset=UTF-8");
+			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('잘못된 접근입니다.'); location.href='/index.jsp';</script>");
+			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
 			out.close();
 			return null;
 		}
@@ -51,7 +51,7 @@ public class ListAction implements Action {
 		HessService service = new HessService();
 		Pagenation pagenation = new Pagenation(page, service.getArticleCount(query));
 		if (page > pagenation.getTotalArticleCount()) {
-			response.setContentType("text/html; charset=UTF-8");
+			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>location.href='/list.do?pn=" + pagenation.getTotalPageCount() +"';</script>");
 			out.close();

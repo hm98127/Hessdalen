@@ -31,8 +31,15 @@
 <script src="/js/sCategory.js" defer></script>
 <script>
 	function goDetail(num) {
-		location.href="/detail.do?num=" + num;
+		location.href="/detail.do?pn=" + <%= nowPage %> + "&num=" + num;
 	}
+	
+	function searchArticle() {
+		var filter = $('#filter option:selected').val();
+        var keyword = $('#keyword').val();
+        location.href =
+            "/list.do?pn=1&filter=" + filter + "&keyword=" + keyword;
+    }
 </script>
 </head>
 <body>
@@ -118,6 +125,14 @@
 				}
 			%>
 		</div>
+		<select name="filter" id="filter">
+    		<option value="all" selected>전체</option>
+    		<option value="subject">제목</option>
+    		<option value="contents">내용</option>
+		</select>
+		<input type="text" name="keyword" id="keyword">
+		<button onclick="searchArticle()">검색</button>
+		
 		<span>
 			<a href="/list.do?pn=<%= pagenation.getStartPage() - 1 %>">◁</a>
 		</span>

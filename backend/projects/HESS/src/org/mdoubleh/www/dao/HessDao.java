@@ -50,13 +50,13 @@ public class HessDao {
     public int getMemberSequence(String id) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        int mber_sq = 0;
+        int sq = 0;
         try {
             pstmt = con.prepareStatement("SELECT mber_sq FROM inf_mber_tb WHERE id = ?");
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             while(rs.next()) {
-            	mber_sq = rs.getInt("mber_sq");
+            	sq = rs.getInt("mber_sq");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class HessDao {
             close(rs);
             close(pstmt);
         }
-        return mber_sq;
+        return sq;
     }
     
     public MemberVo getMember(String id) {
@@ -104,6 +104,26 @@ public class HessDao {
             close(pstmt);
         }
         return count;
+    }
+    
+    public String getWriterId(int num) {
+    	PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	String id = null;
+    	try {
+    		pstmt = con.prepareStatement("SELECT m.id FROM inf_articl_tb b INNER JOIN inf_mber_tb m ON b.mb_sq = m.mber_sq WHERE articl_sq = ?");
+    		pstmt.setInt(1, num);
+    		rs = pstmt.executeQuery();
+    		while (rs.next()) {
+    			id = rs.getString("id");
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	} finally {
+    		close(rs);
+    		close(pstmt);
+    	}
+    	return id;
     }
     
     public int getArticleCount(String query) {
@@ -152,6 +172,7 @@ public class HessDao {
     			vo.setDttm(rs.getString("dttm"));
     			vo.setSj(rs.getString("sj"));
     			vo.setCn(rs.getString("cn"));
+    			vo.setId(rs.getString("id"));
     			list.add(vo);
     		}
     	} catch (Exception e) {
@@ -168,7 +189,17 @@ public class HessDao {
     	ResultSet rs = null;
     	ArticleVo vo = null;
     	try {
-    		pstmt = con.prepareStatement("SELECT * FROM inf_articl_tb WHERE articl_sq = ?");
+    		pstmt = con.prepareStatement("SELECT" +
+    				" b.articl_sq" +
+    				", b.mb_sq" +
+    				", b.sj" +
+    				", b.cn" +
+    				", b.hit" +
+    				", b.dttm" +
+    				", m.id" +
+    				" FROM inf_articl_tb b" +
+    				" INNER JOIN inf_mber_tb m ON b.mb_sq = m.mber_sq" +
+    				" WHERE articl_sq = ?");
     		pstmt.setInt(1, num);
     		rs = pstmt.executeQuery();
     		while (rs.next()) {
@@ -178,6 +209,7 @@ public class HessDao {
     			vo.setDttm(rs.getString("dttm"));
     			vo.setSj(rs.getString("sj"));
     			vo.setCn(rs.getString("cn"));
+    			vo.setId(rs.getString("id"));
     		}
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -209,7 +241,7 @@ public class HessDao {
     	PreparedStatement pstmt = null;
     	int count = 0;
     	try {
-    		pstmt = con.prepareStatement("DElETE FROM inf_articl_tb WHERE articl_sq = ?");
+    		pstmt = con.prepareStatement("DELETE FROM inf_articl_tb WHERE articl_sq = ?");
     		pstmt.setInt(1, num);
     		count = pstmt.executeUpdate();
     	} catch (Exception e) {

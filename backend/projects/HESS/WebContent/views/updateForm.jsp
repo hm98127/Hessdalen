@@ -3,6 +3,7 @@
 <%@ page import="org.mdoubleh.www.vo.ArticleVo"%>
 <%
 	ArticleVo vo = (ArticleVo) request.getAttribute("vo");
+	String nowPage = request.getParameter("pn");
 %>
 <!DOCTYPE html>
 <html>
