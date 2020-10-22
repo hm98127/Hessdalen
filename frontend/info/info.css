@@ -42,5 +42,26 @@
 .info__component i{
     font-size:24px;
     color:black;
-    padding:0px 6px;
+    padding:0px -30px;
+}
+.process{
+    position: relative;
+    left:-8px;
+    top:4px;
+}
+
+.process a{
+    text-decoration: none;
+    color:black;
+    font-size:12px;
+}
+
+@media screen and (max-width:768px){
+    .info__description{
+        flex-direction: column;
+    }
+    .info__individual{
+        padding:20px 0px;
+    }
+    
 }
