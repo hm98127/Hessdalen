@@ -10,20 +10,20 @@ import javax.sql.DataSource;
 
 public class JdbcUtil {
 	public static Connection getConnection() {
-		Connection conn = null;
-		
+		Connection con = null;
+
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource) envCtx.lookup("jdbc/MysqlDB");
-			conn = ds.getConnection();
-			conn.setAutoCommit(false);
+			DataSource ds = (DataSource) envCtx.lookup("jdbc_mariadb");
+			con = ds.getConnection();
+			con.setAutoCommit(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return conn;
+		return con;
 	}
-	
+
 	public static void close(Connection con) {
 		if (con != null) {
 			try {
@@ -33,7 +33,7 @@ public class JdbcUtil {
 			}
 		}
 	}
-	
+
 	public static void close(PreparedStatement pstmt) {
 		if (pstmt != null) {
 			try {
@@ -43,7 +43,7 @@ public class JdbcUtil {
 			}
 		}
 	}
-	
+
 	public static void close(ResultSet rs) {
 		if (rs != null) {
 			try {
@@ -53,7 +53,7 @@ public class JdbcUtil {
 			}
 		}
 	}
-	
+
 	public static void commit(Connection con) {
 		if (con != null) {
 			try {
@@ -63,7 +63,7 @@ public class JdbcUtil {
 			}
 		}
 	}
-	
+
 	public static void rollback(Connection con) {
 		if (con != null) {
 			try {
@@ -73,4 +73,5 @@ public class JdbcUtil {
 			}
 		}
 	}
+
 }

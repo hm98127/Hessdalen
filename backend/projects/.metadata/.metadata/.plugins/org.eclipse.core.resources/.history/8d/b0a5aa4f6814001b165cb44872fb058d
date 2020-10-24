@@ -1,7 +1,0 @@
-package org.mdoubleh.www.common;
-
-public class Parser {
-	public static String chgToStr(String str) {
-		str = str.replaceAll("&", "&amp;");
-	}
-}
