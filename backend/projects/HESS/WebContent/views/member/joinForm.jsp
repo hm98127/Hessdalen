@@ -111,17 +111,17 @@
 </script>
 </head>
 <body>
-	<form action="/joinProc.do" method="post"
-		onsubmit="return validateCheck()">
-		이름 : <input type="text" name="nm" id="nm" minlength="1" maxlength="10">
-		아이디 : <input type="text" name="id" id="id" minlength="4"
-			maxlength="20" oninput="initCheckId()">
-		<button type="button" onclick="checkId()">중복확인</button>
-		비밀번호 : <input type="password" name="pwd" id="pwd" minlength="4"
-			maxlength="30"> 비밀번호확인 : <input type="password"
-			name="pwd_confirm" id="pwd_confirm" minlength="4" maxlength="30">
-		<input type="submit" value="가입">
-		<button type="button" onclick="location.href='/'">취소</button>
-	</form>
+<form action="/joinProc.do" method="post"
+	onsubmit="return validateCheck()">
+	이름 : <input type="text" name="nm" id="nm" minlength="1" maxlength="10">
+	아이디 : <input type="text" name="id" id="id" minlength="4"
+		maxlength="20" oninput="initCheckId()">
+	<button type="button" onclick="checkId()">중복확인</button>
+	비밀번호 : <input type="password" name="pwd" id="pwd" minlength="4"
+		maxlength="30"> 비밀번호확인 : <input type="password"
+		name="pwd_confirm" id="pwd_confirm" minlength="4" maxlength="30">
+	<input type="submit" value="가입">
+	<button type="button" onclick="location.href='/'">취소</button>
+</form>
 </body>
 </html>

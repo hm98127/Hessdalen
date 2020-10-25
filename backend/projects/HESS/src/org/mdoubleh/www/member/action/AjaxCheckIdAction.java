@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
-import org.mdoubleh.www.common.LoginManager;
 import org.mdoubleh.www.member.service.MemberService;
 
 public class AjaxCheckIdAction implements Action {
@@ -18,7 +17,7 @@ public class AjaxCheckIdAction implements Action {
 		request.setAttribute("count", svc.getMemberCount(id));
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/views/ajax/CheckId.jsp");
+		forward.setPath("/views/member/ajax/CheckId.jsp");
 		return forward;
 	}
 

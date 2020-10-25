@@ -7,17 +7,39 @@ import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.common.BCrypt;
 import org.mdoubleh.www.common.LoginManager;
+import org.mdoubleh.www.common.RegExp;
 import org.mdoubleh.www.member.service.MemberService;
 import org.mdoubleh.www.member.vo.MemberVo;
 
+import static org.mdoubleh.www.common.RegExp.*;
+
 import java.io.PrintWriter;
 
-public class LoginProcAction implements Action {
+public class ModifyProcAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String id = request.getParameter("id");
+		LoginManager lm = LoginManager.getInstance();
+		String nm = request.getParameter("nm");
+		String id = lm.getMemberId(request.getSession());
+		if (nm == null || id == null) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인이 필요한 서비스 입니다.');location.href='/login.do';</script>");
+			out.close();
+			return null;
+		}
+
 		String pwd = request.getParameter("pwd");
-		if (id == null || id.equals("") || pwd == null || pwd.equals("")) {
+		String pwd_confirm = request.getParameter("pwd_confirm");
+		if (pwd == null || pwd.equals("") || !RegExp.checkString(MEMBER_PWD, pwd)) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
+			out.close();
+			return null;
+		}
+
+		if (!pwd.equals(pwd_confirm)) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
@@ -26,26 +48,18 @@ public class LoginProcAction implements Action {
 		}
 
 		MemberService svc = new MemberService();
-		MemberVo memberVo = svc.getMember(id);
-		if (memberVo == null || !BCrypt.checkpw(pwd, memberVo.getPwd())) {
+		MemberVo memberVo = new MemberVo();
+		memberVo.setNm(nm);
+		memberVo.setId(id);
+		memberVo.setPwd(BCrypt.hashpw(pwd, BCrypt.gensalt(12)));
+
+		if (!svc.modifyMember(memberVo)) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인 정보를 확인해 주세요.');location.href='/';</script>");
+			out.println("<script>alert('회원 정보 수정에 실패하였습니다.');location.href='/';</script>");
 			out.close();
 			return null;
 		}
-
-		memberVo.setLgn_fl(true);
-		if (!svc.loginMember(memberVo)) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인 처리에 실패하였습니다.');location.href='/';</script>");
-			out.close();
-			return null;
-		}
-
-		LoginManager lm = LoginManager.getInstance();
-		lm.setSession(request.getSession(), memberVo.getId());
 
 		ActionForward forward = new ActionForward();
 		forward.setPath("/");

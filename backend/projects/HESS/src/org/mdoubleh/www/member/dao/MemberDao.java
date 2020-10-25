@@ -124,5 +124,37 @@ public class MemberDao {
 		}
 		return sq;
 	}
+	
+	public int modifyMember(MemberVo vo) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement("UPDATE member SET pwd = ? WHERE nm = ? AND id = ?");
+			pstmt.setString(1, vo.getPwd());
+			pstmt.setString(2, vo.getNm());
+			pstmt.setString(3, vo.getId());
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public int deleteMember(String id) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement("DELETE FROM member WHERE BINARY(id) = ?");
+			pstmt.setString(1, id);
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
 
 }

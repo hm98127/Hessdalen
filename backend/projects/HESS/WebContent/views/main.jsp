@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="/noticeList.do?pn=1">공지사항게시판 이동</a>
 <%
 	if (id == null) {
 %>
@@ -20,7 +21,9 @@
 <%
 	} else {
 %>
+<a href="/modify.do">회원정보수정</a>
 <a href="/logout.do">로그아웃</a>
+<a href="/delete.do">회원탈퇴</a>
 <%
 	}
 %>

@@ -3,17 +3,17 @@ package org.mdoubleh.www.common;
 import java.util.regex.Pattern;
 
 public class RegExp {
-	public static final int ARTICLE_NUM = 0;
-	public static final int ARTICLE_SUBJECT = 1;
-	public static final int ARTICLE_CONTENT = 2;
+	public static final int BOARD_NUM = 0;
+	public static final int BOARD_SUBJECT = 1;
+	public static final int BOARD_CONTENT = 2;
 	public static final int MEMBER_NM = 3;
 	public static final int MEMBER_ID = 4;
 	public static final int MEMBER_PWD = 5;
 	public static final int IS_NUMBER = 6;
 
-	public static final String EXP_ARTICLE_NUM = "^[0-9]*$";
-	public static final String EXP_ARTICLE_SUBJECT = "^.{1,100}$";
-	public static final String EXP_ARTICLE_CONTENT = "^.{1,65535}$";
+	public static final String EXP_BOARD_NUM = "^[0-9]*$";
+	public static final String EXP_BOARD_SUBJECT = "^.{1,100}$";
+	public static final String EXP_BOARD_CONTENT = "^.{1,65535}$";
 	public static final String EXP_MEMBER_NM = "^[가-힣a-z]{1,10}$";
 	public static final String EXP_MEMBER_ID = "^[a-z0-9]{4,20}$";
 	public static final String EXP_MEMBER_PWD = "^.{4,30}$";
@@ -22,14 +22,14 @@ public class RegExp {
 	public static boolean checkString(int type, String data) {
 		boolean result = false;
 		switch (type) {
-		case ARTICLE_NUM:
-			result = Pattern.matches(EXP_ARTICLE_NUM, data);
+		case BOARD_NUM:
+			result = Pattern.matches(EXP_BOARD_NUM, data);
 			break;
-		case ARTICLE_SUBJECT:
-			result = Pattern.matches(EXP_ARTICLE_SUBJECT, data);
+		case BOARD_SUBJECT:
+			result = Pattern.matches(EXP_BOARD_SUBJECT, data);
 			break;
-		case ARTICLE_CONTENT:
-			result = Pattern.matches(EXP_ARTICLE_CONTENT, data);
+		case BOARD_CONTENT:
+			result = Pattern.matches(EXP_BOARD_CONTENT, data);
 			break;
 		case MEMBER_NM:
 			result = Pattern.matches(EXP_MEMBER_NM, data);

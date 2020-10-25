@@ -9,13 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mdoubleh.www.board.action.NoticeListAction;
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
+import org.mdoubleh.www.member.action.DeleteFormAction;
+import org.mdoubleh.www.member.action.DeleteProcAction;
 import org.mdoubleh.www.member.action.JoinFormAction;
 import org.mdoubleh.www.member.action.JoinProcAction;
 import org.mdoubleh.www.member.action.LoginFormAction;
 import org.mdoubleh.www.member.action.LoginProcAction;
 import org.mdoubleh.www.member.action.LogoutProcAction;
+import org.mdoubleh.www.member.action.ModifyFormAction;
+import org.mdoubleh.www.member.action.ModifyProcAction;
 
 /**
  * 회원관련 Controller
@@ -75,6 +80,41 @@ public class BoardController extends HttpServlet {
 			}
 		} else if (command.equals("/logout.do")) { // 로그인화면 이동
 			action = new LogoutProcAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/modify.do")) { // 회원정보수정화면 이동
+			action = new ModifyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/modifyProc.do")) {
+			action = new ModifyProcAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/delete.do")) {
+			action = new DeleteFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/deleteProc.do")) {
+			action = new DeleteProcAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/noticeList.do")) {
+			action = new NoticeListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
