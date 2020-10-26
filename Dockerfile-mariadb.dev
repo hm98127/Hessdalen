@@ -1,3 +1,5 @@
+# docker command
+# docker pull mariadb:10.3.25
 # vim:set ft=dockerfile:
 FROM ubuntu:focal
 
