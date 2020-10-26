@@ -47,13 +47,13 @@ public class JoinProcAction implements Action {
 			return null;
 		}
 
-		MemberVo memberVo = new MemberVo();
-		memberVo.setNm(nm);
-		memberVo.setId(id);
-		memberVo.setPwd(BCrypt.hashpw(pwd, BCrypt.gensalt(12)));
+		MemberVo vo = new MemberVo();
+		vo.setNm(nm);
+		vo.setId(id);
+		vo.setPwd(BCrypt.hashpw(pwd, BCrypt.gensalt(12)));
 
 		MemberService svc = new MemberService();
-		if (!svc.joinMember(memberVo)) {
+		if (!svc.joinMember(vo)) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('회원 가입에 실패하였습니다.');location.href='/';</script>");

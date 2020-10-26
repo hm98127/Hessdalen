@@ -31,7 +31,8 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int count = 0;
 		try {
-			pstmt = con.prepareStatement("INSERT INTO member(nm, id, pwd) VALUES(?, ?, ?)");
+			pstmt = con.prepareStatement
+					("INSERT INTO member(nm, id, pwd) VALUES(?, ?, ?)");
 			pstmt.setString(1, vo.getNm());
 			pstmt.setString(2, vo.getId());
 			pstmt.setString(3, vo.getPwd());
@@ -49,7 +50,8 @@ public class MemberDao {
 		ResultSet rs = null;
 		int count = 0;
 		try {
-			pstmt = con.prepareStatement("SELECT COUNT(*) FROM member WHERE BINARY(id) = ?");
+			pstmt = con.prepareStatement
+					("SELECT COUNT(*) FROM member WHERE BINARY(id) = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -70,7 +72,9 @@ public class MemberDao {
 		MemberVo vo = null;
 		try {
 			pstmt = con
-					.prepareStatement("SELECT mb_sq, nm, id, pwd FROM member WHERE BINARY(id) = ? AND del_fl = false");
+					.prepareStatement
+					("SELECT mb_sq, nm, id, pwd FROM member "
+							+ "WHERE BINARY(id) = ? AND del_fl = false");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -93,7 +97,9 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int count = 0;
 		try {
-			pstmt = con.prepareStatement("UPDATE member SET lgn_fl = ? WHERE mb_sq = ? AND del_fl = false");
+			pstmt = con.prepareStatement
+					("UPDATE member SET lgn_fl = ? "
+							+ "WHERE mb_sq = ? AND del_fl = false");
 			pstmt.setBoolean(1, vo.isLgn_fl());
 			pstmt.setInt(2, vo.getMb_sq());
 			count = pstmt.executeUpdate();
@@ -110,7 +116,8 @@ public class MemberDao {
 		ResultSet rs = null;
 		int sq = 0;
 		try {
-			pstmt = con.prepareStatement("SELECT mb_sq FROM member WHERE BINARY(id) = ?");
+			pstmt = con.prepareStatement
+					("SELECT mb_sq FROM member WHERE BINARY(id) = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -129,7 +136,8 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int count = 0;
 		try {
-			pstmt = con.prepareStatement("UPDATE member SET pwd = ? WHERE nm = ? AND id = ?");
+			pstmt = con.prepareStatement
+					("UPDATE member SET pwd = ? WHERE nm = ? AND id = ?");
 			pstmt.setString(1, vo.getPwd());
 			pstmt.setString(2, vo.getNm());
 			pstmt.setString(3, vo.getId());
@@ -146,7 +154,8 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int count = 0;
 		try {
-			pstmt = con.prepareStatement("DELETE FROM member WHERE BINARY(id) = ?");
+			pstmt = con.prepareStatement
+					("DELETE FROM member WHERE BINARY(id) = ?");
 			pstmt.setString(1, id);
 			count = pstmt.executeUpdate();
 		} catch (Exception e) {

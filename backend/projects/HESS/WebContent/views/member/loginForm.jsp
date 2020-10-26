@@ -30,9 +30,9 @@
 <body>
 <form action="/loginProc.do" method="post"
 	onsubmit="return validateCheck()">
-	아이디 : <input type="text" name="id" id="id">
-	비밀번호 : <input type="password" name="pwd" id="pwd"> 
-	<input type="submit" value="로그인">
+	아이디 : <input type="text" name="id" id="id"/>
+	비밀번호 : <input type="password" name="pwd" id="pwd"/> 
+	<input type="submit" value="로그인"/>
 	<button type="button" onclick="location.href='/'">취소</button>
 </form>
 </body>

@@ -27,12 +27,12 @@ public class LogoutProcAction implements Action {
 	}
 	
 	public void logoutProc(String id) {
-		MemberVo memberVo = new MemberVo();
-		memberVo.setId(id);
-		memberVo.setLgn_fl(false);
+		MemberVo vo = new MemberVo();
+		vo.setId(id);
+		vo.setLgn_fl(false);
 		
 		MemberService svc = new MemberService();
-		if (!svc.logoutMember(memberVo)) {
+		if (!svc.logoutMember(vo)) {
 			System.out.println(id + " 회원의 로그아웃 처리에 실패하였습니다.");
 		}
 	}

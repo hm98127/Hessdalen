@@ -48,12 +48,12 @@ public class ModifyProcAction implements Action {
 		}
 
 		MemberService svc = new MemberService();
-		MemberVo memberVo = new MemberVo();
-		memberVo.setNm(nm);
-		memberVo.setId(id);
-		memberVo.setPwd(BCrypt.hashpw(pwd, BCrypt.gensalt(12)));
+		MemberVo vo = new MemberVo();
+		vo.setNm(nm);
+		vo.setId(id);
+		vo.setPwd(BCrypt.hashpw(pwd, BCrypt.gensalt(12)));
 
-		if (!svc.modifyMember(memberVo)) {
+		if (!svc.modifyMember(vo)) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('회원 정보 수정에 실패하였습니다.');location.href='/';</script>");

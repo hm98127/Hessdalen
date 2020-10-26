@@ -26,8 +26,8 @@ public class LoginProcAction implements Action {
 		}
 
 		MemberService svc = new MemberService();
-		MemberVo memberVo = svc.getMember(id);
-		if (memberVo == null || !BCrypt.checkpw(pwd, memberVo.getPwd())) {
+		MemberVo vo = svc.getMember(id);
+		if (vo == null || !BCrypt.checkpw(pwd, vo.getPwd())) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('로그인 정보를 확인해 주세요.');location.href='/';</script>");
@@ -35,8 +35,8 @@ public class LoginProcAction implements Action {
 			return null;
 		}
 
-		memberVo.setLgn_fl(true);
-		if (!svc.loginMember(memberVo)) {
+		vo.setLgn_fl(true);
+		if (!svc.loginMember(vo)) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('로그인 처리에 실패하였습니다.');location.href='/';</script>");
@@ -45,7 +45,7 @@ public class LoginProcAction implements Action {
 		}
 
 		LoginManager lm = LoginManager.getInstance();
-		lm.setSession(request.getSession(), memberVo.getId());
+		lm.setSession(request.getSession(), vo.getId());
 
 		ActionForward forward = new ActionForward();
 		forward.setPath("/");

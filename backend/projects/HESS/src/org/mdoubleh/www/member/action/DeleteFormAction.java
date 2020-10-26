@@ -25,8 +25,8 @@ public class DeleteFormAction implements Action {
 		}
 		
 		MemberService svc = new MemberService();
-		MemberVo memberVo = svc.getMember(id);
-		if (memberVo == null) {
+		MemberVo vo = svc.getMember(id);
+		if (vo == null) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
@@ -35,7 +35,7 @@ public class DeleteFormAction implements Action {
 		}
 		
 		ActionForward forward = new ActionForward();
-		request.setAttribute("memberVo", memberVo);
+		request.setAttribute("vo", vo);
 		forward.setPath("/views/member/deleteForm.jsp");
 		return forward;
 	}

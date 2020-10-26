@@ -8,12 +8,12 @@ import org.mdoubleh.www.member.vo.MemberVo;
 import static org.mdoubleh.www.common.JdbcUtil.*;
 
 public class MemberService {
-	public boolean joinMember(MemberVo memberVo) {
+	public boolean joinMember(MemberVo vo) {
 		MemberDao dao = MemberDao.getInstance();
 		Connection con = getConnection();
 		dao.setConnection(con);
 		boolean isSucess = false;
-		int count = dao.joinMember(memberVo);
+		int count = dao.joinMember(vo);
 		if (count > 0) {
 			commit(con);
 			isSucess = true;
@@ -42,12 +42,12 @@ public class MemberService {
 		return vo;
 	}
 	
-	public boolean loginMember(MemberVo memberVo) {
+	public boolean loginMember(MemberVo vo) {
 		MemberDao dao = MemberDao.getInstance();
 		Connection con = getConnection();
 		dao.setConnection(con);
 		boolean isSucess = false;
-		int count = dao.updateLogin(memberVo);
+		int count = dao.updateLogin(vo);
 		if (count > 0) {
 			commit(con);
 			isSucess = true;
@@ -58,13 +58,13 @@ public class MemberService {
 		return isSucess;
 	}
 	
-	public boolean logoutMember(MemberVo memberVo) {
+	public boolean logoutMember(MemberVo vo) {
 		MemberDao dao = MemberDao.getInstance();
 		Connection con = getConnection();
 		dao.setConnection(con);
 		boolean isSucess = false;
-		memberVo.setMb_sq(dao.getMemberSequence(memberVo.getId()));
-		int count = dao.updateLogin(memberVo);
+		vo.setMb_sq(dao.getMemberSequence(vo.getId()));
+		int count = dao.updateLogin(vo);
 		if (count > 0) {
 			commit(con);
 			isSucess = true;
@@ -75,12 +75,12 @@ public class MemberService {
 		return isSucess;
 	}
 	
-	public boolean modifyMember(MemberVo memberVo) {
+	public boolean modifyMember(MemberVo vo) {
 		MemberDao dao = MemberDao.getInstance();
 		Connection con = getConnection();
 		dao.setConnection(con);
 		boolean isSucess = false;
-		int count = dao.modifyMember(memberVo);
+		int count = dao.modifyMember(vo);
 		if (count > 0) {
 			commit(con);
 			isSucess = true;

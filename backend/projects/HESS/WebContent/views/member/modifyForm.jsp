@@ -2,16 +2,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	MemberVo memberVo = (MemberVo) request.getAttribute("memberVo");
+	MemberVo vo = (MemberVo) request.getAttribute("vo");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+<script 
+	src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>
 <script>
 	function validateCheck() {
 		var pwd = $('#pwd').val();
@@ -50,11 +52,11 @@
 </head>
 <body>
 <form action="/modifyProc.do" method="post" onsubmit="return validateCheck()">
-	이름 : <input type="text" name="nm" id="nm" minlength="1" maxlength="10" value="<%= memberVo.getNm() %>" readonly>
-	아이디 : <input type="text" name="id" id="id" minlength="4" maxlength="20" value="<%= memberVo.getId() %>" readonly> 
-	비밀번호 : <input	type="password" name="pwd" id="pwd" minlength="4" maxlength="30">
-	비밀번호확인 : <input type="password" name="pwd_confirm" id="pwd_confirm" minlength="4" maxlength="30">
-	<input type="submit" value="수정">
+	이름 : <input type="text" name="nm" id="nm" minlength="1" maxlength="10" value="<%=vo.getNm()%>" readonly/>
+	아이디 : <input type="text" name="id" id="id" minlength="4" maxlength="20" value="<%=vo.getId()%>" readonly/> 
+	비밀번호 : <input	type="password" name="pwd" id="pwd" minlength="4" maxlength="30"/>
+	비밀번호확인 : <input type="password" name="pwd_confirm" id="pwd_confirm" minlength="4" maxlength="30"/>
+	<input type="submit" value="수정"/>
 	<button type="button" onclick="location.href='/'">취소</button>
 </form>
 </body>
