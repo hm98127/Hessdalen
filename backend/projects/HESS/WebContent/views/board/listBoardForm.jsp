@@ -19,7 +19,7 @@
 </script>
 <script>
 	function goDetail(num) {
-		location.href = "/datail.do?pn=" + <%=nowPage%> + "&num=" + num;
+		location.href = "/detail.do?pn=" + <%=nowPage%> + "&num=" + num;
 	}
 </script>
 </head>
@@ -38,8 +38,8 @@
 		<%
 			for (BoardVo vo : list) {
 		%>
-			<tr onclick="goDetail(<%=vo.getDb_sq()%>)">
-				<td><%=vo.getDb_sq()%></td>
+			<tr onclick="goDetail(<%=vo.getBd_sq()%>)">
+				<td><%=vo.getBd_sq()%></td>
 				<td><%=vo.getSj()%></td>
 				<td><%=vo.getHit()%></td>
 				<td><%=vo.getId()%></td>
@@ -73,6 +73,8 @@
 <span> 
 	<a href="/list.do?pn=<%=paging.getEndPage() + 1%>">></a>
 </span>
-<button onclick="location.href='/write.do'">글쓰기</button>
+<div>
+	<button onclick="location.href='/write.do'">글쓰기</button>
+</div>
 </body>
 </html>

@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.mdoubleh.www.board.service.BoardService;
 import org.mdoubleh.www.board.vo.BoardVo;
@@ -12,50 +11,64 @@ import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.common.LoginManager;
 import org.mdoubleh.www.common.Parser;
+import org.mdoubleh.www.common.RegExp;
 
-public class NoticeRegisterAction implements Action {
+import static org.mdoubleh.www.common.RegExp.BOARD_NUM;
+
+public class NoticeModifyAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		LoginManager lm = LoginManager.getInstance();
 		String id = lm.getMemberId(request.getSession());
 		if (id == null) {
-			HttpSession session = request.getSession(true);
-			session.setAttribute("callback", "/write.do");
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인이 필요한 서비스 입니다.');location.href='login.do';</script>");
+			out.println("<script>alert('로그인이 필요한 서비스 입니다.');location.href='/login.do';</script>");
 			out.close();
 			return null;
 		}
 
-		String sj = request.getParameter("sj");
-		String cn = request.getParameter("cn");
-		if (sj == null || sj.equals("") || sj.length() > 50
-				|| cn == null || cn.equals("")) {
+		String num = request.getParameter("num");
+		if (num == null || num.equals("") || !RegExp.checkString(BOARD_NUM, num)) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
 			out.close();
 			return null;
 		}
-		
-		BoardVo vo = new BoardVo();
-		vo.setId(id);
-		vo.setSj(Parser.chgToStr(sj));
-		vo.setCn(Parser.chgToStr(cn));
 
-		BoardService svc = new BoardService();
-		if (!svc.registerBoard(vo)) {
+		int buff = Integer.parseInt(num);
+		if (buff <= 0) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('글 등록에 실패하였습니다.');history.back();</script>");
+			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
 			out.close();
 			return null;
 		}
 
+		BoardService svc = new BoardService();
+		BoardVo vo = svc.getBoard(buff);
+		if (vo == null) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
+			out.close();
+			return null;
+		}
+
+		if (!vo.getId().equals(id)) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
+			out.close();
+			return null;
+		}
+
+		vo.setCn(Parser.chgToHTML(vo.getCn()));
+		request.setAttribute("vo", vo);
+
 		ActionForward forward = new ActionForward();
-		forward.setPath("/list.do?pn=1");
-		forward.setRedirect(true);
+		forward.setPath("/views/board/modifyBoardForm.jsp");
 		return forward;
 	}
 

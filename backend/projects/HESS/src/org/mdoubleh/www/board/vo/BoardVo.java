@@ -1,7 +1,7 @@
 package org.mdoubleh.www.board.vo;
 
 public class BoardVo {
-	private int db_sq;
+	private int bd_sq;
 	private int mb_sq;
 	private String sj;
 	private String cn;
@@ -9,12 +9,12 @@ public class BoardVo {
 	private String dttm;
 	private String id;
 
-	public int getDb_sq() {
-		return db_sq;
+	public int getBd_sq() {
+		return bd_sq;
 	}
 
-	public void setDb_sq(int db_sq) {
-		this.db_sq = db_sq;
+	public void setBd_sq(int bd_sq) {
+		this.bd_sq = bd_sq;
 	}
 
 	public int getMb_sq() {

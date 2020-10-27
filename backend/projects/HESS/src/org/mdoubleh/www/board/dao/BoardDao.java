@@ -55,15 +55,15 @@ public class BoardDao {
 		ArrayList<BoardVo> list = new ArrayList<>();
 		try {
 			pstmt = con.prepareStatement
-					("SELECT b.db_sq, m.id, b.sj, b.cn, b.hit, b.dttm FROM board b "
-							+ "INNER JOIN member m ON b.mb_sq = m.mb_sq WHERE 1 = 1 "
-							+ "ORDER BY db_sq desc LIMIT ?, ?");
+					("SELECT b.bd_sq, m.id, b.sj, b.cn, b.hit, b.dttm FROM board b "
+							+ "INNER JOIN member m ON b.id = m.id WHERE 1 = 1 "
+							+ "ORDER BY bd_sq desc LIMIT ?, ?");
 			pstmt.setInt(1, paging.getStartBoardNumber());
 			pstmt.setInt(2, paging.getSHOW_BOARD_COUNT());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BoardVo vo = new BoardVo();
-				vo.setDb_sq(rs.getInt("db_sq"));
+				vo.setBd_sq(rs.getInt("bd_sq"));
 				vo.setSj(rs.getString("sj"));
 				vo.setCn(rs.getString("cn"));
 				vo.setHit(rs.getInt("hit"));
@@ -89,6 +89,50 @@ public class BoardDao {
 			pstmt.setString(1, vo.getSj());
 			pstmt.setString(2, vo.getCn());
 			pstmt.setString(3, vo.getId());
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public BoardVo getBoard(int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardVo vo = null;
+		try {
+			pstmt = con.prepareStatement
+					("SELECT b.bd_sq, b.sj, b.cn, b.hit, b.dttm, m.id FROM board b "
+							+ "INNER JOIN member m ON b.id = m.id WHERE bd_sq = ?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				vo = new BoardVo();
+				vo.setBd_sq(rs.getInt("bd_sq"));
+				vo.setSj(rs.getString("sj"));
+				vo.setCn(rs.getString("cn"));
+				vo.setHit(rs.getInt("hit"));
+				vo.setDttm(rs.getString("dttm"));
+				vo.setId(rs.getString("id"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return vo;
+	}
+	
+	public int updateHitCount(int num) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement
+					("UPDATE board SET hit = hit + 1 WHERE bd_sq = ?");
+			pstmt.setInt(1, num);
 			count = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

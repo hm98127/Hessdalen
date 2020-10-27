@@ -38,11 +38,26 @@ public class BoardService {
 			isSucess = true;
 			commit(con);
 		} else {
-			isSucess = false;
 			rollback(con);
 		}
 		close(con);
 		return isSucess;
 	}
-
+	
+	public BoardVo getBoard(int num) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		BoardVo vo = null;
+		int count = dao.updateHitCount(num);
+		if (count > 0) {
+			commit(con);
+			vo = dao.getBoard(num);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return vo;
+	}
+	
 }

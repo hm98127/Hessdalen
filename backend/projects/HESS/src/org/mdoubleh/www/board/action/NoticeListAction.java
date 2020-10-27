@@ -51,7 +51,7 @@ public class NoticeListAction implements Action {
 		request.setAttribute("list", list);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/views/board/listForm.jsp");
+		forward.setPath("/views/board/listBoardForm.jsp");
 		return forward;
 	}
 }

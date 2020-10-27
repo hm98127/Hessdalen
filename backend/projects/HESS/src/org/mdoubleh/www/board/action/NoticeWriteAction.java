@@ -27,7 +27,7 @@ public class NoticeWriteAction implements Action {
 		}
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/views/board/writeForm.jsp");
-		return null;
+		forward.setPath("/views/board/writeBoardForm.jsp");
+		return forward;
 	}
 }

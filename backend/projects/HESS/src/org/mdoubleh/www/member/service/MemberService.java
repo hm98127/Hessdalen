@@ -75,6 +75,15 @@ public class MemberService {
 		return isSucess;
 	}
 	
+	public int getMemberSequence(String id) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		int sq = dao.getMemberSequence(id);
+		close(con);
+		return sq;
+	}
+	
 	public boolean modifyMember(MemberVo vo) {
 		MemberDao dao = MemberDao.getInstance();
 		Connection con = getConnection();

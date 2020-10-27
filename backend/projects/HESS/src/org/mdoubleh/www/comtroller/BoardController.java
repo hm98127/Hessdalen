@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mdoubleh.www.board.action.NoticeDetailAction;
 import org.mdoubleh.www.board.action.NoticeListAction;
+import org.mdoubleh.www.board.action.NoticeModifyAction;
 import org.mdoubleh.www.board.action.NoticeRegisterAction;
 import org.mdoubleh.www.board.action.NoticeWriteAction;
 import org.mdoubleh.www.common.Action;
@@ -76,7 +78,15 @@ public class BoardController extends HttpServlet {
 			action = new NoticeWriteAction();
 		} else if (command.equals("/registerBoard.do")) {
 			action = new NoticeRegisterAction();
-		}
+		} else if (command.equals("/detail.do")) {
+			action = new NoticeDetailAction();
+		} else if (command.equals("/modifyBoard.do")) {
+			action = new NoticeModifyAction();
+		} else if (command.equals("/modifyBoardProc.do")) {
+			action = new NoticeModifyProcAction();
+		} else if (command.equals("/deleteBoard.do")) {
+			action = new NoticeDeleteAction();
+		} 
 		
 		if (action != null) {
 			try {
