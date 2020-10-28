@@ -1,21 +1,19 @@
 package org.mdoubleh.www.board.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.mdoubleh.www.board.service.BoardService;
-import org.mdoubleh.www.board.vo.BoardVo;
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.common.LoginManager;
-import org.mdoubleh.www.common.Parser;
 import org.mdoubleh.www.common.RegExp;
 
 import static org.mdoubleh.www.common.RegExp.*;
 
-import java.io.PrintWriter;
-
-public class NoticeModifyProcAction implements Action {
+public class DeleteNoticeBoardAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		LoginManager lm = LoginManager.getInstance();
@@ -24,19 +22,6 @@ public class NoticeModifyProcAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('로그인이 필요한 서비스 입니다.');location.href='/login.do';</script>");
-            out.close();
-            return null;
-		}
-		
-		String sj = request.getParameter("sj");
-		String cn = request.getParameter("cn");
-		if (sj == null || sj.equals("")
-				|| !RegExp.checkString(BOARD_SUBJECT, sj)
-				|| cn == null || cn.equals("")
-				|| !RegExp.checkString(BOARD_CONTENT, cn)) {
-			response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
             out.close();
             return null;
 		}
@@ -70,15 +55,10 @@ public class NoticeModifyProcAction implements Action {
             return null;
 		}
 		
-		BoardVo vo = new BoardVo();
-		vo.setBd_sq(buff);
-		vo.setSj(Parser.chgToStr(sj));
-		vo.setCn(Parser.chgToStr(cn));
-		
-		if (!svc.modifyBoard(vo)) {
+		if (!svc.deleteBoard(buff)) {
 			response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('글을 수정하는데 실패하였습니다.');location.href='/';</script>");
+            out.println("<script>alert('글을 삭제하는데 실패하였습니다.');location.href='/';</script>");
             out.close();
             return null;
 		}
@@ -103,9 +83,9 @@ public class NoticeModifyProcAction implements Action {
 		}
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/detail.do?pn=" + page + "&num=" + buff);
+		forward.setPath("/list.do?pn=" + page);
 		forward.setRedirect(true);
 		return forward;
 	}
-
+	
 }

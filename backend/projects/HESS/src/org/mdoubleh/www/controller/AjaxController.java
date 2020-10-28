@@ -1,4 +1,4 @@
-package org.mdoubleh.www.comtroller;
+package org.mdoubleh.www.controller;
 
 import java.io.IOException;
 

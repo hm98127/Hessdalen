@@ -13,6 +13,7 @@
 </head>
 <body>
 <a href="/list.do?pn=1">공지사항게시판 이동</a>
+<a href="/listEventBoard.do?pn=1">이벤트게시판 이동</a>
 <%
 	if (id == null) {
 %>

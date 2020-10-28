@@ -23,7 +23,7 @@
 	if (id != null && id.equals(vo.getId())) {
 %>
 	<button onclick="location.href='/modifyBoard.do?pn=<%=nowPage%>&num=<%=vo.getBd_sq()%>'">수정</button>
-	<button onclick="location.href='/deleteBoard.do?pn=<%=nowPage%>&num=<%=vo.getBd_sq()%>'">삭제</button>
+	<button onclick="location.href='/deleteNoticeBoard.do?pn=<%=nowPage%>&num=<%=vo.getBd_sq()%>'">삭제</button>
 <%
 	}
 %>

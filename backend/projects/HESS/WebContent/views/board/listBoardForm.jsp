@@ -75,6 +75,7 @@
 </span>
 <div>
 	<button onclick="location.href='/write.do'">글쓰기</button>
+	<button onclick="location.href='/'">메인</button>
 </div>
 </body>
 </html>

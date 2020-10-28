@@ -2,7 +2,6 @@ package org.mdoubleh.www.board.vo;
 
 public class BoardVo {
 	private int bd_sq;
-	private int mb_sq;
 	private String sj;
 	private String cn;
 	private int hit;
@@ -15,14 +14,6 @@ public class BoardVo {
 
 	public void setBd_sq(int bd_sq) {
 		this.bd_sq = bd_sq;
-	}
-
-	public int getMb_sq() {
-		return mb_sq;
-	}
-
-	public void setMb_sq(int mb_sq) {
-		this.mb_sq = mb_sq;
 	}
 
 	public String getSj() {

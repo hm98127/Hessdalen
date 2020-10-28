@@ -1,4 +1,4 @@
-package org.mdoubleh.www.comtroller;
+package org.mdoubleh.www.controller;
 
 import java.io.IOException;
 
@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mdoubleh.www.board.action.NoticeDetailAction;
 import org.mdoubleh.www.board.action.NoticeListAction;
+import org.mdoubleh.www.board.action.DeleteNoticeBoardAction;
+import org.mdoubleh.www.board.action.NoticeDetailAction;
 import org.mdoubleh.www.board.action.NoticeModifyAction;
+import org.mdoubleh.www.board.action.NoticeModifyProcAction;
 import org.mdoubleh.www.board.action.NoticeRegisterAction;
 import org.mdoubleh.www.board.action.NoticeWriteAction;
 import org.mdoubleh.www.common.Action;
@@ -84,8 +86,10 @@ public class BoardController extends HttpServlet {
 			action = new NoticeModifyAction();
 		} else if (command.equals("/modifyBoardProc.do")) {
 			action = new NoticeModifyProcAction();
-		} else if (command.equals("/deleteBoard.do")) {
-			action = new NoticeDeleteAction();
+		} else if (command.equals("/deleteNoticeBoard.do")) {
+			action = new DeleteNoticeBoardAction();
+		} else if (command.equals("/listEventBoard.do")) {
+			action = new ListEventBoardAction();
 		} 
 		
 		if (action != null) {
