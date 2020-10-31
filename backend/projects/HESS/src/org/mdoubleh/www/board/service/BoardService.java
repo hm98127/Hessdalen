@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import org.mdoubleh.www.board.dao.BoardDao;
+import org.mdoubleh.www.board.item.vo.ItemVo;
 import org.mdoubleh.www.board.vo.BoardVo;
+import org.mdoubleh.www.board.vo.EvBoardVo;
 import org.mdoubleh.www.common.Paging;
 
 import static org.mdoubleh.www.common.JdbcUtil.*;
@@ -100,5 +102,100 @@ public class BoardService {
 		close(con);
 		return isSucess;
 	}
+	
+	// 이벤트 게시판
+	public int getEventBoardCount() {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		int count = dao.getEventBoardCount();
+		close(con);
+		return count;
+	}
+	
+	public ArrayList<EvBoardVo> getEventBoardList(Paging paging) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		ArrayList<EvBoardVo> list = dao.getEventBoardList(paging);
+		close(con);
+		return list;
+	}
+	
+	public boolean registerEventBoard(EvBoardVo vo) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.registerEventBoard(vo);
+		if (count > 0) {
+			isSucess = true;
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public EvBoardVo getEventBoard(int num) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		EvBoardVo vo = null;
+		int count = dao.updateHitEventCount(num);
+		if (count > 0) {
+			commit(con);
+			vo = dao.getEventBoard(num);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return vo;
+	}
+	
+	public String getWriterEventId(int num) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		String id = dao.getWriterEventId(num);
+		close(con);
+		return id;
+	}
+	
+	public boolean modifyEventBoard(EvBoardVo vo) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.modifyEventBoard(vo);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public boolean deleteEventBoard(int num) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.deleteEventBoard(num);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	// 상품 게시판
+	
 	
 }

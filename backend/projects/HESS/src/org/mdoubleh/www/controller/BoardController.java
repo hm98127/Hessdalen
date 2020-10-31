@@ -9,13 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mdoubleh.www.board.action.NoticeListAction;
-import org.mdoubleh.www.board.action.DeleteNoticeBoardAction;
-import org.mdoubleh.www.board.action.NoticeDetailAction;
-import org.mdoubleh.www.board.action.NoticeModifyAction;
-import org.mdoubleh.www.board.action.NoticeModifyProcAction;
-import org.mdoubleh.www.board.action.NoticeRegisterAction;
-import org.mdoubleh.www.board.action.NoticeWriteAction;
+import org.mdoubleh.www.board.action.event.DeleteEventBoardAction;
+import org.mdoubleh.www.board.action.event.DetailEventBoardAction;
+import org.mdoubleh.www.board.action.event.ListEventBoardAction;
+import org.mdoubleh.www.board.action.event.ModifyEventBoardAction;
+import org.mdoubleh.www.board.action.event.ModifyProcEventBoardAction;
+import org.mdoubleh.www.board.action.event.RegisterEventBoardAction;
+import org.mdoubleh.www.board.action.event.WriteEventBoardAction;
+import org.mdoubleh.www.board.action.notice.DeleteNoticeBoardAction;
+import org.mdoubleh.www.board.action.notice.NoticeDetailAction;
+import org.mdoubleh.www.board.action.notice.NoticeListAction;
+import org.mdoubleh.www.board.action.notice.NoticeModifyAction;
+import org.mdoubleh.www.board.action.notice.NoticeModifyProcAction;
+import org.mdoubleh.www.board.action.notice.NoticeRegisterAction;
+import org.mdoubleh.www.board.action.notice.NoticeWriteAction;
+import org.mdoubleh.www.board.item.action.ItemDetailAction;
+import org.mdoubleh.www.board.item.action.ItemListAction;
+import org.mdoubleh.www.board.item.action.ItemWriteAction;
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.member.action.DeleteFormAction;
@@ -50,9 +60,9 @@ public class BoardController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = requestURI.substring(contextPath.length());
 		// URI, command 확인
-		// System.out.println("requestURI : " + requestURI);
-		// System.out.println("contextPath : " + command);
-		// System.out.println("command : " + command);
+//		 System.out.println("requestURI : " + requestURI);
+//		 System.out.println("contextPath : " + command);
+//		 System.out.println("command : " + command);
 		ActionForward forward = null;
 		Action action = null;
 		// 화면 전환
@@ -90,7 +100,33 @@ public class BoardController extends HttpServlet {
 			action = new DeleteNoticeBoardAction();
 		} else if (command.equals("/listEventBoard.do")) {
 			action = new ListEventBoardAction();
+		} else if (command.equals("/writeEventBoard.do")) {
+			action = new WriteEventBoardAction();
+		} else if (command.equals("/registerEventBoard.do")) {
+			action = new RegisterEventBoardAction();
+		} else if (command.equals("/detailEventBoard.do")) {
+			action = new DetailEventBoardAction();
+		} else if (command.equals("/modifyEventBoard.do")) {
+			action = new ModifyEventBoardAction();
+		} else if (command.equals("/modifyProcEventBoard.do")) {
+			action = new ModifyProcEventBoardAction();
+		} else if (command.equals("/deleteEventBoard.do")) {
+			action = new DeleteEventBoardAction();
+		} else if (command.equals("/itemList.do")) {
+			action = new ItemListAction();
+		} else if (command.equals("/itemDetail.do")) {
+			action = new ItemDetailAction();
+		} else if (command.equals("/itemWrite.do")) {
+			action = new ItemWriteAction();
+		} else if (command.equals("/itemRegister.do")) {
+			action = new ItemRegisterAction();
 		} 
+		
+		
+		
+		
+		
+		
 		
 		if (action != null) {
 			try {

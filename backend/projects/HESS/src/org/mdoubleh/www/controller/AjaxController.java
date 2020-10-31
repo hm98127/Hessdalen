@@ -50,7 +50,7 @@ public class AjaxController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		} 
 		
 		// 화면이동 - isRedirect() 값에 따라 sendRedirect 또는 forward를 사용
         // sendRedirect : 새로운 페이지에서는 request와 response객체가 새롭게 생성된다.
