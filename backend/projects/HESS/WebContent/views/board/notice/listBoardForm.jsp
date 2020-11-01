@@ -1,9 +1,9 @@
-<%@ page import="org.mdoubleh.www.board.event.vo.EvBoardVo"%>
 <%@ page import="org.mdoubleh.www.common.Paging"%>
+<%@ page import="org.mdoubleh.www.board.notice.vo.BoardVo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	ArrayList<EvBoardVo> list = (ArrayList<EvBoardVo>) request.getAttribute("list");
+	ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 	Paging paging = (Paging) request.getAttribute("paging");
 	String nowPage = request.getParameter("pn");
 %>
@@ -19,7 +19,7 @@
 </script>
 <script>
 	function goDetail(num) {
-		location.href = "/detailEventBoard.do?pn=" + <%=nowPage%> + "&num=" + num;
+		location.href = "/detail.do?pn=" + <%=nowPage%> + "&num=" + num;
 	}
 </script>
 </head>
@@ -36,10 +36,10 @@
 		if (list.size() > 0) {
 	%>
 		<%
-			for (EvBoardVo vo : list) {
+			for (BoardVo vo : list) {
 		%>
-			<tr onclick="goDetail(<%=vo.getEv_sq()%>)">
-				<td><%=vo.getEv_sq()%></td>
+			<tr onclick="goDetail(<%=vo.getBd_sq()%>)">
+				<td><%=vo.getBd_sq()%></td>
 				<td><%=vo.getSj()%></td>
 				<td><%=vo.getHit()%></td>
 				<td><%=vo.getId()%></td>
@@ -59,22 +59,22 @@
 	%>
 </table>
 <span> 
-	<a href="/listEventBoard.do?pn=<%=paging.getStartPage() - 1%>"><</a>
+	<a href="/list.do?pn=<%=paging.getStartPage() - 1%>"><</a>
 </span>
 <%
 	for (int i = paging.getStartPage(); i <= paging.getEndPage(); i++) {
 %>
 	<span> 
-	<a href="/listEventBoard.do?pn=<%=i%>"><%=i%></a>
+	<a href="/list.do?pn=<%=i%>"><%=i%></a>
 	</span>
 <%
 	}
 %>
 <span> 
-	<a href="/listEventBoard.do?pn=<%=paging.getEndPage() + 1%>">></a>
+	<a href="/list.do?pn=<%=paging.getEndPage() + 1%>">></a>
 </span>
 <div>
-	<button onclick="location.href='/writeEventBoard.do'">글쓰기</button>
+	<button onclick="location.href='/write.do'">글쓰기</button>
 	<button onclick="location.href='/'">메인</button>
 </div>
 </body>

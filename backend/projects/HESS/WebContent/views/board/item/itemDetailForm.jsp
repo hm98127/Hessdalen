@@ -20,11 +20,6 @@
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 	crossorigin="anonymous">
 </script>
-<script>
-	function goDetail(num) {
-		location.href = "/itemDetail.do?pn=" + <%=nowPage%> + "&num=" + num;
-	}
-</script>
 </head>
 <body>
 <%=vo.getNm()%>
@@ -32,7 +27,7 @@
 <%=vo.getItem_img()%>
 
 <button onclick="location.href='/itemRent.do?pn=<%=nowPage%>&num=<%=vo.getItem_sq()%>'">렌트</button>
-<button onclick="location.href='/itemCart.do?pn=<%=nowPage%>&num=<%=vo.getItem_sq()%>'">장바구니</button>
+<button onclick="location.href='/cartAdd.do?pn=<%=nowPage%>&num=<%=vo.getItem_sq()%>'">장바구니 담기</button>
 <button onclick="location.href='/naverPay.do?pn=<%=nowPage%>&num=<%=vo.getItem_sq()%>'">네이버 페이로 구매</button>
 <h3>리뷰게시판</h3>
 <table border="1">
@@ -47,17 +42,18 @@
 <%
 	if (id != null && id.equals(vo.getId())) {
 %>
+<button onclick="location.href='/itemModify.do'">수정</button>
+<button onclick="location.href='/itemDelete.do'">삭제</button>
 <%
 	}
 %>
-
 <%
 	if (list.size() > 0) {
 %>
 		<%
 			for (ItemVo ref : list) {
 		%>
-			<img src="images/a.png" id="lmg" onclick="goDetail(<%=ref.getItem_sq()%>)">
+			<img src="images/a.png" id="lmg">
 		<%
 			}
 		%>

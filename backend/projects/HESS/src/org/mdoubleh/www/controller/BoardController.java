@@ -9,23 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mdoubleh.www.board.action.event.DeleteEventBoardAction;
-import org.mdoubleh.www.board.action.event.DetailEventBoardAction;
-import org.mdoubleh.www.board.action.event.ListEventBoardAction;
-import org.mdoubleh.www.board.action.event.ModifyEventBoardAction;
-import org.mdoubleh.www.board.action.event.ModifyProcEventBoardAction;
-import org.mdoubleh.www.board.action.event.RegisterEventBoardAction;
-import org.mdoubleh.www.board.action.event.WriteEventBoardAction;
-import org.mdoubleh.www.board.action.notice.DeleteNoticeBoardAction;
-import org.mdoubleh.www.board.action.notice.NoticeDetailAction;
-import org.mdoubleh.www.board.action.notice.NoticeListAction;
-import org.mdoubleh.www.board.action.notice.NoticeModifyAction;
-import org.mdoubleh.www.board.action.notice.NoticeModifyProcAction;
-import org.mdoubleh.www.board.action.notice.NoticeRegisterAction;
-import org.mdoubleh.www.board.action.notice.NoticeWriteAction;
+import org.mdoubleh.www.board.cart.CartListAction;
+import org.mdoubleh.www.board.event.action.DeleteEventBoardAction;
+import org.mdoubleh.www.board.event.action.DetailEventBoardAction;
+import org.mdoubleh.www.board.event.action.ListEventBoardAction;
+import org.mdoubleh.www.board.event.action.ModifyEventBoardAction;
+import org.mdoubleh.www.board.event.action.ModifyProcEventBoardAction;
+import org.mdoubleh.www.board.event.action.RegisterEventBoardAction;
+import org.mdoubleh.www.board.event.action.WriteEventBoardAction;
 import org.mdoubleh.www.board.item.action.ItemDetailAction;
 import org.mdoubleh.www.board.item.action.ItemListAction;
+import org.mdoubleh.www.board.item.action.ItemModifyAction;
+import org.mdoubleh.www.board.item.action.ItemModifyProcAction;
+import org.mdoubleh.www.board.item.action.ItemRegisterAction;
 import org.mdoubleh.www.board.item.action.ItemWriteAction;
+import org.mdoubleh.www.board.notice.action.DeleteNoticeBoardAction;
+import org.mdoubleh.www.board.notice.action.NoticeDetailAction;
+import org.mdoubleh.www.board.notice.action.NoticeListAction;
+import org.mdoubleh.www.board.notice.action.NoticeModifyAction;
+import org.mdoubleh.www.board.notice.action.NoticeModifyProcAction;
+import org.mdoubleh.www.board.notice.action.NoticeRegisterAction;
+import org.mdoubleh.www.board.notice.action.NoticeWriteAction;
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.member.action.DeleteFormAction;
@@ -120,6 +124,12 @@ public class BoardController extends HttpServlet {
 			action = new ItemWriteAction();
 		} else if (command.equals("/itemRegister.do")) {
 			action = new ItemRegisterAction();
+		} else if (command.equals("/itemModify.do")) {
+			action = new ItemModifyAction();
+		} else if (command.equals("/itemModifyProc.do")) {
+			action = new ItemModifyProcAction();
+		} else if (command.equals("/cartList.do")) {
+			action = new CartListAction();
 		} 
 		
 		

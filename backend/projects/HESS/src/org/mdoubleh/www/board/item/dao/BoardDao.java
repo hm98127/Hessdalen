@@ -117,7 +117,7 @@ public class BoardDao {
 		ItemVo vo = null;
 		try {
 			pstmt = con.prepareStatement
-					("SELECT b.item_sq, b.nm, b.price, item_img, m.id "
+					("SELECT b.item_sq, b.nm, b.price, b.item_img, m.id "
 							+ "FROM itemboard b "
 							+ "INNER JOIN member m "
 							+ "ON b.id = m.id "
@@ -139,6 +139,27 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return vo;
+	}
+	
+	public int registerBoard(ItemVo vo) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement
+					("INSERT INTO itemboard(price, nm, cont, id, item_img) "
+							+ "VALUES(?, ?, ?, ?, ?)");
+			pstmt.setInt(1, vo.getPrice());
+			pstmt.setString(2, vo.getNm());
+			pstmt.setString(3, vo.getCont());
+			pstmt.setString(4, vo.getId());
+			pstmt.setString(5, vo.getItem_img());
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
 	}
 
 }

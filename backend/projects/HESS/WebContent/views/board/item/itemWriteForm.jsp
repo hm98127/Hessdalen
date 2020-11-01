@@ -12,18 +12,12 @@
 <script>
 function checkValidate() {
 	var nm = $('#nm');
-	var cont = $('#cont');
 	var price = $('#price');
+	var cont = $('#cont');
 	
 	if (!nm.val()) {
 		alert("상품 이름을 입력해 주세요.");
 		nm.focus();
-		return;
-	}
-	
-	if (!cont.val()) {
-		alert("상품 내용를 입력해 주세요.");
-		cont.focus();
 		return;
 	}
 	
@@ -33,11 +27,17 @@ function checkValidate() {
 		return;
 	}
 	
-	var regExpSj = new RegExp("^.{1,50}$", "g");
-	if (regExpSj.exec(sj.val()) == null) {
+	if (!cont.val()) {
+		alert("상품 내용를 입력해 주세요.");
+		cont.focus();
+		return;
+	}
+	
+	var regExpNm = new RegExp("^.{1,50}$", "g");
+	if (regExpNm.exec(nm.val()) == null) {
 		alert("제목은 50자 이내로 입력해 주세요.");
-		sj.val('');
-		sj.focus();
+		nm.val('');
+		nm.focus();
 		return;
 	}
 	

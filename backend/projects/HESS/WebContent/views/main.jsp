@@ -20,6 +20,7 @@
 %>
 	<a href="/join.do">회원가입</a>
 	<a href="/login.do">로그인</a>
+	<a href="/cartList.do">로그인</a>
 <%
 	} else {
 %>

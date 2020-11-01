@@ -46,4 +46,20 @@ public class BoardService {
 		return vo;
 	}
 	
+	public boolean registerBoard(ItemVo vo) {
+		BoardDao dao = BoardDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.registerBoard(vo);
+		if (count > 0) {
+			isSucess = true;
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
 }

@@ -1,8 +1,8 @@
-<%@ page import="org.mdoubleh.www.board.event.vo.EvBoardVo"%>
+<%@page import="org.mdoubleh.www.board.notice.vo.BoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	EvBoardVo vo = (EvBoardVo) request.getAttribute("vo");
+	BoardVo vo = (BoardVo) request.getAttribute("vo");
 	String nowPage = request.getParameter("pn");
 %>
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
 </script>
 </head>
 <body>
-<form action="/modifyProcEventBoard.do?pn=<%=nowPage%>&num=<%=vo.getEv_sq()%>" method="post" onsubmit="return checkData()">
+<form action="/modifyBoardProc.do?pn=<%=nowPage%>&num=<%=vo.getBd_sq()%>" method="post" onsubmit="return checkData()">
 	제목 : <input type="text" name="sj" id="sj" maxlength="50" value="<%=vo.getSj()%>"/>
 	내용 : <textarea name="cn" id="cn" rows="10" cols="30"><%=vo.getCn()%></textarea>
 	<input type="submit" value="수정">
