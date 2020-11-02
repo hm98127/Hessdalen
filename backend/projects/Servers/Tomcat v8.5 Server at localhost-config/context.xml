@@ -18,14 +18,14 @@
 
 	<!-- Uncomment this to disable session persistence across Tomcat restarts -->
 	<!-- <Manager pathname="" /> -->
-	<Resource
-		name="jdbc_mariadb"
+	<Resource 
+		name="jdbc/jdbc_mariadb"
 		auth="Container"
 		type="javax.sql.DataSource"
 		username="root"
 		password="root"
-		driverClassName="org.mariadb.jdbc.Driver"
+		driverClassName="com.mysql.cj.jdbc.Driver"
 		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
-		url="jdbc:mariadb://localhost:3306/hess?serverTimezone=UTC"
+		url="jdbc:mysql://localhost:3306/hess?serverTimezone=UTC"
 		maxActive="500" />
 </Context>

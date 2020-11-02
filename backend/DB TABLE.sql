@@ -2,7 +2,7 @@ CREATE TABLE mall_member (
 member_postnum INT AUTO_INCREMENT PRIMARY KEY,
 member_name VARCHAR(100) NOT NULL,
 member_id VARCHAR(100) NOT NULL,
-member_pw VARCHAR(200) NOT NULL
+member_pwd VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE noticeboard (

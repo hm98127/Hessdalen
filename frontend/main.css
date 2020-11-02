@@ -1,0 +1,514 @@
+
+/* MainBanner */
+
+#main__banner{
+  position: relative;
+  height:480px;
+  padding-top:20px;
+}
+#main__banner img{
+  width:100%;
+  height:100%;
+  filter: blur(4px);
+}
+
+.main__title{
+  position: absolute;
+  top:28%;
+  right:13%;
+  text-align:right;
+}
+.main__title h1{
+  font-weight: 100;
+  color:white;
+  font-size: 56px;
+  text-shadow: 16px 16px 10px rgb(133, 124, 133);
+}
+.main__title h2{
+  font-weight: 100;
+  font-size:16px;
+  padding-top:10px;
+  color:white;
+  opacity: 0.6;
+  line-height: 27px;
+}
+.more__btn{
+  position: absolute;
+  border:1px solid white;
+  background-color: white;
+  color:#817e7e;
+  top:58%;
+  right:13%;
+  width:150px;
+  height:32px;
+  border-radius: 20px;
+  text-align:center;
+  line-height: 32px;
+  cursor: pointer;
+  font-size:14px;
+}
+
+/* Event Furniture */
+
+#event__furnture{
+  padding-top:100px;
+  display:flex;
+}
+
+.event__left{
+  flex-basis: 50%;
+  padding-left:100px;
+  visibility: hidden;
+}
+.left__furnture{
+  width: 340px;
+  height:500px;
+  margin:auto;
+  position: relative;
+}
+.event__left img{
+  width:100%;
+  height:100%;
+}
+.left__pricetag{
+  text-align: left;
+  padding-top:10px;
+  font-size:13px;
+}
+.pricetag{
+  display: flex;
+  padding-top:4px;
+  font-size:14px;
+}
+
+.sail__pricetag{
+  text-decoration: line-through;
+  margin:0px 8px;
+  color:#807F80;
+}
+
+.event__tag{
+  position: absolute;
+  top: -15px;
+  left:0px;
+  background-color:#302F35;
+  padding:8px 18px;
+  color:white;
+  font-size:12px;
+}
+
+.event__right{
+  flex-basis: 50%;
+  padding-right:100px;
+}
+
+.event__title{
+  display: flex;
+  justify-content: center;
+  padding-bottom:100px;
+  font-size:14px;
+}
+
+.left__title{
+  padding:25px 0px;
+}
+
+.right__title{ 
+  background-color: #16222E;
+  color:white;
+  padding:25px 60px 25px 0px;
+}
+
+.right__furnture{
+  display: flex;
+}
+
+.right__furnture h2{
+  font-size:16px;
+  padding:2px 0px;
+}
+
+.event__right img{
+  width:100%;
+  height:100%;
+  padding-bottom:10px;
+}
+.right__furnitureF,
+.right__furnitureS{
+  visibility: hidden;
+  width:380px;
+  height:220px;
+  margin:0px 32px;
+  position: relative;
+}
+
+/* Vertical Bar */
+#vertical__bar{
+  display: flex;
+  justify-content: center;
+  padding:60px;
+}
+
+.bar{
+  border-left: 2px solid #707070;
+  content: '';
+  height:20px;
+}
+
+/* MD Recommendation */
+
+
+.recommendation__title{
+  text-align: center;
+  color: #001928;
+  padding-bottom:60px;
+  font-size:13px;
+}
+
+.recommendation__conitainer{
+  display:flex;
+  justify-content: center;
+}
+
+.recommendation__box{
+  width:380px;
+  height:230px;
+  margin:0px 24px;
+}
+.recommendation__box img{
+  width:100%;
+  height:100%;
+}
+
+.recommendation__box h1{
+  font-size:17px;  
+  padding-top:10px;
+}
+
+ /* Advertising banner  */
+
+ .advertising__banner{
+   padding-top:120px;
+   text-align: center;
+ }
+
+ .banner img{
+   width: 82%;
+   height:150px;
+ }
+
+
+ /* New Furniture */
+
+#new__furniture{
+padding-top:100px;
+padding-left:30px;
+ }
+
+ .new__title{
+  display: flex;
+  padding-bottom:100px;
+  padding-left:105px;
+  font-size:14px;
+ }
+
+.left__new{
+  background-color: #16222E;
+  color:white;
+  padding:25px 0px 25px 60px;
+
+}
+.right__new{ 
+  padding:25px 0px;
+}
+
+
+/* New Furniture */
+
+.new__container{
+  display: flex;
+  justify-content:center;
+  color:white;
+
+} 
+.new__container h1{
+  font-size:15px;
+  padding-top:10px;
+}
+
+.new__boxf h1{
+  font-size: 19.5px;
+  padding-top:10px;
+}
+
+.new__boxc{
+  margin:0px 62px;
+} 
+
+.new__boxf img{
+  width:390px;
+  height: 490px;
+}
+
+.top__box img{
+  width:370px;
+  height:230px;
+}
+.bottom__box img{
+  width:370px;
+  height:230px;
+  padding-top:30px;
+
+
+}
+.new__boxs img{
+  width:360px;
+  height:490px;
+}
+
+.new__boxf,
+.top__box,
+.bottom__box,
+.new__boxs{
+  position: relative;
+  visibility: hidden;
+}
+.new__pricetag{
+  position: absolute;
+  bottom:14px;
+  left:12px;
+}
+
+.new__container .pricetag{
+  color:rgb(248, 236, 236);
+}
+
+/* Footer */
+
+#footer{
+  height:220px;
+  text-align: center;
+  font-size:16px;
+  border-top:1px solid #EEEEEE;
+  line-height: 34px;
+  margin-top:120px;
+  background-color: #464a4e;
+  color:#D9E3E9;
+  font-weight: bold;
+
+}
+.team__name{
+  font-size:14px;
+  padding-top:25px;
+  color:#868E96;
+
+}
+.footer__description h1{
+  font-size:15px;
+}
+.footer__description p{
+  font-size:14px;
+  color:#868E96;
+}
+
+/* Show */
+
+.event__show{
+  animation: fade 500ms linear;
+  visibility: visible;
+}
+
+/* keyFrame  */
+
+@keyframes fade{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+/* Media Screen */
+
+@media screen and (max-width:768px){
+
+/* MainBanner */
+#main__banner img{
+  width:100%;
+  height:65%;
+  filter: blur(4px);
+}
+
+.main__title{
+  position: absolute;
+  top:18%;
+  right:10%;
+  text-align:right;
+}
+.main__title h1{
+  color:#EEECEE;
+  font-size: 28px;
+  text-shadow: 14px 14px 10px rgb(87, 83, 87);
+}
+
+.main__title h2{
+  font-size:11px;
+  padding-top:12px;
+  color:#6B8080;
+  line-height: 20px;
+}
+
+.more__btn{
+  position: absolute;
+  top:37%;
+  right:10%;
+  width:110px;
+  height:20px;
+  line-height: 20px;
+  font-size:11px;
+}
+/* Event Furniture */
+
+#event__furnture{
+  display: flex;
+  justify-content: center;
+  padding:20px;
+  margin-top:-100px;
+}
+
+
+.event__title{
+  padding-bottom:30px;
+  font-size:13px;
+} 
+
+.left__title{
+  padding:18px 0px;
+}
+
+.right__title{ 
+  padding:18px 60px 18px 0px;
+}
+
+.right__furnture{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.right__furnitureF,
+.right__furnitureS{
+  margin:50px 0px;
+  width:320px;
+  height:200px;
+  visibility: visible;
+}
+
+.event__left{
+  display:none;
+}
+
+.event__right{
+  padding-right:0px;
+}
+
+/* verticalBar*/
+#vertical__bar{
+  padding:30px;
+}
+/* MD Recommendation */
+
+.recommendation__title h1{
+  font-size:20px;
+}
+
+.recommendation__conitainer{
+  flex-wrap: wrap;
+  text-align: center;
+  
+}
+.recommendation__box{
+  margin:40px 0px;
+}
+.recommendation__box h1,
+.recommendation__box p{
+  text-align: left; 
+  padding:10px 0px 0px 30px;
+
+}
+
+.recommendation__box img{
+  width:320px;
+  height:210px;
+  
+}
+/* Advertising Banner */
+.advertising__banner{
+  padding-top:50px;
+}
+
+.banner img{
+  width: 100%;
+  height: 100px;
+}
+
+/* New Furniture  */
+
+
+#new__furniture{
+  padding-left:0px;
+
+   }
+
+.new__title{
+  padding-bottom:30px;
+  font-size:13px;
+  justify-content: center;
+  padding-left:0px;
+} 
+.left__new{
+  padding:18px 0px 18px 60px;
+}
+.right__new{ 
+  padding:18px 0px;
+}
+
+.new__container{
+  flex-wrap: wrap;
+}
+.new__container img{
+  width: 320px;
+  height: 210px;
+  padding: 30px 0px;
+}
+.new__pricetag{
+  bottom:50px;
+}
+
+
+/* Footer */
+
+#footer{
+  line-height: 28px;
+}
+.team__name{
+  font-size:13px;
+}
+.footer__description h1{
+  font-size:14px;
+}
+.footer__description p{
+  font-size:13px;
+  color:#868E96;
+  padding-top:10px;
+}
+
+.new__boxf,
+.top__box,
+.bottom__box,
+.new__boxs{
+  visibility: visible;
+}
+
+
+}

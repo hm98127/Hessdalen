@@ -13,11 +13,7 @@ import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.main.action.MainAction;
 
-/**
- * 메인화면 Controller
- *
- */
-@WebServlet("/")
+@WebServlet("/main.jsp")
 public class MainController extends HttpServlet {
 	/**
 	 * 명령어에 따른 해당 Action을 지정해 준다.
