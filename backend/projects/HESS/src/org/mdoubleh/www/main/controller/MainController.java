@@ -35,8 +35,8 @@ public class MainController extends HttpServlet {
 		}
 
 		// 화면이동 - isRedirect() 값에 따라 sendRedirect 또는 forward를 사용
-        // sendRedirect : 새로운 페이지에서는 request와 response객체가 새롭게 생성된다.
-        // forward : 현재 실행중인 페이지와 forward에 의해 호출될 페이지는 request와 response 객체를 공유
+		// sendRedirect : 새로운 페이지에서는 request와 response객체가 새롭게 생성된다.
+		// forward : 현재 실행중인 페이지와 forward에 의해 호출될 페이지는 request와 response 객체를 공유
 		if (forward != null) {
 			if (forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
@@ -46,7 +46,7 @@ public class MainController extends HttpServlet {
 			}
 		}
 	}
-	
+
 	/**
 	 * GET 방식일 경우 doGet()
 	 */

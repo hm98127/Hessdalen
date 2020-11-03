@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
-import org.mdoubleh.www.member.action.LogoutProcAction;
+import org.mdoubleh.www.member.action.MemberLogoutAction;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -41,8 +41,8 @@ public class LoginManager implements HttpSessionBindingListener {
 	 */
 	@Override
 	public void valueUnbound(HttpSessionBindingEvent event) {
-		Action action = new LogoutProcAction();
-		((LogoutProcAction) action).logoutProc(getMemberId(event.getSession()));
+		Action action = new MemberLogoutAction();
+		((MemberLogoutAction) action).memberLogoutProc(getMemberId(event.getSession()));
 		loginUsers.remove(event.getSession());
 	}
 

@@ -24,4 +24,64 @@ public class MemberService {
 		return isSucess;
 	}
 	
+	public int getMemberCount(String id) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		int count = dao.getMemberCount(id);
+		close(con);
+		return count;
+	}
+	
+	public MemberVo getMember(String id) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		MemberVo vo = dao.getMember(id);
+		close(con);
+		return vo;
+	}
+	
+	public boolean getLogin(MemberVo vo) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.getLogin(vo);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public boolean getLogout(MemberVo vo) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		vo.setMember_postnum(dao.getMemberNumber(vo.getMember_id()));
+		int count = dao.getLogin(vo);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public int getMemberNumber(MemberVo vo) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		int num = dao.getMemberNumber(vo);
+		close(con);
+		return num;
+	}
+	
 }

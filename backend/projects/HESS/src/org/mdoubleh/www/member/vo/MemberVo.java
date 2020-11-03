@@ -5,6 +5,7 @@ public class MemberVo {
 	private String member_name;
 	private String member_id;
 	private String member_pwd;
+	private boolean check_login;
 
 	public int getMember_postnum() {
 		return member_postnum;
@@ -36,6 +37,14 @@ public class MemberVo {
 
 	public void setMember_pwd(String member_pwd) {
 		this.member_pwd = member_pwd;
+	}
+
+	public boolean isCheck_login() {
+		return check_login;
+	}
+
+	public void setCheck_login(boolean check_login) {
+		this.check_login = check_login;
 	}
 
 }

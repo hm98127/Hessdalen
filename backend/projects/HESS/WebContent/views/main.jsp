@@ -1,9 +1,14 @@
+<%@ page import="org.mdoubleh.www.common.LoginManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+	LoginManager lm = LoginManager.getInstance();
+	String id = lm.getMemberId(session);
+%>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Main</title>
+<title>MAIN</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/design/css/navbar.css" />
@@ -17,16 +22,26 @@
 <body>
 	<!-- Login -->
 	<div id="login">
-		<span class="login__btn"><a href="/memberLogin.do">Login</a></span>
-		<span class="login__btn"><a href="/memberLogout.do">Sign up</a></span>
-		<span class="login__btn"><a href="/memberJoin.do">Join</a></span>
+	<%
+		if (id == null) {
+	%>
+		<span class="login__btn"><a href="/memberLogin.do">LOGIN</a></span>
+		<span class="login__btn"><a href="/memberJoin.do">JOIN</a></span>
+	<%
+		} else {
+	%>
+		<span class="login__btn"><a href="/memberLogout.do">LOGOUT</a></span>
+		<span class="login__btn"><a href="/memberPage.do">MEMBERPAGE</a></span>
+	<%
+		}
+	%>
 	</div>
 
 	<!-- Navbar -->
 	<div id="navbar">
 		<div class="logo">
 			<div class="logo__title">
-				<a href="/main.jsp">HESSDALEN</a>
+				<a href="/">HESSDALEN</a>
 			</div>
 			<div class="square__point">
 				<div class="squareA">
@@ -71,7 +86,7 @@
 		<div id="event__furnture">
 			<div class="event__left">
 				<div class="left__furnture">
-					<img src="/design/images/furnitureEvent1.png" alt="event__furniture1" />
+					<img src="/design/imgs/furnitureEvent1.png" alt="event__furniture1" />
 					<div class="left__pricetag">
 						<h2>Lizzio Open-type sofa table</h2>
 					</div>
