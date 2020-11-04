@@ -142,6 +142,8 @@ input::placeholder {
 		<input type="password" name="pwd" id="pwd" maxlength="30" placeholder="비밀번호 " />
 	</div>
 	<input type="submit" value="로그인" />
+	<button type="button" onclick="location.href='/getMemberId.do'">아이디 찾기</button>
+	<button type="button" onclick="location.href='/getMemberPwd.do'">비밀번호 찾기</button>
 </form>
 </body>
 </html>

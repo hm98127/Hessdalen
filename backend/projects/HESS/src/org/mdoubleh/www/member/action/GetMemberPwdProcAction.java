@@ -11,12 +11,12 @@ import org.mdoubleh.www.common.LoginManager;
 import org.mdoubleh.www.member.service.MemberService;
 import org.mdoubleh.www.member.vo.MemberVo;
 
-public class MemberModifyPwdAction implements Action {
+public class GetMemberPwdProcAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		LoginManager lm = LoginManager.getInstance();
 		String id = lm.getMemberId(request.getSession());
-		if (id == null) {
+		if (id != null) {
 			response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
@@ -30,7 +30,7 @@ public class MemberModifyPwdAction implements Action {
 				|| id == null || id.equals("")) {
 			response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
             out.close();
             return null;
 		}
@@ -52,7 +52,7 @@ public class MemberModifyPwdAction implements Action {
 		request.setAttribute("num", num);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/views/member/memberModifyPwdForm.jsp");
+		forward.setPath("/views/member/getYourPwd.jsp");
 		return forward;
 	}
 

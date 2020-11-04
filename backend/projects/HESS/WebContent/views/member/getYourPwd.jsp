@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>MODIFYPWD</title>
+<title>YOUR_PWD</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 	crossorigin="anonymous">
@@ -154,7 +154,7 @@ input::placeholder {
 <h1 style="text-align: center; margin: 40px 0 5px 0">비밀번호 변경</h1>
 <p style="text-align: center; font-weight: 300; font-size: 1rem; margin-top: 5px; margin-bottom: 30px;">─</p>
 <p class="info">"비밀번호를 입력해주세요."</p>
-<form id="form" action="/memberModifyPwdProc.do" method="post" onsubmit="return checkValidate()">
+<form id="form" action="/getYourPwd.do" method="post" onsubmit="return checkValidate()">
 	<div class="input__container">
 		<input type="password" name="pwd" id="pwd" maxlength="30" placeholder="비밀번호 " />
 	</div>

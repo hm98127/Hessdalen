@@ -84,4 +84,47 @@ public class MemberService {
 		return num;
 	}
 	
+	public boolean getMemberPwd(MemberVo vo) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.getMemberPwd(vo);
+		if (count > 0) {
+			isSucess = true;
+			commit(con);
+		} else {
+			isSucess = false;
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public boolean deleteMember(String id) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.deleteMember(id);
+		if (count > 0) {
+			isSucess = true;
+			commit(con);
+		} else {
+			isSucess = false;
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public String getMemberId(String name) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		String id = dao.getMemberId(name);
+		close(con);
+		return id;
+	}
+	
 }

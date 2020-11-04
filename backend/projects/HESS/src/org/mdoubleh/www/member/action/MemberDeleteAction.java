@@ -9,9 +9,8 @@ import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.common.LoginManager;
 import org.mdoubleh.www.member.service.MemberService;
-import org.mdoubleh.www.member.vo.MemberVo;
 
-public class MemberModifyPwdAction implements Action {
+public class MemberDeleteAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		LoginManager lm = LoginManager.getInstance();
@@ -24,35 +23,20 @@ public class MemberModifyPwdAction implements Action {
             return null;
 		}
 		
-		String name = request.getParameter("name");
-		id = request.getParameter("id");
-		if (name == null || name.equals("")
-				|| id == null || id.equals("")) {
-			response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
-            out.close();
-            return null;
-		}
-		
-		MemberVo vo = new MemberVo();
-		vo.setMember_name(name);
-		vo.setMember_id(id);
-		
 		MemberService svc = new MemberService();
-		int num = svc.getMemberNumber(vo);
-		if (num == 0) {
+		if (!svc.deleteMember(id)) {
 			response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('회원 정보를 찾을 수 없습니다.');history.back();</script>");
+            out.println("<script>alert('회원 탈퇴에 실패 하였습니다.');history.back();</script>");
             out.close();
             return null;
 		}
 		
-		request.setAttribute("num", num);
+		lm.removeSession(id);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/views/member/memberModifyPwdForm.jsp");
+		forward.setPath("/main.jsp");
+		forward.setRedirect(true);
 		return forward;
 	}
 

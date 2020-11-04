@@ -156,4 +156,58 @@ public class MemberDao {
 		return num;
 	}
 	
+	public int getMemberPwd(MemberVo vo) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement
+					("UPDATE mall_member SET member_pwd = ? WHERE member_postnum = ?");
+			pstmt.setString(1, vo.getMember_pwd());
+			pstmt.setInt(2, vo.getMember_postnum());
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public int deleteMember(String id) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement
+					("DELETE FROM mall_member WHERE BINARY(member_id) = ?");
+			pstmt.setString(1, id);
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public String getMemberId(String name) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String id = null;
+		try {
+			pstmt = con.prepareStatement
+					("SELECT member_id FROM mall_member WHERE member_name = ?");
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				id = rs.getString("member_id");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return id;
+	}
+	
 }

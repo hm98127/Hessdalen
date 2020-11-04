@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	int num = (int) request.getAttribute("num");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>MODIFYPWD</title>
+<title>GETMEMBERID</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 	crossorigin="anonymous">
@@ -80,36 +77,10 @@ input::placeholder {
 }
 </style>
 <script>
-	function checkValidate() {
-		var pwd = $('#pwd');
-		var confirm_pwd = $('#confirm_pwd');
-	
-		if (!pwd.val()) {
-			alert('비밀번호를 입력해 주세요.');
-			pwd.focus();
-			return;
-		}
-	
-		if (!confirm_pwd.val()) {
-			alert("비밀번호 확인을 입력해 주세요.");
-			confirm_pwd.focus();
-			return;
-		}
-		
-		if (pwd.val() != confirm_pwd.val()) {
-			alert("비밀번호가 다릅니다.");
-			pwd.val('');
-			confirm_pwd.val('');
-			pwd.focus();
-			return;
-		}
-		
-		var regExpPwd = new RegExp("^.{4,30}$", "g");
-		if (regExpPwd.exec(pwd.val()) == null) {
-			alert("비밀번호는 4~30자로 입력해 주세요.");
-			pwd.val('');
-			confirm_pwd.val('');
-			pwd.focus();
+	function validateCheck() {
+		if (!$('#name').val()) {
+			alert("이름을 입력해 주세요.");
+			$('#name').focus();
 			return;
 		}
 	}
@@ -151,18 +122,14 @@ input::placeholder {
 		<i class="fas fa-bars"></i>
 	</div>
 </div>
-<h1 style="text-align: center; margin: 40px 0 5px 0">비밀번호 변경</h1>
+<h1 style="text-align: center; margin: 40px 0 5px 0">아이디 찾기</h1>
 <p style="text-align: center; font-weight: 300; font-size: 1rem; margin-top: 5px; margin-bottom: 30px;">─</p>
-<p class="info">"비밀번호를 입력해주세요."</p>
-<form id="form" action="/memberModifyPwdProc.do" method="post" onsubmit="return checkValidate()">
+<p class="info">"이름을 입력해주세요."</p>
+<form id="form" action="/getYourId.do" method="post" onsubmit="return validateCheck()">
 	<div class="input__container">
-		<input type="password" name="pwd" id="pwd" maxlength="30" placeholder="비밀번호 " />
+		<input type="text" name="name" id="name" maxlength="10" placeholder="이름 " />
 	</div>
-	<div class="input__container">
-		<input type="password" name="confirm_pwd" id="confirm_pwd" maxlength="30" placeholder="비밀번호 확인 " />
-	</div>
-	<input type="submit" value="비밀번호 변경" />
-	<input type="hidden" value="<%=num%>" name="num" />
+	<input type="submit" value="찾기" />
 </form>
 </body>
 </html>
