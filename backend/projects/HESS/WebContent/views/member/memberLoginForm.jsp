@@ -20,6 +20,7 @@
 <script src="/design/js/category.js" defer></script>
 <script src="/design/js/stop.js" defer></script>
 <style>
+
 #form {
 	display: flex;
 	flex-direction: column;
@@ -75,6 +76,45 @@ input::placeholder {
 	opacity: 0.7;
 	padding-left: 5px;
 }
+
+.login__search{
+display:flex;
+margin-top:10px;
+  
+}
+
+#pw__search,
+#id__search{
+  outline:none;
+  border:none;
+  background-color:transparent;
+  margin:0px 12px;
+  cursor:pointer
+
+}
+
+.external__btn{
+display:flex;
+
+}
+
+.kakao__btn,
+.naver__btn {
+margin:20px 10px;
+cursor :pointer;
+
+
+}
+.kakao__btn img,
+.naver__btn img
+{
+width:190px;
+height:2.5rem;
+}
+
+
+
+
 </style>
 <script>
 	function validateCheck() {
@@ -142,8 +182,21 @@ input::placeholder {
 		<input type="password" name="pwd" id="pwd" maxlength="30" placeholder="비밀번호 " />
 	</div>
 	<input type="submit" value="로그인" />
-	<button type="button" onclick="location.href='/getMemberId.do'">아이디 찾기</button>
-	<button type="button" onclick="location.href='/getMemberPwd.do'">비밀번호 찾기</button>
+	<div class = "login__search"> 
+	<button id = "id__search" type="button" onclick="location.href='/getMemberId.do'">Find ID</button>
+	<button id = "pw__search" type="button" onclick="location.href='/getMemberPwd.do'">Find PWD</button>
+	</div>
+	
+	
+	<form action ="">
+	<div class = "external__btn">  
+	<div class = "kakao__btn">
+	<img src="/design/imgs/kakaoLogin.png" />
+	</div>
+	<div class = "naver__btn">
+	<img src="/design/imgs/naverLogin.png" />
+	</div>
+	</div>
 </form>
 </body>
 </html>

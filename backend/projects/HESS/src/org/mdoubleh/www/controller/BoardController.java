@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mdoubleh.www.board.notice.action.NoticeDetailAction;
 import org.mdoubleh.www.board.notice.action.NoticeListAction;
+import org.mdoubleh.www.board.notice.action.NoticeRegisterAction;
+import org.mdoubleh.www.board.notice.action.NoticeWriteAction;
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.main.action.InfoAction;
@@ -19,6 +22,7 @@ import org.mdoubleh.www.member.action.GetYourPwdAction;
 import org.mdoubleh.www.member.action.GetMemberPwdAction;
 import org.mdoubleh.www.member.action.GetMemberPwdProcAction;
 import org.mdoubleh.www.member.action.MemberDeleteAction;
+import org.mdoubleh.www.member.action.MemberDeleteProcAction;
 import org.mdoubleh.www.member.action.MemberJoinAction;
 import org.mdoubleh.www.member.action.MemberJoinProcAction;
 import org.mdoubleh.www.member.action.MemberLoginAction;
@@ -60,6 +64,8 @@ public class BoardController extends HttpServlet {
 			action = new MemberModifyPwdProcAction();
 		} else if (command.equals("/memberDelete.do")) { // 회원 탈퇴
 			action = new MemberDeleteAction();
+		} else if (command.equals("/memberDeleteProc.do")) { // 회원 탈퇴
+			action = new MemberDeleteProcAction();
 		} else if (command.equals("/getMemberId.do")) { // 아이디 찾기
 			action = new GetMemberIdAction();
 		} else if (command.equals("/getYourId.do")) { // 아이디 찾기 처리
@@ -77,6 +83,12 @@ public class BoardController extends HttpServlet {
 			action = new InfoAction();
 		} else if (command.equals("/noticeList.do")) {
 			action = new NoticeListAction();
+		} else if (command.equals("/noticeWrite.do")) {
+			action = new NoticeWriteAction();
+		} else if (command.equals("/noticeRegister.do")) {
+			action = new NoticeRegisterAction();
+		} else if (command.equals("/noticeDetail.do")) {
+			action = new NoticeDetailAction();
 		} 
 		
 		

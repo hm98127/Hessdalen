@@ -9,6 +9,7 @@ import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.common.LoginManager;
 import org.mdoubleh.www.member.service.MemberService;
+import org.mdoubleh.www.member.vo.MemberVo;
 
 public class MemberDeleteAction implements Action {
 	@Override
@@ -23,20 +24,8 @@ public class MemberDeleteAction implements Action {
             return null;
 		}
 		
-		MemberService svc = new MemberService();
-		if (!svc.deleteMember(id)) {
-			response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('회원 탈퇴에 실패 하였습니다.');history.back();</script>");
-            out.close();
-            return null;
-		}
-		
-		lm.removeSession(id);
-		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/main.jsp");
-		forward.setRedirect(true);
+		forward.setPath("/views/member/memberDeleteForm.jsp");
 		return forward;
 	}
 

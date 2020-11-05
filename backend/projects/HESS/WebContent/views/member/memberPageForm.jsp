@@ -28,17 +28,43 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+}
+.userContainer{
+margin-bottom: 20px;
+
+}
+.user__name,
+.user__id{
+	font-size:14px;
+}
+.user__name__box,
+.user__id__box{
+margin:20px 0px;
 }
 
-.double__check {
-	position: relative;
+#name,
+#id{
+  outline:none;
+  border-top:none;
+  border-left:none;
+  border-right:none;	
+  border-bottom:1px solid black;
+  
+}
+.btn__category{
+	display:flex;
+	
+}
+.btn__category button{
+  margin:20px 16px;
+  background-color:transparent;
+  outline:none;
+  border:none;
+  cursor:pointer;
+
 }
 
-#id__double__check {
-	position: absolute;
-	top: 14px;
-	right: -80px;
-}
 
 .info {
 	position: relative;
@@ -72,7 +98,7 @@ input {
 	width: 400px;
 	height: 36px;
 	font-size: 15px;
-	margin: 10px 0px;
+	
 }
 
 input::placeholder {
@@ -121,16 +147,22 @@ input::placeholder {
 <p style="text-align: center; font-weight: 300; font-size: 1rem; margin-top: 5px; margin-bottom: 30px;">─</p>
 <p class="info">"기본 회원정보"</p>
 <form id="form" action="/memberModifyPwd.do" method="post">
-	<div class="input__container">
-		이름 : <input type="text" name="name" id="name" maxlength="10" value="<%=vo.getMember_name()%>" readonly />
+	<div class="userContainer">
+	<div class="user__name__box">
+	<div class ="user__name">User NAME </div>
+	   <input type="text" name="name" id="name" value="<%=vo.getMember_name()%>" readonly />
 	</div>
-	<div class="double__check">
-		아이디 : <input type="text" name="id" id="id" maxlength="20" value="<%=vo.getMember_id()%>" readonly />
+	<div class="user__id__box">
+	<div class ="user__id">User ID </div>
+	    <input type="text" name="id" id="id"  value="<%=vo.getMember_id()%>" readonly />
+	</div>
 	</div>
 	<input type="submit" value="비밀번호 변경" />
-	<button type="button" onclick="location.href='/memberDelete.do'">회원 탈퇴</button>
+	<div class = "btn__category">
 	<button type="button" onclick="location.href='/main.jsp'">장바구니</button>
 	<button type="button" onclick="location.href='/main.jsp'">결제 내역</button>
+	<button type="button" onclick="location.href='/memberDelete.do'">회원 탈퇴</button>
+	</div>
 </form>
 </body>
 </html>

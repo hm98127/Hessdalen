@@ -11,7 +11,7 @@ notice_postnum INT AUTO_INCREMENT PRIMARY KEY,
 notice_title VARCHAR(300) NOT NULL,
 notice_content TEXT,
 notice_regdate DATETIME NOT NULL DEFAULT NOW(),
-notice_hit INT NOT NULL,
+notice_hit INT NOT NULL DEFAULT '0',
 member_id VARCHAR(100)
 );
 
