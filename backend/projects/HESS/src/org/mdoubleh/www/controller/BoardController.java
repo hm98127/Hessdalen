@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mdoubleh.www.board.item.action.ItemListAction;
+import org.mdoubleh.www.board.notice.action.NoticeDeleteAction;
 import org.mdoubleh.www.board.notice.action.NoticeDetailAction;
 import org.mdoubleh.www.board.notice.action.NoticeListAction;
+import org.mdoubleh.www.board.notice.action.NoticeModifyAction;
+import org.mdoubleh.www.board.notice.action.NoticeModifyProcAction;
 import org.mdoubleh.www.board.notice.action.NoticeRegisterAction;
 import org.mdoubleh.www.board.notice.action.NoticeWriteAction;
 import org.mdoubleh.www.common.Action;
@@ -89,6 +93,14 @@ public class BoardController extends HttpServlet {
 			action = new NoticeRegisterAction();
 		} else if (command.equals("/noticeDetail.do")) {
 			action = new NoticeDetailAction();
+		} else if (command.equals("/noticeModify.do")) {
+			action = new NoticeModifyAction();
+		} else if (command.equals("/noticeModifyProc.do")) {
+			action = new NoticeModifyProcAction();
+		} else if (command.equals("/noticeDelete.do")) {
+			action = new NoticeDeleteAction();
+		} else if (command.equals("/itemList.do")) {
+			action = new ItemListAction();
 		} 
 		
 		

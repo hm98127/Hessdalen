@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-	LoginManager lm = LoginManager.getInstance();
-	String id = lm.getMemberId(session);
+LoginManager lm = LoginManager.getInstance();
+String id = lm.getMemberId(session);
 %>
 <html>
 <head>
@@ -22,19 +22,27 @@
 <body>
 	<!-- Login -->
 	<div id="login">
-	<%
-		if (id == null) {
-	%>
-		<span class="login__btn"><a href="/memberLogin.do">LOGIN</a></span>
-		<span class="login__btn"><a href="/memberJoin.do">JOIN</a></span>
-	<%
-		} else {
-	%>
-		<span class="login__btn"><a href="/memberLogout.do">LOGOUT</a></span>
-		<span class="login__btn"><a href="/memberPage.do">MEMBERPAGE</a></span>
-	<%
-		}
-	%>
+		<%
+			if (id == null) {
+		%>
+		<span class="login__btn">
+			<a href="/memberLogin.do">LOGIN</a>
+		</span>
+		<span class="login__btn">
+			<a href="/memberJoin.do">JOIN</a>
+		</span>
+		<%
+			} else {
+		%>
+		<span class="login__btn">
+			<a href="/memberLogout.do">LOGOUT</a>
+		</span>
+		<span class="login__btn">
+			<a href="/memberPage.do">MEMBERPAGE</a>
+		</span>
+		<%
+			}
+		%>
 	</div>
 
 	<!-- Navbar -->
@@ -65,9 +73,9 @@
 			<i class="fas fa-bars"></i>
 		</div>
 	</div>
-	
+
 	<div class="category__click">
-	
+
 		<!-- MainBanner -->
 		<div id="main__banner">
 			<img src="/design/imgs/furnitureMain.jpg" alt="MainBanner" />
@@ -148,17 +156,17 @@
 				<div class="recommendation__box">
 					<img src="/design/imgs/furnitureMd1.png" alt="furnitureMd" />
 					<h1>Market Bee BENKU Single Corner Sofa Rubber</h1>
-					<div class="pricetag">$120</div>
+					<div class="recommendation__box__pricetag">$120</div>
 				</div>
 				<div class="recommendation__box">
 					<img src="/design/imgs/furnitureMd2.png" alt="furnitureMd" />
 					<h1>Bianth Kellen Aqua</h1>
-					<div class="pricetag">$325</div>
+					<div class="recommendation__box__pricetag">$325</div>
 				</div>
 				<div class="recommendation__box">
 					<img src="/design/imgs/furnitureMd3.png" alt="furnitureMd" />
 					<h1>Paroma Plane LED Multi-Recipient PU Bed</h1>
-					<div class="pricetag">$712</div>
+					<div class="recommendation__box__pricetag">$712</div>
 				</div>
 			</div>
 		</div>

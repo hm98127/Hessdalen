@@ -1,0 +1,285 @@
+/* Products banner */
+
+#products__banner {
+  padding-top: 30px;
+  text-align: center;
+}
+
+#products__banner img {
+  width: 84.3%;
+  height: 150px;
+}
+
+/* Products MenuList */
+
+#products__menu {
+  padding: 50px 0px;
+  font-weight: var(--weight-bold);
+}
+
+.products__list {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 100px;
+}
+
+.products__items {
+  margin: 0px 22px;
+  font-size: 16px;
+  color: #0E3044;
+  cursor: pointer;
+}
+
+/*Bed Products */
+
+.products__title {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 100px;
+  font-size: 14px;
+}
+
+.products__Ltitle {
+  background-color: #16222E;
+  color: white;
+  padding: 25px 0px 25px 100px;
+
+}
+
+.products__Rtitle {
+  padding: 25px 0px;
+}
+
+.bed__products {
+  width: 1310px;
+  margin: auto;
+  margin-top: -100px;
+  display: none;
+
+}
+
+.products__container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.products__box {
+  width: 380px;
+  height: 240px;
+  margin: 0px 28px;
+  margin-top: 100px;
+}
+
+.products__image {
+  width: 380px;
+  height: 240px;
+}
+
+.products__image img {
+  width: 100%;
+  height: 100%;
+}
+
+.products__name h2 {
+  font-size: 16px;
+  padding-top: 10px;
+  color: #0E3044;
+}
+
+.products__price {
+  display: flex;
+  font-size: 14px;
+  padding-top: 4px;
+
+}
+
+.products__sailing {
+  margin: 0px 8px;
+  text-decoration: line-through;
+  color: #807F80;
+
+}
+
+
+/* Table Products */
+/* Sofa Products */
+/* Cabinet Products */
+
+.table__products,
+.sofa__products,
+.cabinet__products {
+  display: none;
+  width: 1310px;
+  margin: auto;
+  margin-top: -100px;
+}
+
+
+
+
+
+/* Footer */
+
+#footer {
+  height: 220px;
+  text-align: center;
+  font-size: 16px;
+  border-top: 1px solid #EEEEEE;
+  line-height: 34px;
+  margin-top: 120px;
+  background-color: #3f4246;
+  color: #D9E3E9;
+  font-weight: bold;
+
+}
+
+.team__name {
+  font-size: 14px;
+  padding-top: 25px;
+  color: #868E96;
+
+}
+
+.footer__description h1 {
+  font-size: 15px;
+}
+
+.footer__description p {
+  font-size: 14px;
+  color: #868E96;
+}
+
+/* Show */
+.productsShow {
+  display: block;
+  animation: fade 500ms linear;
+}
+
+/* keyFrame  */
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+@media screen and (max-width:768px) {
+
+  /* Login */
+
+  #login {
+    position: static;
+    width: 100%;
+    text-align: right;
+    padding: 15px 0px;
+    color: #f8f8f8;
+  }
+
+  .login__btn a {
+    font-size: 12px;
+  }
+
+  /* Navbar */
+
+  #navbar {
+    padding: 0px;
+    justify-content: center;
+    padding-bottom: 50px;
+  }
+
+  .logo {
+    flex-direction: column;
+    color: #001928;
+  }
+
+  .logo__title a {
+    font-size: 22px;
+  }
+
+  .square__point {
+    top: 0px;
+    left: -15px;
+  }
+
+  .menu__list {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px;
+    padding-top: 30px;
+    text-align: center;
+    padding-top: 50px;
+
+  }
+
+  .menu__items a {
+    line-height: 50px;
+    font-size: 14px;
+    color: #f8f8f8;
+    font-weight: var(--weight-bold);
+
+  }
+
+  #input__form {
+    display: none;
+  }
+
+  .category {
+    position: absolute;
+    top: 53px;
+    right: 8px;
+    font-size: 18px;
+    display: block;
+  }
+
+  /* Products MenuList */
+
+  .products__list {
+    justify-content: center;
+  }
+
+  /* Products */
+
+  .bed__products,
+  .table__products,
+  .sofa__products,
+  .cabinet__products {
+    width: 100%;
+    margin: auto;
+    margin-top: -100px;
+  }
+
+  .products__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Footer */
+
+  #footer {
+    line-height: 28px;
+  }
+
+  .team__name {
+    font-size: 13px;
+  }
+
+  .footer__description h1 {
+    font-size: 14px;
+  }
+
+  .footer__description p {
+    font-size: 13px;
+    color: #868E96;
+    padding-top: 10px;
+  }
+
+
+
+}

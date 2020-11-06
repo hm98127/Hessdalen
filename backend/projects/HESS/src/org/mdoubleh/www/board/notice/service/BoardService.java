@@ -50,4 +50,45 @@ public class BoardService {
         return vo;
     }
 	
+	public String getWriterId(int num) {
+		BoardDao dao = BoardDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        String id = dao.getWriterId(num);
+        close(con);
+        return id;
+	}
+	
+	public boolean modifyBoard(BoardVo vo) {
+		BoardDao dao = BoardDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        boolean isSucess = false;
+        int count = dao.modifyBoard(vo);
+        if (count > 0) {
+            commit(con);
+            isSucess = true;
+        } else {
+            rollback(con);
+        }
+        close(con);
+        return isSucess;
+	}
+	
+	public boolean deleteBoard(int num) {
+        BoardDao dao = BoardDao.getInstance();
+        Connection con = getConnection();
+        dao.setConnection(con);
+        boolean isSucess = false;
+        int count = dao.deleteBoard(num);
+        if (count > 0) {
+            commit(con);
+            isSucess = true;
+        } else {
+            rollback(con);
+        }
+        close(con);
+        return isSucess;
+    }
+	
 }

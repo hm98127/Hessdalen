@@ -3,7 +3,9 @@ package org.mdoubleh.www.board.notice.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.mdoubleh.www.board.notice.vo.BoardVo;
 
@@ -106,6 +108,71 @@ public class BoardDao {
         try {
             pstmt = con.prepareStatement
             		("UPDATE noticeboard SET notice_hit = notice_hit + 1 WHERE notice_postnum = ?");
+            pstmt.setInt(1, num);
+            count = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close(pstmt);
+        }
+        return count;
+    }
+	
+	public int modifyBoard(BoardVo vo) {
+        PreparedStatement pstmt = null;
+        int count = 0;
+        try {
+            pstmt = con.prepareStatement
+            		("UPDATE noticeboard SET "
+            				+ "notice_title = ?, "
+            				+ "notice_content = ?, "
+            				+ "notice_regdate = ? "
+            				+ "WHERE notice_postnum = ?");
+            pstmt.setString(1, vo.getNotice_title());
+            pstmt.setString(2, vo.getNotice_content());
+            pstmt.setString(3,
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
+            pstmt.setInt(4, vo.getNotice_postnum());
+            count = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close(pstmt);
+        }
+        return count;
+    }
+	
+	public String getWriterId(int num) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String id = null;
+        try {
+            pstmt = con.prepareStatement
+            		("SELECT m.member_id FROM "
+            				+ "noticeboard b INNER JOIN "
+            				+ "mall_member m ON "
+            				+ "b.member_id = m.member_id "
+            				+ "WHERE notice_postnum = ?");
+            pstmt.setInt(1, num);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                id = rs.getString("member_id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close(rs);
+            close(pstmt);
+        }
+        return id;
+    }
+	
+	public int deleteBoard(int num) {
+        PreparedStatement pstmt = null;
+        int count = 0;
+        try {
+            pstmt = con.prepareStatement
+            		("DELETE FROM noticeboard WHERE notice_postnum = ?");
             pstmt.setInt(1, num);
             count = pstmt.executeUpdate();
         } catch (Exception e) {

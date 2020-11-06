@@ -158,7 +158,7 @@ height:2.5rem;
 		</div>
 		<ul class="navbar__menu">
 			<li class="navbar__component"><a href="/info.do">INFO</a></li>
-			<li class="navbar__component"><a href="/itemList.do">PRODUCTS</a></li>
+			<li class="navbar__component"><a href="/itemList.do">ITEM</a></li>
 			<li class="navbar__component"><a href="/noticeList.do">SERVICE</a>
 			</li>
 			<form id="input__form" action="">

@@ -13,9 +13,9 @@ import org.mdoubleh.www.common.LoginManager;
 import org.mdoubleh.www.common.Parser;
 import org.mdoubleh.www.common.RegExp;
 
-import static org.mdoubleh.www.common.RegExp.*;
+import static org.mdoubleh.www.common.RegExp.BOARD_NUM;
 
-public class NoticeRegisterAction implements Action {
+public class NoticeModifyAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		LoginManager lm = LoginManager.getInstance();
@@ -28,12 +28,18 @@ public class NoticeRegisterAction implements Action {
             return null;
         }
         
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        if (title == null || title.equals("")
-                || !RegExp.checkString(BOARD_TITLE, title)
-                || content == null || content.equals("")
-                || !RegExp.checkString(BOARD_CONTENT, content)) {
+        String num = request.getParameter("num");
+        if (num == null || num.equals("")
+                || !RegExp.checkString(BOARD_NUM, num)) {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
+            out.close();
+            return null;
+        }
+        
+        int buff = Integer.parseInt(num);
+        if (buff <= 0) {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
@@ -42,22 +48,29 @@ public class NoticeRegisterAction implements Action {
         }
         
         BoardService svc = new BoardService();
-        BoardVo vo = new BoardVo();
-        vo.setNotice_title(Parser.chgToStr(title));
-        vo.setNotice_content(content);
-        vo.setMember_id(id);
-
-        if (!svc.registerBoard(vo)) {
+        BoardVo vo = svc.getBoard(buff);
+        if (vo == null) {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('글을 저장하는데 실패하였습니다.');location.href='/main.jsp';</script>");
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
             out.close();
             return null;
         }
         
+        if (!vo.getMember_id().equals(id)) {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
+            out.close();
+            return null;
+        }
+        
+        vo.setNotice_content(Parser.chgToHTML(vo.getNotice_content()));
+        
+        request.setAttribute("vo", vo);
+        
         ActionForward forward = new ActionForward();
-        forward.setPath("/noticeList.do");
-        forward.setRedirect(true);
+        forward.setPath("/views/board/notice/noticeModifyForm.jsp");
         return forward;
 	}
 
