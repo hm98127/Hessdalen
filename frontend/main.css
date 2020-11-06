@@ -57,8 +57,9 @@
 
 .event__left{
   flex-basis: 50%;
-  padding-left:100px;
+  padding-left:30px;
   visibility: hidden;
+  text-align: right;
 }
 .left__furnture{
   width: 340px;
@@ -80,6 +81,9 @@
   padding-top:4px;
   font-size:14px;
 }
+.recommendation__box__pricetag{
+  text-align: left;
+}
 
 .sail__pricetag{
   text-decoration: line-through;
@@ -99,7 +103,7 @@
 
 .event__right{
   flex-basis: 50%;
-  padding-right:100px;
+  margin-left:-270px;
 }
 
 .event__title{
@@ -168,8 +172,8 @@
 .recommendation__conitainer{
   display:flex;
   justify-content: center;
+  
 }
-
 .recommendation__box{
   width:380px;
   height:230px;
@@ -202,7 +206,7 @@
 
 #new__furniture{
 padding-top:100px;
-padding-left:30px;
+padding-left:65px;
  }
 
  .new__title{
@@ -277,6 +281,7 @@ padding-left:30px;
   position: absolute;
   bottom:14px;
   left:12px;
+
 }
 
 .new__container .pricetag{
@@ -409,7 +414,7 @@ padding-left:30px;
 }
 
 .event__right{
-  padding-right:0px;
+  margin-left:0px;
 }
 
 /* verticalBar*/
@@ -431,10 +436,10 @@ padding-left:30px;
   margin:40px 0px;
 }
 .recommendation__box h1,
-.recommendation__box p{
+.recommendation__box p,
+.recommendation__box__pricetag{
   text-align: left; 
   padding:10px 0px 0px 30px;
-
 }
 
 .recommendation__box img{
@@ -457,8 +462,7 @@ padding-left:30px;
 
 #new__furniture{
   padding-left:0px;
-
-   }
+ }
 
 .new__title{
   padding-bottom:30px;
