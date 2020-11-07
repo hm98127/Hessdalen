@@ -21,6 +21,7 @@ function listhandle(evnet) {
 }
 
 function init() {
+  bedProducts.classList.add('productsShow');
   productsList.addEventListener('click', listhandle);
 }
 init();

@@ -74,7 +74,8 @@
 			}
 		%>
 	</div>
-	<!-- Navbar -->
+
+    <!-- Navbar -->
 	<div id="navbar">
 		<div class="logo">
 			<div class="logo__title">
@@ -114,34 +115,48 @@
 			</div>
 			<div class="form__box">
 				<form action="/itemRegister.do" method="post" onsubmit="return checkData()" enctype="multipart/form-data">
-					<div class="input__name">Group</div>
-					<input type="radio" name="group" id="bed" value="bed" checked>
-					<label for="bed">BED</label>
-					
-					<input type="radio" name="group" id="table" value="table">
-					<label for="table">TABLE</label>
-					
-					<input type="radio" name="group" id="sofa" value="sofa">
-					<label for="sofa">SOFA</label>
-					
-					<input type="radio" name="group" id="cabinet" value="cabinet">
-					<label for="cabinet">CABINET</label>
+                <div class="group__box">
+                    <div class="input__name">SelectGroup</div>
+                    <div class="input__select">
+                        <div class="input__select__category">
+                            <input type="radio" name="group" id="bed" value="bed" checked>
+                            <label for="bed">BED</label>
+                        </div>
+                        <div class="input__select__category">
+                            
+                        <input type="radio" name="group" id="table" value="table">
+                        <label for="table">TABLE</label>
+                        </div>
+                        <div class="input__select__category">
+                                
+                        <input type="radio" name="group" id="sofa" value="sofa">
+                        <label for="sofa">SOFA</label>
+                        </div>
+                        <div class="input__select__category">
+                             
+                        <input type="radio" name="group" id="cabinet" value="cabinet">
+                        <label for="cabinet">CABINET</label>
+                        </div>
+                    </div>
+                </div>
+                    
+                
 
-					<div class="input__name">Title</div>
+                <div class="write__box">
+                    <div class="input__name">Title</div>
 					<input type="text" name="title" id="title__input" maxlength="100" placeholder="Please enter the author." />
 
 					<div class="input__name">Price</div>
 					<input type="text" name="price" id="price" placeholder="Please enter the author." />
 
 					<div class="input__name">Content</div>
-					<div style="width: 300px">
 						<textarea name="content" id="content" cols="30" rows="10"></textarea>
-					</div>
 					
-					<div class="input__name">Image</div>
 					<input type="file" name="image" id="image" />
 					
-					<input type="submit" value="Insert" id="insert" />
+                    <input type="submit" value="Insert" id="insert" />
+                    
+                </div>
 				</form>
 			</div>
 		</div>
