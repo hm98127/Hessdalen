@@ -1,4 +1,15 @@
+<%@page import="org.mdoubleh.www.common.Paging"%>
+<%@ page import="org.mdoubleh.www.board.item.vo.BoardVo"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="org.mdoubleh.www.common.LoginManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	LoginManager lm = LoginManager.getInstance();
+String id = lm.getMemberId(session);
+ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
+Paging paging = (Paging) request.getAttribute("paging");
+String nowPage = request.getParameter("pn");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +23,11 @@
 <link rel="stylesheet" href="/design/css/products.css" />
 <script src="/design/js/selectList.js" defer></script>
 <script src="/design/js/category.js" defer></script>
+<script>
+function goDetail(num) {
+    location.href ="/itemDetail.do?pn=" + <%=nowPage%> + "&num=" + num;
+}
+</script>
 </head>
 <body>
 	<!-- Login -->
@@ -40,12 +56,14 @@
 			</div>
 			<ul class="navbar__menu">
 				<li class="navbar__component"><a href="/info.do">INFO</a></li>
-				<li class="navbar__component"><a href="/itemList.do">ITEM</a></li>
+				<li class="navbar__component"><a href="/itemList.do?pn=1">ITEM</a></li>
 				<li class="navbar__component"><a href="/noticeList.do">SERVICE</a></li>
-				<form id="input__form" action="">
-					<input type="text" placeholder="Search" id="search__input" />
-					<i class="fas fa-search"></i>
-				</form>
+				<li>
+					<form id="input__form" action="">
+						<input type="text" placeholder="Search" id="search__input" />
+						<i class="fas fa-search"></i>
+					</form>
+				</li>
 			</ul>
 		</div>
 		<div class="category">
@@ -58,6 +76,7 @@
 		<div id="products__banner">
 			<img src="/design/imgs/productsBanner.png" alt="productsBanner" />
 		</div>
+		<a href="itemWrite.do">상품 등록</a>
 
 		<!-- Products Menu List-->
 		<div id="products__menu">
@@ -68,8 +87,6 @@
 				<li class="products__items" data-link=".cabinet__products">CABINET</li>
 			</ul>
 		</div>
-
-		<!--Bed Products-->
 		<div class="products__title">
 			<div class="products__Ltitle">
 				<h2>Funrni</h2>
@@ -79,117 +96,125 @@
 			</div>
 		</div>
 
+		<!--Bed Products-->
 		<div class="bed__products">
 			<div class="products__container">
-				<div class="products__box">
+				<%
+					for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getItem_group().equals("bed")) {
+				%>
+				<div class="products__box" onclick="goDetail(<%=list.get(i).getItem_postnum()%>)">
 					<div class="products__image">
-						<img src="./productsImage/product1.png" alt="products1" />
+						<img src="/images/<%=list.get(i).getItem_img()%>" alt="products1" />
 					</div>
 					<div class="products__name">
-						<h2>Recreational Latan Interrier Bed Frameheadboard</h2>
+						<h2><%=list.get(i).getItem_content()%></h2>
 					</div>
 					<div class="products__price">
-						<p>$783</p>
+						<p>$<%=list.get(i).getItem_price()%></p>
 						<div class="products__sailing">$800</div>
 					</div>
 				</div>
-
-				<div class="products__box">
-					<div class="products__image">
-						<a href="../detail/detail.html"> <img src="./productsImage/product2.png" alt="products1" />
-						</a>
-					</div>
-					<div class="products__name">
-						<h2>Frieder non-LED outlet 4-layer storage bed</h2>
-					</div>
-					<div class="products__price">
-						<p>$813</p>
-						<div class="products__sailing">$833</div>
-					</div>
-				</div>
-
-				<div class="products__box">
-					<div class="products__image">
-						<img src="./productsImage/product3.png" alt="products1" />
-					</div>
-					<div class="products__name">
-						<h2>KUF non-bone wood bed, memory foam roll pack mattress</h2>
-					</div>
-					<div class="products__price">
-						<p>$725</p>
-						<div class="products__sailing">$740</div>
-					</div>
-				</div>
-
-				<div class="products__box">
-					<div class="products__image">
-						<img src="./productsImage/product4.png" alt="products1" />
-					</div>
-					<div class="products__name">
-						<h2>Recreational Latan Interrier Bed Frameheadboard</h2>
-					</div>
-					<div class="products__price">
-						<p>$738</p>
-						<div class="products__sailing">$758</div>
-					</div>
-				</div>
+				<%
+					}
+				}
+				%>
 			</div>
 		</div>
 
 		<!--Table Products-->
 		<div class="table__products">
 			<div class="products__container">
-				<div class="products__box">
+				<%
+					for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getItem_group().equals("table")) {
+				%>
+				<div class="products__box" onclick="goDetail(<%=list.get(i).getItem_postnum()%>)">
 					<div class="products__image">
-						<img src="./productsImage/productTable.png" alt="productTable" />
+						<img src="/images/<%=list.get(i).getItem_img()%>" alt="productTable" />
 					</div>
 					<div class="products__name">
-						<h2>Recreational Latan Interrier Bed Frameheadboard</h2>
+						<h2><%=list.get(i).getItem_content()%></h2>
 					</div>
 					<div class="products__price">
-						<p>$783</p>
+						<p>$<%=list.get(i).getItem_price()%></p>
 						<div class="products__sailing">$800</div>
 					</div>
 				</div>
+				<%
+					}
+				}
+				%>
 			</div>
 		</div>
 
 		<!--Sofa Products-->
 		<div class="sofa__products">
 			<div class="products__container">
-				<div class="products__box">
+				<%
+					for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getItem_group().equals("sofa")) {
+				%>
+				<div class="products__box" onclick="goDetail(<%=list.get(i).getItem_postnum()%>)">
 					<div class="products__image">
-						<img src="./productsImage/productSofa.png" alt="productSofa" />
+						<img src="/images/<%=list.get(i).getItem_img()%>" alt="productSofa" />
 					</div>
 					<div class="products__name">
-						<h2>Recreational Latan Interrier Bed Frameheadboard</h2>
+						<h2><%=list.get(i).getItem_content()%></h2>
 					</div>
 					<div class="products__price">
-						<p>$783</p>
+						<p>$<%=list.get(i).getItem_price()%></p>
 						<div class="products__sailing">$800</div>
 					</div>
 				</div>
+				<%
+					}
+				}
+				%>
 			</div>
 		</div>
 
 		<!--Cabinet Products-->
 		<div class="cabinet__products">
 			<div class="products__container">
-				<div class="products__box">
+				<%
+					for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getItem_group().equals("cabinet")) {
+				%>
+				<div class="products__box" onclick="goDetail(<%=list.get(i).getItem_postnum()%>)">
 					<div class="products__image">
-						<img src="./productsImage/productCaninet.png" alt="productCaninet" />
+						<img src="/images/<%=list.get(i).getItem_img()%>" alt="productCaninet" />
 					</div>
 					<div class="products__name">
-						<h2>Recreational Latan Interrier Bed Frameheadboard</h2>
+						<h2><%=list.get(i).getItem_content()%></h2>
 					</div>
 					<div class="products__price">
-						<p>$783</p>
+						<p>$<%=list.get(i).getItem_price()%></p>
 						<div class="products__sailing">$800</div>
 					</div>
 				</div>
+				<%
+					}
+				}
+				%>
 			</div>
 		</div>
 
+		<span>
+			<a href="/itemList.do?pn=<%=paging.getStartPage() - 1%>"><</a>
+		</span>
+		<%
+			for (int i = paging.getStartPage(); i <= paging.getEndPage(); i++) {
+		%>
+		<span>
+			<a href="/itemList.do?pn=<%=i%>"><%=i%></a>
+		</span>
+		<%
+			}
+		%>
+		<span>
+			<a href="/itemList.do?pn=<%=paging.getEndPage() + 1%>">></a>
+		</span>
 		<!-- Footer -->
 		<div id="footer">
 			<div class="footer__description">

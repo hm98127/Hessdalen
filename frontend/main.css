@@ -139,8 +139,16 @@
   height: 100%;
   padding-bottom: 10px;
 }
+<<<<<<< HEAD
 .right__furnitureF,
 .right__furnitureS {
+=======
+.right__furnitureF{
+  visibility: hidden;
+  width:380px;
+  height:220px;
+  margin:0px 32px;
+>>>>>>> dbe345baf6e075ec3398fd0eebd3093ddee8db5f
   position: relative;
   visibility: hidden;
   width: 380px;

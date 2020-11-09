@@ -8,6 +8,7 @@ public class BoardVo {
 	private String item_img;
 	private String item_group;
 	private String item_regdate;
+	private boolean item_event;
 	private String member_id;
 
 	public int getItem_postnum() {
@@ -64,6 +65,14 @@ public class BoardVo {
 
 	public void setItem_regdate(String item_regdate) {
 		this.item_regdate = item_regdate;
+	}
+
+	public boolean isItem_event() {
+		return item_event;
+	}
+
+	public void setItem_event(boolean item_event) {
+		this.item_event = item_event;
 	}
 
 	public String getMember_id() {

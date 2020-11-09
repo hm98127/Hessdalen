@@ -1,11 +1,9 @@
 <%@ page import="org.mdoubleh.www.board.notice.vo.BoardVo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="org.mdoubleh.www.common.LoginManager"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	LoginManager lm = LoginManager.getInstance();
+LoginManager lm = LoginManager.getInstance();
 String id = lm.getMemberId(session);
 ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 %>
@@ -14,17 +12,9 @@ ArrayList<BoardVo> list = (ArrayList<BoardVo>) request.getAttribute("list");
 <head>
 <meta charset="UTF-8">
 <title>NOTICELIST</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-	crossorigin="anonymous"
-></script>
-<link
-	href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
-	rel="stylesheet"
->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-/>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="icon" type="image/png" href="/design/imgs/Logo.png">
 <link rel="stylesheet" href="/design/css/navbar.css">
 <link rel="stylesheet" href="/design/service/css/service.css">
@@ -43,14 +33,21 @@ function goDetail(num) {
 		<%
 			if (id == null) {
 		%>
-		<span class="login__btn"><a href="/memberLogin.do">LOGIN</a></span> <span
-			class="login__btn"
-		><a href="/memberJoin.do">JOIN</a></span>
+		<span class="login__btn">
+			<a href="/memberLogin.do">LOGIN</a>
+		</span>
+		<span class="login__btn">
+			<a href="/memberJoin.do">JOIN</a>
+		</span>
 		<%
 			} else {
 		%>
-		<span class="login__btn"><a href="/memberLogout.do">LOGOUT</a></span>
-		<span class="login__btn"><a href="/memberPage.do">MEMBERPAGE</a></span>
+		<span class="login__btn">
+			<a href="/memberLogout.do">LOGOUT</a>
+		</span>
+		<span class="login__btn">
+			<a href="/memberPage.do">MEMBERPAGE</a>
+		</span>
 		<%
 			}
 		%>
@@ -72,12 +69,11 @@ function goDetail(num) {
 			</div>
 			<ul class="navbar__menu">
 				<li class="navbar__component"><a href="/info.do">INFO</a></li>
-				<li class="navbar__component"><a href="/itemList.do">ITEM</a></li>
+				<li class="navbar__component"><a href="/itemList.do?pn=1">ITEM</a></li>
 				<li class="navbar__component"><a href="/noticeList.do">SERVICE</a></li>
 				<form id="input__form" action="">
-					<input type="text" placeholder="Search" id="search__input" /> <i
-						class="fas fa-search"
-					></i>
+					<input type="text" placeholder="Search" id="search__input" />
+					<i class="fas fa-search"></i>
 				</form>
 			</ul>
 		</div>
@@ -123,9 +119,7 @@ function goDetail(num) {
 			<%
 				for (int i = 0; i < list.size(); i++) {
 			%>
-			<ul class="notice__board"
-				onclick="goDetail(<%=list.get(i).getNotice_postnum()%>)"
-			>
+			<ul class="notice__board" onclick="goDetail(<%=list.get(i).getNotice_postnum()%>)">
 				<li class="board__list"><%=list.get(i).getNotice_postnum()%></li>
 				<li class="board__list"><%=list.get(i).getNotice_title()%></li>
 				<li class="board__list"><%=list.get(i).getMember_id()%></li>

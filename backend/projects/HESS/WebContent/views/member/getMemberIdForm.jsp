@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 <title>GETMEMBERID</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+	
 </script>
 
 <%-- design --%>
@@ -87,49 +85,54 @@ input::placeholder {
 </script>
 </head>
 <body>
-<!-- Login -->
-<div id="login">
-	<span class="login__btn"><a href="/memberLogin.do">Login</a></span>
-	<span class="login__btn"><a href="/memberJoin.do">Sign up</a></span>
-</div>
+	<!-- Login -->
+	<div id="login">
+		<span class="login__btn">
+			<a href="/memberLogin.do">Login</a>
+		</span>
+		<span class="login__btn">
+			<a href="/memberJoin.do">Sign up</a>
+		</span>
+	</div>
 
-<!-- Navbar -->
-<div id="navbar">
-	<div class="logo">
-		<div class="logo__title">
-			<a href="/main.jsp">HESSDALEN</a>
-		</div>
-		<div class="square__point">
-			<div class="squareA">
-				<i class="fas fa-square-full"></i>
+	<!-- Navbar -->
+	<div id="navbar">
+		<div class="logo">
+			<div class="logo__title">
+				<a href="/main.jsp">HESSDALEN</a>
 			</div>
-			<div class="squareB">
-				<i class="fas fa-square-full"></i>
+			<div class="square__point">
+				<div class="squareA">
+					<i class="fas fa-square-full"></i>
+				</div>
+				<div class="squareB">
+					<i class="fas fa-square-full"></i>
+				</div>
 			</div>
+			<ul class="navbar__menu">
+				<li class="navbar__component"><a href="/info.do">INFO</a></li>
+				<li class="navbar__component"><a href="/itemList.do?pn=1">ITEM</a></li>
+				<li class="navbar__component"><a href="/noticeList.do">SERVICE</a></li>
+				<li>
+					<form id="input__form" action="">
+						<input type="text" placeholder="Search" id="search__input" />
+						<i class="fas fa-search"></i>
+					</form>
+				</li>
+			</ul>
 		</div>
-		<ul class="navbar__menu">
-			<li class="navbar__component"><a href="/info.do">INFO</a></li>
-			<li class="navbar__component"><a href="/itemList.do">ITEM</a></li>
-			<li class="navbar__component"><a href="/noticeList.do">SERVICE</a>
-			</li>
-			<form id="input__form" action="">
-				<input type="text" placeholder="Search" id="search__input" />
-				<i class="fas fa-search"></i>
-			</form>
-		</ul>
+		<div class="category">
+			<i class="fas fa-bars"></i>
+		</div>
 	</div>
-	<div class="category">
-		<i class="fas fa-bars"></i>
-	</div>
-</div>
-<h1 style="text-align: center; margin: 40px 0 5px 0">아이디 찾기</h1>
-<p style="text-align: center; font-weight: 300; font-size: 1rem; margin-top: 5px; margin-bottom: 30px;">─</p>
-<p class="info">"이름을 입력해주세요."</p>
-<form id="form" action="/getYourId.do" method="post" onsubmit="return validateCheck()">
-	<div class="input__container">
-		<input type="text" name="name" id="name" maxlength="10" placeholder="이름 " />
-	</div>
-	<input type="submit" value="찾기" />
-</form>
+	<h1 style="text-align: center; margin: 40px 0 5px 0">아이디 찾기</h1>
+	<p style="text-align: center; font-weight: 300; font-size: 1rem; margin-top: 5px; margin-bottom: 30px;">─</p>
+	<p class="info">"이름을 입력해주세요."</p>
+	<form id="form" action="/getYourId.do" method="post" onsubmit="return validateCheck()">
+		<div class="input__container">
+			<input type="text" name="name" id="name" maxlength="10" placeholder="이름 " />
+		</div>
+		<input type="submit" value="찾기" />
+	</form>
 </body>
 </html>
