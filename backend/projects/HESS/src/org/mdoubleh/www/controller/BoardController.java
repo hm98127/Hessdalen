@@ -9,7 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mdoubleh.www.board.item.action.ItemDeleteAction;
+import org.mdoubleh.www.board.item.action.ItemDetailAction;
 import org.mdoubleh.www.board.item.action.ItemListAction;
+import org.mdoubleh.www.board.item.action.ItemModifyAction;
+import org.mdoubleh.www.board.item.action.ItemModifyProcAction;
+import org.mdoubleh.www.board.item.action.ItemRegisterAction;
+import org.mdoubleh.www.board.item.action.ItemWriteAction;
 import org.mdoubleh.www.board.notice.action.NoticeDeleteAction;
 import org.mdoubleh.www.board.notice.action.NoticeDetailAction;
 import org.mdoubleh.www.board.notice.action.NoticeListAction;
@@ -17,6 +23,7 @@ import org.mdoubleh.www.board.notice.action.NoticeModifyAction;
 import org.mdoubleh.www.board.notice.action.NoticeModifyProcAction;
 import org.mdoubleh.www.board.notice.action.NoticeRegisterAction;
 import org.mdoubleh.www.board.notice.action.NoticeWriteAction;
+import org.mdoubleh.www.board.review.action.ReviewWriteAction;
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.main.action.InfoAction;
@@ -101,7 +108,26 @@ public class BoardController extends HttpServlet {
 			action = new NoticeDeleteAction();
 		} else if (command.equals("/itemList.do")) {
 			action = new ItemListAction();
-		} 
+		} else if (command.equals("/itemWrite.do")) {
+			action = new ItemWriteAction();
+		} else if (command.equals("/itemRegister.do")) {
+			action = new ItemRegisterAction();
+		} else if (command.equals("/itemDetail.do")) {
+			action = new ItemDetailAction();
+		} else if (command.equals("/itemModify.do")) {
+			action = new ItemModifyAction();
+		} else if (command.equals("/itemRegisterProc.do")) {
+			action = new ItemModifyProcAction();
+		} else if (command.equals("/itemDelete.do")) {
+			action = new ItemDeleteAction();
+		} else if (command.equals("/reviewWrite.do")) {
+			action = new ReviewWriteAction();
+		}
+		
+		
+		
+		
+		
 		
 		
 		// GET Error

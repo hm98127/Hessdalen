@@ -2,20 +2,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	LoginManager lm = LoginManager.getInstance();
-String id = lm.getMemberId(session);
+	String id = lm.getMemberId(session);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INFO</title>
+<title>REVIEW_WRITE_FROM</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/design/write/css/writeForm.css">
 <link rel="stylesheet" href="/design/css/navbar.css">
-<link rel="stylesheet" href="/design/css/info.css">
 <link rel="icon" type="image/png" href="/design/imgs/Logo.png">
 <script src="/design/js/category.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+<script>
+	function checkData() {
+		var title__input = $('#title__input').val();
+		if (!title__input) {
+			alert("제목을 입력하세요.");
+			$('#title__input').focus();
+			return false;
+		}
+
+		var price = $('#price').val();
+		if (!price) {
+			alert("가격을 입력하세요.");
+			$('#price').focus();
+			return false;
+		}
+
+		var content = $('#content').val();
+		if (!content) {
+			alert("내용을 입력하세요.");
+			$('#content').focus();
+			return false;
+		}
+
+		var image = $('#image').val();
+		if (!image) {
+			alert("이미지를 넣으세요.");
+			$("#image").focus();
+			return;
+		}
+		
+		var regExpPrice = new RegExp('^.{1,30}$', 'g');
+		if (regExpPrice.exec(price) == null) {
+			alert('잘못된 가격 입니다.');
+			$('#price').val('');
+			$('#price').focus();
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 	<!-- Login -->
@@ -42,12 +82,11 @@ String id = lm.getMemberId(session);
 			}
 		%>
 	</div>
-
 	<!-- Navbar -->
 	<div id="navbar">
 		<div class="logo">
 			<div class="logo__title">
-				<a href="/">HESSDALEN</a>
+				<a href="/main.jsp">HESSDALEN</a>
 			</div>
 			<div class="square__point">
 				<div class="squareA">
@@ -73,60 +112,25 @@ String id = lm.getMemberId(session);
 			<i class="fas fa-bars"></i>
 		</div>
 	</div>
-
 	<div class="category__click">
-
-		<!-- Info -->
-		<div id="info">
-			<div class="info__title">
-				<h2>TEAM</h2>
+	
+		<!-- WriteForm -->
+		<div id="write__container">
+			<div class="write__title">
+				<h2>Creating a post</h2>
 			</div>
-			<!-- https://www.notion.so/TeamProject-5f4e4beff59444aca328c2d2a5427520 -->
-			<div class="info__description">
-
-
-				<div class="info__individual">
-					<div class="info__img">
-						<a href=""><img src="/design/imgs/furniutreTeamPark.jpg" alt="info__Park"></a>
+			<div class="form__box">
+				<form action="/reviewRegister.do" method="post" onsubmit="return checkData()" enctype="multipart/form-data">
+					<div class="write__box">
+						<div class="input__name">Title</div>
+						<input type="text" name="title" id="title__input" maxlength="100" placeholder="Please enter the author." />
+						<div class="input__name">Content</div>
+						<textarea name="content" id="content" cols="30" rows="10"></textarea>
+						
+						<input type="file" name="image" id="image" />
+						<input type="submit" value="Insert" id="insert" />
 					</div>
-					<div class="info__component">
-						<h2>Name : Park Young Min</h2>
-						<h3>
-							Part : Front-end <a href="https://github.com/"><i class="fab fa-git-alt"></i></a>
-						</h3>
-						<div class="process">
-							<a href="https://www.notion.so/TeamProject-5f4e4beff59444aca328c2d2a5427520">UI & UX Design Process</a>
-						</div>
-					</div>
-
-				</div>
-				<div class="info__individual">
-
-					<div class="info__img">
-						<a href=""> <img src="/design/imgs/furniutreTeamJo.jpg" alt="info__Jo"></a>
-					</div>
-					<div class="info__component">
-						<h2>Name : Cho Sung Hun</h2>
-						<h3>
-							Part : Back-end <a href=""><i class="fab fa-git-alt"></i></a>
-						</h3>
-
-					</div>
-				</div>
-				<div class="info__individual">
-
-					<div class="info__img">
-						<a href=""><img src="/design/imgs/furniutreTeamKim.jpg" alt="info__Kim"></a>
-						<!-- href에다가 포폴 링크넣으시면 될거같네용 -->
-					</div>
-					<div class="info__component">
-						<h2>Name : Kim Jeong han</h2>
-						<h3>
-							Part : DevOps<a href=""><i class="fab fa-git-alt"></i></a>
-						</h3>
-
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 </body>

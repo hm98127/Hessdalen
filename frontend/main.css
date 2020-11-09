@@ -137,8 +137,7 @@
   height:100%;
   padding-bottom:10px;
 }
-.right__furnitureF,
-.right__furnitureS{
+.right__furnitureF{
   visibility: hidden;
   width:380px;
   height:220px;

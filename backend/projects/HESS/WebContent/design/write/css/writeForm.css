@@ -1,76 +1,97 @@
-*{
-    margin:0px;
+* {
+  margin: 0px;
 }
 
-#write__container{
-    width:1000px;
-    height:570px;
-    margin:auto;
-    text-align: center;
+#write__container {
+  width: 600px;
+  height: 570px;
+  margin: auto;
+  padding-top: 1.2rem;
+}
+.write__title {
+  text-align: center;
+  font-size: 1.5rem;
+}
+.group__box {
+  display: flex;
+  margin-top: 5rem;
+}
+.input__name {
+  flex-basis: 50%;
+  font-weight: bold;
+}
+.input__select {
+  display: flex;
+  flex-basis: 50%;
+}
 
+.input__select__category {
+  display: flex;
+  align-items: center;
+  margin: 0px 1rem;
 }
-.write__title{
-    text-align: center;
-}
-.write__title h2{
-    padding-top:20px;
-    font-size:22px;
-}
-
-.form__box{
-    padding:27px 60px;
-    
-}
-.input__name{
-    text-align: left;
-    margin:0px 125px;
+.input__select__category label {
+  margin: 0px 0.5rem;
 }
 
-#title__input{
-    width: 622px;
-    height:20px;
-    margin:10px 0px;
-
+.write__box .input__name {
+  margin-top: 1.5rem;
+  font-weight: bold;
 }
-#write__input{
-    width:700px;
-    height:320px;
-    margin:10px 0px;
+
+.write__box input {
+  width: 600px;
+  height: 25px;
+  margin-top: 0.8rem;
+}
+#content {
+  width: 600px;
+  margin-top: 0.8rem;
 }
 
 #insert,
 #amend,
-#delete{
-    outline: none;
-    border:none;
-    color: black;
-    margin:18px 12px;
-    padding:6px 10px;
-    cursor: pointer;
+#delete {
+  outline: none;
+  border: none;
+  color: black;
+  margin: 18px 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: transparent;
 }
 
+@media screen and (max-width: 768px) {
+  .write__box input,
+  #write__container,
+  #content {
+    width: 21rem;
+  }
+  .group__box {
+    flex-wrap: wrap;
+  }
+  .input__select {
+    margin-top: 1.5rem;
+  }
 
+  .input__select__category {
+    margin: 0px 0.5rem;
+    font-size: 0.9rem;
+  }
 
-@media screen and (max-width:768px){
-   #write__container,
-#title__input,
-#text__area,
-#write__input{
-    width:350px;
+  .form__box {
+    padding: 35px 0px;
+  }
+
+  .input__name {
+    padding: 0px;
+    margin: 0px;
+  }
+  #insert,
+  #amend,
+  #delete {
+    margin: 20px 14px;
+  }
 }
-
-.form__box{
-    padding:35px 0px;
-}
-
-.input__name
-{
-    padding:0px;
-    margin:0px;
-}
-#insert,
-#amend,
-#delete{
-    margin:20px 14px;
-}
-

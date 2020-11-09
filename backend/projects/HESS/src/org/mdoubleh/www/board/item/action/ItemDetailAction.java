@@ -1,5 +1,7 @@
 package org.mdoubleh.www.board.item.action;
 
+import static org.mdoubleh.www.common.RegExp.BOARD_NUM;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -8,52 +10,53 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.mdoubleh.www.board.item.service.BoardService;
 import org.mdoubleh.www.board.item.vo.BoardVo;
+import org.mdoubleh.www.board.review.vo.ReviewVo;
 import org.mdoubleh.www.common.Action;
 import org.mdoubleh.www.common.ActionForward;
-import org.mdoubleh.www.common.Paging;
 import org.mdoubleh.www.common.RegExp;
 
-import static org.mdoubleh.www.common.RegExp.IS_NUMBER;
-
-public class ItemListAction implements Action {
+public class ItemDetailAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String pageNum = request.getParameter("pn");
-		if (pageNum == null || !RegExp.checkString(IS_NUMBER, pageNum)) {
-			response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
-            out.close();
-            return null;
-		}
-		
-		int page = Integer.parseInt(pageNum);
-        if (page < 1) {
+		String num = request.getParameter("num");
+        if (num == null || num.equals("")
+                || !RegExp.checkString(BOARD_NUM, num)) {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
             out.close();
             return null;
         }
-			
-		BoardService svc = new BoardService();
-		Paging paging = new Paging(page, svc.getBoardCount());
-		if (page > paging.getTotalPageCount()) {
+        
+        int buff = Integer.parseInt(num);
+        if (buff <= 0) {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>location.href='/itemList.do?pn=" + paging.getTotalPageCount() +"';</script>");
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
             out.close();
             return null;
         }
-		
-		ArrayList<BoardVo> list = svc.getBoardList(paging);
+        
+        BoardService svc = new BoardService();
+        BoardVo vo = svc.getBoard(buff);
+        if (vo == null) {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
+            out.close();
+            return null;
+        }
+        
+        ArrayList<BoardVo> list = svc.getBoardList();
+        ArrayList<ReviewVo> reviewList = svc.getReviewBoardList();
 
 		request.setAttribute("list", list);
-		request.setAttribute("paging", paging);
-		
-		ActionForward forward = new ActionForward();
-		forward.setPath("/views/board/item/itemListForm.jsp");
-		return forward;
+		request.setAttribute("reviewList", reviewList);
+        request.setAttribute("vo", vo);
+
+        ActionForward forward = new ActionForward();
+        forward.setPath("/views/board/item/itemDetailForm.jsp");
+        return forward;
 	}
 
 }

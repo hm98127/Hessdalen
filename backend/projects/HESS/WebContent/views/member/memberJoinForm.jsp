@@ -138,39 +138,39 @@ input::placeholder {
 			$('#pwd').focus();
 			return false;
 		}
-		
+
 		if (!isChecked) {
 			alert('아이디 중복 검사를 해주세요.');
 			return false;
 		}
-		
+
 	}
 
 	function checkId() {
-        var id = $('#id').val();
+		var id = $('#id').val();
 
-        $.ajax({
-            url: "/checkId.ajax"
-            , type: "post"
-            , data: {
-                id : id
-            }
-            , dataType: "json"
-            , error: function () {
-                alert("통신 실패");
-            }
-            , success: function (data) {
-                if (data.id == "true") {
-                    // 중복된 아이디 없음
-                    isChecked = true;
-                    alert("사용할 수 있는 아이디 입니다.");
-                } else {
-                    // 중복된 아이디 있음
-                    alert("사용할 수 없는 아이디 입니다.");
-                }
-            }
-        });
-    }
+		$.ajax({
+			url : "/checkId.ajax",
+			type : "post",
+			data : {
+				id : id
+			},
+			dataType : "json",
+			error : function() {
+				alert("통신 실패");
+			},
+			success : function(data) {
+				if (data.id == "true") {
+					// 중복된 아이디 없음
+					isChecked = true;
+					alert("사용할 수 있는 아이디 입니다.");
+				} else {
+					// 중복된 아이디 있음
+					alert("사용할 수 없는 아이디 입니다.");
+				}
+			}
+		});
+	}
 
 	function initCheckId() {
 		isChecked = false;
@@ -180,7 +180,12 @@ input::placeholder {
 <body>
 	<!-- Login -->
 	<div id="login">
-		<span class="login__btn"><a href="/memberLogin.do">Login</a></span> <span class="login__btn"><a href="/memberJoin.do">Sign up</a></span>
+		<span class="login__btn">
+			<a href="/memberLogin.do">Login</a>
+		</span>
+		<span class="login__btn">
+			<a href="/memberJoin.do">Sign up</a>
+		</span>
 	</div>
 
 	<!-- Navbar -->
@@ -199,11 +204,14 @@ input::placeholder {
 			</div>
 			<ul class="navbar__menu">
 				<li class="navbar__component"><a href="/info.do">INFO</a></li>
-				<li class="navbar__component"><a href="/itemList.do">ITEM</a></li>
+				<li class="navbar__component"><a href="/itemList.do?pn=1">ITEM</a></li>
 				<li class="navbar__component"><a href="/noticeList.do">SERVICE</a></li>
-				<form id="input__form" action="">
-					<input type="text" placeholder="Search" id="search__input" /> <i class="fas fa-search"></i>
-				</form>
+				<li>
+					<form id="input__form" action="">
+						<input type="text" placeholder="Search" id="search__input" />
+						<i class="fas fa-search"></i>
+					</form>
+				</li>
 			</ul>
 		</div>
 		<div class="category">

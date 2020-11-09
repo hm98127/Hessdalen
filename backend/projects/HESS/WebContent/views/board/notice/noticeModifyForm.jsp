@@ -86,7 +86,7 @@
 			</div>
 			<ul class="navbar__menu">
 				<li class="navbar__component"><a href="/info.do">INFO</a></li>
-				<li class="navbar__component"><a href="/itemList.do">ITEM</a></li>
+				<li class="navbar__component"><a href="/itemList.do?pn=1">ITEM</a></li>
 				<li class="navbar__component"><a href="/noticeList.do">SERVICE</a></li>
 				<form id="input__form" action="">
 					<input type="text" placeholder="Search" id="search__input" /> <i
