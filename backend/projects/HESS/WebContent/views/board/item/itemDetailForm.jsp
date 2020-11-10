@@ -60,10 +60,10 @@ String id = lm.getMemberId(session);
 			} else {
 		%>
 		<span class="login__btn">
-			<a href="/itemModify.do?num=<%=vo.getItem_postnum()%>">상품 수정</a>
+			<a href="/itemModify.do?pn=<%=nowPage%>&num=<%=vo.getItem_postnum()%>">상품 수정</a>
 		</span>
 		<span class="login__btn">
-			<a href="javascript:checkDelete('/itemDelete.do?num=<%=vo.getItem_postnum()%>')">상품 삭제</a>
+			<a href="javascript:checkDelete('/itemDelete.do?pn=<%=nowPage%>&num=<%=vo.getItem_postnum()%>')">상품 삭제</a>
 		</span>
 		<span class="login__btn">
 			<a href="/memberlogout.do">Logout</a>
@@ -124,7 +124,7 @@ String id = lm.getMemberId(session);
 					</ul>
 
 					<div class="production__detail__description">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laudantium<br /> non quaerat qui nostrum? Ab voluptatum numquam <br />perspiciatis dicta perferendis commodi, corrupti, reprehenderit veniam <br />facilis quisquam dolorem voluptas magni enim.
+						<%=vo.getItem_content()%>
 					</div>
 					<div class="naver__buy">
 						<div class="buy__description">
@@ -137,49 +137,50 @@ String id = lm.getMemberId(session);
 							<img src="/design/imgs/naverLogo.png" alt="naverLogo" style="width: 18px;"> Pay Purchase
 						</div>
 					</div>
-
-					<div class="review">
-						<div class="review__title">Review</div>
-						<ul class="review__board">
-							<li class="review__list">Number</li>
-							<li class="review__list">Photo</li>
-							<li class="review__list">Title</li>
-							<li class="review__list">Writer</li>
-							<li class="review__list">Rating</li>
-						</ul>
-						<%
-							if (reviewList.size() > 0) {
-						%>
-						<%
-							for (int i = 0; i < reviewList.size(); i++) {
-						%>
-						<ul class="review__board" onclick="goReviewDetail(<%=reviewList.get(i).getReview_postnum()%>)">
-							<li class="review__list"><%=reviewList.get(i).getReview_postnum()%></li>
-							<li class="review__list"><%=reviewList.get(i).getReview_img()%></li>
-							<li class="review__list"><%=reviewList.get(i).getReview_title()%></li>
-							<li class="review__list"><%=reviewList.get(i).getMember_id()%></li>
-							<li class="review__list"><%=reviewList.get(i).getReview_hit()%></li>
-						</ul>
-						<%
-							}
-						%>
-						<%
-							} else {
-						%>
-						<ul class="review__board">
-							<li class="review__list">등록된 글이 없습니다.</li>
-						</ul>
-						<%
-							}
-						%>
-						<button onclick="location.href='/reviewWrite.do'">후기 쓰기</button>
-					</div>
 				</div>
 			</div>
 			<div class="right__detail">
 				<img src="/images/<%=vo.getItem_img()%>" alt="detailImage">
 			</div>
 		</div>
+
+		<div class="review">
+			<div class="review__title">Review</div>
+			<ul class="review__board">
+				<li class="review__list">Number</li>
+				<li class="review__list">Photo</li>
+				<li class="review__list">Title</li>
+				<li class="review__list">Writer</li>
+				<li class="review__list">Rating</li>
+			</ul>
+			<%
+				if (reviewList.size() > 0) {
+			%>
+			<%
+				for (int i = 0; i < reviewList.size(); i++) {
+			%>
+			<ul class="review__board" onclick="goReviewDetail(<%=reviewList.get(i).getReview_postnum()%>)">
+				<li class="review__list"><%=reviewList.get(i).getReview_postnum()%></li>
+				<li class="review__list"><%=reviewList.get(i).getReview_img()%></li>
+				<li class="review__list"><%=reviewList.get(i).getReview_title()%></li>
+				<li class="review__list"><%=reviewList.get(i).getMember_id()%></li>
+				<li class="review__list"><%=reviewList.get(i).getReview_hit()%></li>
+			</ul>
+			<%
+				}
+			%>
+			<%
+				} else {
+			%>
+			<ul class="review__board">
+				<li class="review__list">등록된 글이 없습니다.</li>
+			</ul>
+			<%
+				}
+			%>
+			<button onclick="location.href='/reviewWrite.do'">후기 쓰기</button>
+		</div>
+
 
 		<!-- Detail More Products -->
 		<div id="relative__category">

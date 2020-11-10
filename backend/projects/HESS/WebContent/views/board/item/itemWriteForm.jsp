@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	LoginManager lm = LoginManager.getInstance();
-	String id = lm.getMemberId(session);
+String id = lm.getMemberId(session);
 %>
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,7 @@
 			$("#image").focus();
 			return;
 		}
-		
+
 		var regExpPrice = new RegExp('^.{1,30}$', 'g');
 		if (regExpPrice.exec(price) == null) {
 			alert('잘못된 가격 입니다.');
@@ -113,7 +113,7 @@
 		</div>
 	</div>
 	<div class="category__click">
-	
+
 		<!-- WriteForm -->
 		<div id="write__container">
 			<div class="write__title">
@@ -155,5 +155,6 @@
 				</form>
 			</div>
 		</div>
+	</div>
 </body>
 </html>

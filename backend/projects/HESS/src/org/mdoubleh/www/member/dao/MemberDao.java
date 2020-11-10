@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import org.mdoubleh.www.member.vo.MemberVo;
+import org.mdoubleh.www.member.vo.NaverVo;
 
 import static org.mdoubleh.www.common.JdbcUtil.close;
 
@@ -25,6 +26,84 @@ public class MemberDao {
 
 	public void setConnection(Connection con) {
 		this.con = con;
+	}
+	
+	public int getNaverLogin(NaverVo vo) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement
+					("UPDATE mall_naver SET check_login = ? "
+							+ "WHERE naver_postnum = ?");
+			pstmt.setBoolean(1, vo.isCheck_login());
+			pstmt.setInt(2, vo.getNaver_postnum());
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public int getNaverNumber(String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num = 0;
+		try {
+			pstmt = con.prepareStatement
+					("SELECT naver_postnum FROM mall_naver WHERE BINARY(naver_id) = ?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				num = rs.getInt("naver_postnum");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return num;
+	}
+	
+	public int getNaverId(NaverVo vo) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement
+					("INSERT INTO "
+							+ "mall_naver(naver_id) "
+							+ "VALUES(?)");
+			pstmt.setString(1, vo.getNaver_id());
+			count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return count;
+	}
+	
+	public int getNaverCount(String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			pstmt = con.prepareStatement
+					("SELECT COUNT(*) FROM mall_naver WHERE BINARY(naver_id) = ?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
 	}
 	
 	public int joinMember(MemberVo vo) {

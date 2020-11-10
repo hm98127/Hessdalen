@@ -108,7 +108,7 @@ function goDetail(num) {
 					for (int i = 0; i < list.size(); i++) {
 				%>
 				<%
-					if (list.get(i).isItem_event() && i < 1) {
+					if (list.get(i).isItem_event() && (i + 1) % 3 == 1) {
 				%>
 				<div class="left__furnture" onClick="goDetail(<%=list.get(i).getItem_postnum()%>)">
 					<img src="/images/<%=list.get(i).getItem_img()%>" alt="event__furniture1" />
@@ -121,6 +121,7 @@ function goDetail(num) {
 							<p>$140</p>
 						</div>
 					</div>
+					
 					<div class="event__tag">Event</div>
 				</div>
 				<%
@@ -156,7 +157,9 @@ function goDetail(num) {
 					</div>
 					<%
 						}
-					}
+					%>
+					<%
+						}
 					%>
 				</div>
 
@@ -178,7 +181,9 @@ function goDetail(num) {
 		<div class="recommendation__conitainer">
 			<%
 				for (int i = 3; i < list.size(); i++) {
-				if (!list.get(i).isItem_event()) {
+			%>
+			<%
+				if (!list.get(i).isItem_event() && i < 6) {
 			%>
 			<div class="recommendation__box" onClick="goDetail(<%=list.get(i).getItem_postnum()%>)">
 				<img src="/images/<%=list.get(i).getItem_img()%>" alt="furnitureMd" />
@@ -217,10 +222,10 @@ function goDetail(num) {
 
 	<div class="new__container">
 		<%
-			for (int i = 0; i < list.size(); i++) {
+			for (int i = 6; i < list.size(); i++) {
 		%>
 		<%
-			if (!list.get(i).isItem_event()) {
+			if (!list.get(i).isItem_event() && i < 7) {
 		%>
 		<div class="new__boxf">
 			<img src="/images/<%=list.get(i).getItem_img()%>" alt="furniturNewItemFirst" />
@@ -232,11 +237,15 @@ function goDetail(num) {
 		</div>
 		<%
 			}
+		}
 		%>
 
 		<div class="new__boxc">
 			<%
-				if (!list.get(i).isItem_event()) {
+				for (int i = 7; i < list.size(); i++) {
+			%>
+			<%
+				if (!list.get(i).isItem_event() && i < 8) {
 			%>
 			<div class="top__box">
 				<img src="/images/<%=list.get(i).getItem_img()%>" alt="furniturNewItemTop" />
@@ -248,9 +257,13 @@ function goDetail(num) {
 			</div>
 			<%
 				}
+			}
 			%>
 			<%
-				if (!list.get(i).isItem_event()) {
+				for (int i = 8; i < list.size(); i++) {
+			%>
+			<%
+				if (!list.get(i).isItem_event() && i < 9) {
 			%>
 			<div class="bottom__box">
 				<img src="/images/<%=list.get(i).getItem_img()%>" alt="furniturNewItemBottom" />
@@ -262,10 +275,14 @@ function goDetail(num) {
 			</div>
 			<%
 				}
+			}
 			%>
 		</div>
 		<%
-			if (!list.get(i).isItem_event()) {
+			for (int i = 9; i < list.size(); i++) {
+		%>
+		<%
+			if (!list.get(i).isItem_event() && i < 10) {
 		%>
 		<div class="new__boxs">
 			<img src="/images/<%=list.get(i).getItem_img()%>" alt="furniturNewItemSecond" />
@@ -277,9 +294,7 @@ function goDetail(num) {
 		</div>
 		<%
 			}
-		%>
-		<%
-			}
+		}
 		%>
 	</div>
 

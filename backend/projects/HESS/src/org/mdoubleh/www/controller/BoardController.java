@@ -42,6 +42,7 @@ import org.mdoubleh.www.member.action.MemberLogoutAction;
 import org.mdoubleh.www.member.action.MemberModifyPwdAction;
 import org.mdoubleh.www.member.action.MemberModifyPwdProcAction;
 import org.mdoubleh.www.member.action.MemberPageAction;
+import org.mdoubleh.www.member.navar.NaverCallbackAction;
 
 @WebServlet("*.do")
 public class BoardController extends HttpServlet {
@@ -87,7 +88,9 @@ public class BoardController extends HttpServlet {
 			action = new GetMemberPwdProcAction();
 		} else if (command.equals("/getYourPwd.do")) { // 비밀번호 변경
 			action = new GetYourPwdAction();
-		}
+		} else if (command.equals("/naverCallback.do")) { // 비밀번호 변경
+			action = new NaverCallbackAction();
+		} 
 		
 		// Board
 		else if (command.equals("/info.do")) {

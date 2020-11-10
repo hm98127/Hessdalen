@@ -84,7 +84,7 @@ public class ItemDeleteAction implements Action {
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("<script>alert('상품 삭제가 완료되었습니다.');location.href('/itemList.do?pn=' + page);</script>");
+        out.println("<script>alert('상품 삭제가 완료되었습니다.');location.href('/itemList.do?pn=page');</script>");
         out.close();
         return null;
 	}

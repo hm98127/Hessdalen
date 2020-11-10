@@ -8,6 +8,7 @@ import org.mdoubleh.www.common.ActionForward;
 import org.mdoubleh.www.common.LoginManager;
 import org.mdoubleh.www.member.service.MemberService;
 import org.mdoubleh.www.member.vo.MemberVo;
+import org.mdoubleh.www.member.vo.NaverVo;
 
 public class MemberLogoutAction implements Action {
 	@Override
@@ -25,11 +26,19 @@ public class MemberLogoutAction implements Action {
 	}
 	
 	public void memberLogoutProc(String id) {
+		NaverVo naverVo = new NaverVo();
+		naverVo.setNaver_id(id);
+		
 		MemberVo vo = new MemberVo();
 		vo.setMember_id(id);
 		
+		
 		MemberService svc = new MemberService();
 		if (!svc.getLogout(vo)) {
+			System.out.println(id + " 회원의 로그아웃 처리에 실패하였습니다.");
+		}
+		
+		if (!svc.getNaverLogout(naverVo)) {
 			System.out.println(id + " 회원의 로그아웃 처리에 실패하였습니다.");
 		}
 	}

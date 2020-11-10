@@ -36,7 +36,7 @@ public class ItemRegisterAction implements Action {
 
 		String saveFolder = "/images";
 		String encType = "UTF-8";
-		int maxSize = 5 * 1024 * 1024;
+		int maxSize = 10 * 2048 * 2048;
 
 		ServletContext context = request.getServletContext();
 		realFolder = context.getRealPath(saveFolder);
@@ -50,12 +50,11 @@ public class ItemRegisterAction implements Action {
 		if (group == null || group.equals("") || title == null || title.equals("")
 				|| !RegExp.checkString(BOARD_TITLE, title) 
 				|| price == null || price.equals("") || !RegExp.checkString(BOARD_NUM, price)
-				|| content == null
-				|| content.equals("") || !RegExp.checkString(BOARD_CONTENT, content)
+				|| content == null || content.equals("") || !RegExp.checkString(BOARD_CONTENT, content)
 				|| image == null || image.equals("")) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
+			out.println("<script>alert('잘못된 접근입니다.1');location.href='/main.jsp';</script>");
 			out.close();
 			return null;
 		}
@@ -64,7 +63,7 @@ public class ItemRegisterAction implements Action {
 		if (buff <= 0) {
 			response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('잘못된 접근입니다.');location.href='/main.jsp';</script>");
+            out.println("<script>alert('잘못된 접근입니다.2');location.href='/main.jsp';</script>");
             out.close();
             return null;
 		}

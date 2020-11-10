@@ -4,10 +4,53 @@ import java.sql.Connection;
 
 import org.mdoubleh.www.member.dao.MemberDao;
 import org.mdoubleh.www.member.vo.MemberVo;
+import org.mdoubleh.www.member.vo.NaverVo;
 
 import static org.mdoubleh.www.common.JdbcUtil.*;
 
 public class MemberService {
+	public boolean getNaverLogout(NaverVo vo) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		vo.setNaver_postnum(dao.getNaverNumber(vo.getNaver_id()));
+		int count = dao.getNaverLogin(vo);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public boolean getNaverId(NaverVo vo) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		boolean isSucess = false;
+		int count = dao.getNaverId(vo);
+		if (count > 0) {
+			commit(con);
+			isSucess = true;
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return isSucess;
+	}
+	
+	public int getNaverCount(String id) {
+		MemberDao dao = MemberDao.getInstance();
+		Connection con = getConnection();
+		dao.setConnection(con);
+		int count = dao.getNaverCount(id);
+		close(con);
+		return count;
+	}
+	
 	public boolean joinMember(MemberVo vo) {
 		MemberDao dao = MemberDao.getInstance();
 		Connection con = getConnection();

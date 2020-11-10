@@ -61,14 +61,14 @@
 .event__left {
   flex-grow: 1;
   visibility: hidden;
-  flex-basis: 35%;
+  flex-basis: 30%;
   display: flex;
   justify-content: flex-end;
 }
 
 .event__right {
   flex-grow: 2;
-  flex-basis: 70%;
+  flex-basis: 50%;
   margin-left: 7rem;
 }
 .left__furnture {
@@ -79,6 +79,7 @@
 .event__left img {
   width: 100%;
   height: 100%;
+  cursor:pointer;
 }
 .left__pricetag {
   padding-top: 10px;
@@ -138,6 +139,7 @@
   width: 95%;
   height: 100%;
   padding-bottom: 10px;
+  cursor:pointer;
 }
 .right__furnitureF,
 .right__furnitureS {
@@ -182,6 +184,7 @@
 .recommendation__box img {
   width: 100%;
   height: 100%;
+  cursor:pointer;
 }
 
 .recommendation__box h1 {
@@ -205,7 +208,7 @@
 
 #new__furniture {
   padding-top: 6.25rem;
-  padding-left: 1.8rem;
+  padding-left: 3.5rem;
 }
 
 .new__title {
@@ -246,6 +249,7 @@
 .new__boxf img {
   width: 390px;
   height: 490px;
+  
 }
 
 .top__box img {
@@ -256,10 +260,13 @@
   width: 370px;
   height: 230px;
   padding-top: 1.5rem;
+  
 }
 .new__boxs img {
   width: 360px;
   height: 490px;
+   
+  
 }
 
 .new__boxf,

@@ -6,6 +6,11 @@ member_pwd VARCHAR(200) NOT NULL,
 check_login BOOLEAN NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE mall_naver (
+naver_postnum INT AUTO_INCREMENT PRIMARY KEY,
+naver_id VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE noticeboard (
 notice_postnum INT AUTO_INCREMENT PRIMARY KEY,
 notice_title VARCHAR(300) NOT NULL,

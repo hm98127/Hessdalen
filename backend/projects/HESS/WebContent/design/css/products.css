@@ -8,6 +8,7 @@
 #products__banner img {
   width: 84.3%;
   height: 150px;
+  
 }
 
 /* Products MenuList */
@@ -26,7 +27,7 @@
 .products__items {
   margin: 0px 22px;
   font-size: 16px;
-  color: #0E3044;
+  color: #0e3044;
   cursor: pointer;
 }
 
@@ -40,10 +41,9 @@
 }
 
 .products__Ltitle {
-  background-color: #16222E;
+  background-color: #16222e;
   color: white;
   padding: 25px 0px 25px 100px;
-
 }
 
 .products__Rtitle {
@@ -55,7 +55,6 @@
   margin: auto;
   margin-top: -100px;
   display: none;
-
 }
 
 .products__container {
@@ -78,28 +77,26 @@
 .products__image img {
   width: 100%;
   height: 100%;
+  cursor:pointer;
 }
 
 .products__name h2 {
   font-size: 16px;
   padding-top: 10px;
-  color: #0E3044;
+  color: #0e3044;
 }
 
 .products__price {
   display: flex;
   font-size: 14px;
   padding-top: 4px;
-
 }
 
 .products__sailing {
   margin: 0px 8px;
   text-decoration: line-through;
-  color: #807F80;
-
+  color: #807f80;
 }
-
 
 /* Table Products */
 /* Sofa Products */
@@ -114,9 +111,37 @@
   margin-top: -100px;
 }
 
+/* Write Button */
+#write__btn button a {
+  position: absolute;
+  right: 9rem;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 0.7rem;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #16222e;
+  margin-top: 10rem;
+}
 
+/* PageNation */
 
+#pagenation {
+  position: absolute;
+  right: 45%;
+  margin-top: 10rem;
+  color: #16222e;
+}
 
+.pageSelect {
+  display: flex;
+}
+.page {
+  margin: 0rem 1rem;
+  cursor: pointer;
+}
 
 /* Footer */
 
@@ -124,20 +149,18 @@
   height: 220px;
   text-align: center;
   font-size: 16px;
-  border-top: 1px solid #EEEEEE;
+  border-top: 1px solid #eeeeee;
   line-height: 34px;
-  margin-top: 120px;
+  margin-top: 18rem;
   background-color: #3f4246;
-  color: #D9E3E9;
+  color: #d9e3e9;
   font-weight: bold;
-
 }
 
 .team__name {
   font-size: 14px;
   padding-top: 25px;
-  color: #868E96;
-
+  color: #868e96;
 }
 
 .footer__description h1 {
@@ -146,7 +169,7 @@
 
 .footer__description p {
   font-size: 14px;
-  color: #868E96;
+  color: #868e96;
 }
 
 /* Show */
@@ -167,10 +190,7 @@
   }
 }
 
-
-
-@media screen and (max-width:768px) {
-
+@media screen and (max-width: 768px) {
   /* Login */
 
   #login {
@@ -215,7 +235,6 @@
     padding-top: 30px;
     text-align: center;
     padding-top: 50px;
-
   }
 
   .menu__items a {
@@ -223,7 +242,6 @@
     font-size: 14px;
     color: #f8f8f8;
     font-weight: var(--weight-bold);
-
   }
 
   #input__form {
@@ -276,10 +294,22 @@
 
   .footer__description p {
     font-size: 13px;
-    color: #868E96;
+    color: #868e96;
     padding-top: 10px;
   }
 
+  /* Write Button */
+  #write__btn button a {
+    right: 0rem;
+    margin-top: 10rem;
+    padding: 0.2rem 0.5rem;
+    font-size: 14px;
+  }
 
+  /* PageNation */
 
+  #pagenation {
+    right: 33%;
+    margin-top: 10rem;
+  }
 }

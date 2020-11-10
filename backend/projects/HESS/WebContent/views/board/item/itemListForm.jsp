@@ -32,12 +32,27 @@ function goDetail(num) {
 <body>
 	<!-- Login -->
 	<div id="login">
+		<%
+			if (id == null) {
+		%>
 		<span class="login__btn">
 			<a href="/memberLogin.do">Login</a>
 		</span>
 		<span class="login__btn">
 			<a href="/memberJoin.do">Sign up</a>
 		</span>
+		<%
+			} else {
+		%>
+		<span class="login__btn">
+			<a href="/memberlogout.do">Logout</a>
+		</span>
+		<span class="login__btn">
+			<a href="/memberPage.do">MEMBERPAGE</a>
+		</span>
+		<%
+			}
+		%>
 	</div>
 
 	<!-- Navbar -->
@@ -76,7 +91,6 @@ function goDetail(num) {
 		<div id="products__banner">
 			<img src="/design/imgs/productsBanner.png" alt="productsBanner" />
 		</div>
-		<a href="itemWrite.do">상품 등록</a>
 
 		<!-- Products Menu List-->
 		<div id="products__menu">
@@ -199,22 +213,28 @@ function goDetail(num) {
 				%>
 			</div>
 		</div>
+		<!-- Write Btn -->
+		<div id="write__btn">
+			<button>
+				<a href="itemWrite.do">Write</a>
+			</button>
+		</div>
 
-		<span>
-			<a href="/itemList.do?pn=<%=paging.getStartPage() - 1%>"><</a>
-		</span>
-		<%
-			for (int i = paging.getStartPage(); i <= paging.getEndPage(); i++) {
-		%>
-		<span>
-			<a href="/itemList.do?pn=<%=i%>"><%=i%></a>
-		</span>
-		<%
-			}
-		%>
-		<span>
-			<a href="/itemList.do?pn=<%=paging.getEndPage() + 1%>">></a>
-		</span>
+		<!-- Paging -->
+		<div id="pagenation">
+			<ul class="pageSelect">
+				<li class="page" onclick="location.href='/itemList.do?pn=<%=paging.getStartPage() - 1%>'">Prev</li>
+				<%
+					for (int i = paging.getStartPage(); i <= paging.getEndPage(); i++) {
+				%>
+				<li class="page" onclick="location.href='/itemList.do?pn=<%=i%>'"><%=i%></li>
+				<%
+					}
+				%>
+				<li class="page" onclick="location.href='/itemList.do?pn=<%=paging.getEndPage() + 1%>'">Next</li>
+			</ul>
+		</div>
+		
 		<!-- Footer -->
 		<div id="footer">
 			<div class="footer__description">

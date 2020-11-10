@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String apiURL = (String) request.getAttribute("apiURL");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,7 +187,7 @@ input::placeholder {
 					<img src="/design/imgs/kakaoLogin.png" />
 				</div>
 				<div class="naver__btn">
-					<img src="/design/imgs/naverLogin.png" />
+					<img src="/design/imgs/naverLogin.png" onclick="location.href='<%=apiURL%>'" />
 				</div>
 			</div>
 		</form>

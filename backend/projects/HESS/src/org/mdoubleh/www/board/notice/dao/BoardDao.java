@@ -42,7 +42,8 @@ public class BoardDao {
                 vo.setNotice_postnum(rs.getInt("notice_postnum"));
                 vo.setNotice_title(rs.getString("notice_title"));
                 vo.setNotice_content(rs.getString("notice_content"));
-                vo.setNotice_regdate(rs.getString("notice_regdate"));
+                //2020-11-10 00:00:00.0
+                vo.setNotice_regdate(rs.getString("notice_regdate").substring(0,16));
                 vo.setNotice_hit(rs.getInt("notice_hit"));
                 vo.setMember_id(rs.getString("member_id"));
                 list.add(vo);
@@ -62,7 +63,7 @@ public class BoardDao {
 		try {
 			pstmt = con.prepareStatement
 					("INSERT INTO noticeboard(notice_title, notice_content, member_id) "
-							+ "VALUES(?, ?, ?)");
+							+ "VALUES(?, ?, ?, ?)");
 			pstmt.setString(1, vo.getNotice_title());
 			pstmt.setString(2, vo.getNotice_content());
 			pstmt.setString(3, vo.getMember_id());
